@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>空空Studio作品集</title>
+  <meta name="description" content="空空Studio 3C Product Rendering / AIGC Visual / Motion Portfolio" />
+  <style>
+    :root{--bg:#050505;--white:#fff;--muted:rgba(255,255,255,.58);--line:rgba(255,255,255,.1)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:#fff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit}img{display:block;max-width:100%}
+    .bg{pointer-events:none;position:fixed;inset:0;z-index:0}.bg:before{content:"";position:absolute;left:50%;top:-18rem;width:46rem;height:46rem;transform:translateX(-50%);border-radius:999px;background:rgba(255,255,255,.1);filter:blur(150px)}.bg:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,transparent 0,rgba(0,0,0,.55) 72%)}
+    #glow{pointer-events:none;position:fixed;z-index:1;width:760px;height:760px;border-radius:999px;background:radial-gradient(circle,rgba(255,255,255,.15) 0%,rgba(92,141,255,.14) 28%,rgba(255,145,77,.09) 54%,transparent 72%);filter:blur(90px);mix-blend-mode:screen;transform:translate(-500px,-500px);transition:transform .08s linear}
+    .nav{position:fixed;left:50%;top:20px;z-index:50;display:flex;gap:4px;transform:translateX(-50%);padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(0,0,0,.45);box-shadow:0 25px 70px rgba(0,0,0,.35);backdrop-filter:blur(24px)}.nav a{padding:8px 16px;border-radius:999px;font-size:12px;color:rgba(255,255,255,.72);transition:.25s}.nav a:hover{color:#fff;background:rgba(255,255,255,.14);transform:scale(1.08);text-shadow:0 0 18px rgba(255,255,255,.55)}
+    .wrap{position:relative;z-index:10;max-width:1280px;margin:0 auto;padding:0 24px}.hero{min-height:100vh;padding-top:112px;padding-bottom:80px;display:grid;grid-template-columns:.95fr 1.05fr;gap:40px;align-items:center}.pill{display:inline-flex;align-items:center;gap:8px;margin-bottom:28px;padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.72);backdrop-filter:blur(20px);font-size:14px}.hero h1{margin:0;max-width:920px;font-size:clamp(64px,10vw,138px);line-height:.92;letter-spacing:-.07em;font-weight:720}.gradient{display:block;background:linear-gradient(90deg,#fff,rgba(255,255,255,.7),rgba(255,255,255,.25));-webkit-background-clip:text;background-clip:text;color:transparent}.intro{max-width:660px;margin-top:32px;color:rgba(255,255,255,.68);font-size:20px;line-height:1.75}.actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:40px}.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.08);color:#fff;backdrop-filter:blur(20px);transition:.25s}.btn:hover{background:#fff;color:#000;border-color:#fff;transform:translateY(-2px) scale(1.05)}
+    .hero-media{position:relative;min-height:560px}.float-card{position:absolute;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.04);box-shadow:0 35px 80px rgba(0,0,0,.5);backdrop-filter:blur(20px);transition:.45s cubic-bezier(.16,1,.3,1)}.float-card:hover{transform:translateY(-18px) rotate(1.2deg) scale(1.025)}.float-card.big{right:0;top:32px;width:72%;height:480px;border-radius:42px}.float-card.small{left:0;top:150px;width:55%;height:352px;border-radius:36px}.float-card img,.float-card video{width:100%;height:100%;object-fit:cover;opacity:.78}.float-card:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000,transparent,rgba(255,255,255,.05))}.caption{position:absolute;left:24px;bottom:24px;right:24px;z-index:2}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.28em;color:rgba(255,255,255,.42)}.caption h3{margin:8px 0 0;font-size:28px;letter-spacing:-.04em}
+    .magtext{display:inline}.char{display:inline-block;position:relative;transition:transform .18s cubic-bezier(.16,1,.3,1),color .18s,text-shadow .18s;transform-origin:center bottom;will-change:transform}.char.hot{z-index:3;transform:translateY(-2px) scale(1.24);color:#fff;text-shadow:0 0 22px rgba(255,255,255,.56)}.char.warm{z-index:2;transform:translateY(-1px) scale(1.13);color:rgba(255,255,255,.96);text-shadow:0 0 16px rgba(255,255,255,.4)}.char.soft{z-index:1;transform:scale(1.06);color:rgba(255,255,255,.9);text-shadow:0 0 10px rgba(255,255,255,.24)}.tag,.work-type,.muted,.label,.caption h3,.wechat-id{transition:color .22s,text-shadow .22s}.tag:hover,.work-type:hover,.muted:hover,.label:hover,.caption h3:hover,.wechat-id:hover{color:#fff;text-shadow:0 0 20px rgba(255,255,255,.42)}
+    section{position:relative;z-index:10}.about{padding:96px 0;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:end}.label{margin:0 0 16px;font-size:14px;text-transform:uppercase;letter-spacing:.35em;color:rgba(255,255,255,.4)}.title{margin:0;font-size:clamp(46px,6vw,76px);line-height:1;letter-spacing:-.05em}.muted{color:rgba(255,255,255,.58);line-height:1.8;font-size:18px}
+    .core{padding:64px 0}.core-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.core-card{min-height:416px;padding:32px;border:1px solid var(--line);border-radius:38px;background:linear-gradient(to bottom,rgba(255,255,255,.085),rgba(255,255,255,.025));position:relative;overflow:hidden;transition:.4s}.core-card:hover{transform:translateY(-12px) scale(1.015);border-color:rgba(255,255,255,.3)}.core-card:before{content:"";position:absolute;right:-80px;top:-80px;width:288px;height:288px;border-radius:50%;background:rgba(255,255,255,.1);filter:blur(80px);transition:.4s}.core-card:hover:before{background:rgba(90,145,255,.2)}.core-card h3{font-size:40px;letter-spacing:-.04em;margin:90px 0 8px}.core-card p{position:relative;color:rgba(255,255,255,.58);line-height:1.7}
+    .portfolio-section{padding:96px 0}.section-shell{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:44px;background:rgba(255,255,255,.03);padding:28px;box-shadow:0 35px 100px rgba(0,0,0,.3)}.section-shell:before{content:"";position:absolute;left:-80px;top:-80px;width:384px;height:384px;border-radius:50%;background:var(--glow);filter:blur(130px)}.section-hero{position:relative;overflow:hidden;border-radius:36px;border:1px solid var(--line);background:#000}.section-hero img,.section-hero video{height:430px;width:100%;object-fit:cover;opacity:.66;transform:scale(1.08);transition:transform .25s linear}.section-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#000,rgba(0,0,0,.62),rgba(0,0,0,.18))}.section-head{position:absolute;left:32px;right:32px;bottom:32px;z-index:2}.section-head-grid{display:grid;grid-template-columns:1fr .85fr;gap:28px;align-items:end}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{padding:16px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.075);backdrop-filter:blur(20px)}.stat small{font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(255,255,255,.42)}.stat b{display:block;margin-top:8px;font-size:32px}.tag-row{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 30px}.tag{padding:9px 16px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.88);backdrop-filter:blur(20px);font-size:14px}.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:22px}.featured{grid-column:1/-1;margin-top:0}.work{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:32px;background:rgba(255,255,255,.035);text-align:left;cursor:pointer;transition:.4s;box-shadow:0 25px 70px rgba(0,0,0,.3)}.work:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06)}.work-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:#111}.featured .work-img{aspect-ratio:16/7}.work-img img,.work-img video{width:100%;height:100%;object-fit:cover;opacity:.92;transition:.7s}.work:hover .work-img img,.work:hover .work-img video{transform:scale(1.07);opacity:1}.work-img:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.58) 25%,rgba(0,0,0,.2) 50%,rgba(0,0,0,0) 78%)}.work-body{position:absolute;left:22px;right:70px;bottom:20px;z-index:2;padding:0}.work-body .mb{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px;padding-right:0}.work-body .tag{padding:6px 10px;font-size:11px;font-weight:680;line-height:1.15;background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.24);box-shadow:0 7px 20px rgba(0,0,0,.3)}.work h3{margin:0;color:#fff;font-size:26px;line-height:1.08;letter-spacing:-.03em;text-shadow:0 5px 24px rgba(0,0,0,1)}.featured .work h3{font-size:42px}.work-type{display:block;margin-top:9px;color:rgba(255,255,255,.9);font-size:13px;font-weight:620;line-height:1.3;text-shadow:0 4px 18px rgba(0,0,0,.95)}.work-type .char.hot{transform:translateY(-1px) scale(1.12)}.work-type .char.warm{transform:scale(1.06)}.work-type .char.soft{transform:scale(1.03)}.work-desc{padding:24px;color:rgba(255,255,255,.58);font-size:14px;line-height:1.7}.external{position:absolute;right:16px;top:16px;width:38px;height:38px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.32);display:grid;place-items:center;z-index:2;transition:.3s}.external svg{width:20px;height:20px}.work:hover .external{background:#fff;color:#000;transform:rotate(45deg)}
+    .modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.75);backdrop-filter:blur(24px);padding:24px}.modal.open{display:flex}.modal-box{position:relative;width:min(1100px,100%);max-height:90vh;overflow:auto;border:1px solid rgba(255,255,255,.15);border-radius:38px;background:#080808;box-shadow:0 40px 110px #000}.close{position:sticky;top:24px;float:right;margin:24px 24px 0 0;z-index:5;width:48px;height:48px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);display:grid;place-items:center;cursor:pointer;transition:.3s}.close:hover{background:#fff;color:#000;transform:rotate(90deg) scale(1.06)}.modal-content{padding:24px 40px 48px;clear:both}.modal-hero{position:relative;border-radius:32px;overflow:hidden;background:#111}.modal-hero img,.modal-hero video{height:42vh;width:100%;object-fit:cover;opacity:.9}.modal-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000,rgba(0,0,0,.2),transparent)}.modal-title{position:absolute;left:32px;right:32px;bottom:32px;z-index:2}.modal-title h2{font-size:clamp(42px,6vw,76px);line-height:1;letter-spacing:-.05em;margin:0}.info-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:32px;padding:40px 0}.panel{padding:24px;border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.035)}.process{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:30px}.process div{padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.035);color:rgba(255,255,255,.78)}.gallery{display:grid;gap:20px}.gallery button,.gallery .gallery-item{padding:0;border:1px solid var(--line);border-radius:28px;overflow:hidden;background:rgba(255,255,255,.03);cursor:zoom-in}.gallery img,.gallery video{width:100%;transition:.5s}.gallery button:hover img,.gallery .gallery-item:hover video{transform:scale(1.02)}.lightbox{position:fixed;inset:0;z-index:140;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.9);backdrop-filter:blur(24px);padding:16px}.lightbox.open{display:flex}.lightbox img,.lightbox video{max-width:92vw;max-height:92vh;border-radius:24px;object-fit:contain}.lightbox-arrow{position:absolute;top:50%;z-index:2;width:54px;height:54px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.09);color:#fff;font-size:32px;cursor:pointer;backdrop-filter:blur(18px);transform:translateY(-50%);transition:.25s}.lightbox-arrow:hover{background:#fff;color:#000;transform:translateY(-50%) scale(1.08)}.lightbox-prev{left:28px}.lightbox-next{right:28px}.lightbox-count{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);padding:8px 14px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(0,0,0,.35);color:rgba(255,255,255,.72);backdrop-filter:blur(16px)}.wechat-modal{position:fixed;inset:0;z-index:130;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,.72);backdrop-filter:blur(26px)}.wechat-modal.open{display:flex}.wechat-card{position:relative;width:min(460px,100%);overflow:hidden;border:1px solid rgba(255,255,255,.14);border-radius:36px;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.045));box-shadow:0 45px 110px rgba(0,0,0,.62);padding:28px;text-align:center}.wechat-card:before{content:"";position:absolute;left:50%;top:-160px;width:360px;height:360px;transform:translateX(-50%);border-radius:999px;background:rgba(255,255,255,.12);filter:blur(95px)}.wechat-close{position:absolute;right:18px;top:18px;width:42px;height:42px;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(0,0,0,.28);color:#fff;cursor:pointer;transition:.25s}.wechat-close:hover{background:#fff;color:#000;transform:rotate(90deg)}.wechat-title{position:relative;margin:14px 0 8px;font-size:38px;line-height:1;letter-spacing:-.04em}.wechat-text{position:relative;margin:0 auto 22px;max-width:320px;color:rgba(255,255,255,.62);line-height:1.75}.qr-frame{position:relative;margin:0 auto;width:min(320px,82vw);padding:14px;border-radius:28px;background:#fff;box-shadow:0 26px 70px rgba(0,0,0,.4)}.qr-frame img{width:100%;border-radius:18px}.wechat-id{position:relative;display:inline-flex;gap:10px;align-items:center;margin-top:22px;padding:10px 16px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.74)}.email-card .qr-frame{background:linear-gradient(145deg,#fff,rgba(255,255,255,.78));padding:28px}.email-address{display:block;color:#050505;font-size:clamp(24px,5vw,38px);font-weight:760;letter-spacing:-.04em;word-break:break-all}.email-actions{position:relative;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}.contact{padding:96px 24px}.contact-box{max-width:1280px;margin:0 auto;padding:64px 32px;text-align:center;border:1px solid var(--line);border-radius:48px;background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.025))}.contact-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:40px}
+    .reveal{opacity:0;transform:translateY(48px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}.reveal.in{opacity:1;transform:translateY(0)}
+    @media(max-width:900px){.hero,.about,.section-head-grid,.info-grid{grid-template-columns:1fr}.hero-media{display:none}.core-grid,.work-grid,.stats,.process{grid-template-columns:1fr}.featured .work-img{aspect-ratio:4/3}.featured .work h3{font-size:28px}.section-head{position:relative;left:auto;right:auto;bottom:auto;padding:24px}.section-hero img,.section-hero video{height:280px}.nav{max-width:calc(100vw - 24px);overflow:auto}.nav a{padding:8px 10px}}
+  </style>
+</head>
+<body>
+  <div id="glow"></div><div class="bg"></div>
+  <nav class="nav"><a href="#about">About</a><a href="#rendering">Rendering</a><a href="#aigc">AIGC</a><a href="#motion">Motion</a><a href="#contact">Contact</a></nav>
+  <main id="app"></main>
+  <div id="modal" class="modal"></div>
+  <div id="lightbox" class="lightbox"></div>
+  <div id="wechatModal" class="wechat-modal"></div>
+  <script>
+    const profile={name:'空空Studio',wechat:'kongkongC4D',email:'3501903303@qq.com',intro:'我是一名专注于 3C 类目的三维渲染师，拥有 3 年行业经验，擅长产品级高精度渲染、视觉表现优化、AIGC 视觉生成与动态视觉表达。',xiaohongshu:'https://www.xiaohongshu.com/user/profile/5e312bfc0000000001005001',zcool:'https://www.zcool.com.cn/work/ZNjgzNDM4NTI=.html',behance:'https://www.behance.net/kongkong18'};
+    const works=[
+      {
+            "id": 1,
+            "title": "WH 80",
+            "category": "Rendering",
+            "type": "键盘产品商业渲染",
+            "cover": "作品集文件/%E5%8A%9E%E5%85%AC%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29%201.png",
+            "desc": "WH 80 项目收录 25 张产品渲染与场景图，覆盖主视觉、细节卖点、结构表现和电商传播画面。",
+            "tags": [
+                  "Rendering",
+                  "工作",
+                  "键盘"
+            ],
+            "process": [
+                  "产品结构分析",
+                  "材质与灯光设定",
+                  "场景/卖点构图",
+                  "商业输出整理"
+            ],
+            "images": [
+                  "作品集文件/%E5%8A%9E%E5%85%AC%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29%201.png",
+                  "作品集文件/%E7%94%B5%E7%AB%9E%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29.png",
+                  "作品集文件/%E9%A6%96%E5%9B%BE0090_%280-00-00-01%29.png",
+                  "作品集文件/%E6%96%9C%E8%A7%92%E8%BD%B4%E4%BD%93%E5%AE%89%E8%A3%850000_%280-00-00-00%29.png",
+                  "作品集文件/NuPhy_WH80_%E7%99%BD%E8%89%B2_%E7%94%B5%E7%AB%9E%E5%9C%BA%E6%99%AF4.png",
+                  "作品集文件/%E5%8F%8C8k-10000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%8F%8C%E9%9D%A20500_%280-00-00-00%29.png",
+                  "作品集文件/%E7%AB%96%E5%90%91%E6%AD%A30090_%280-00-00-00%29.png",
+                  "作品集文件/%E7%AB%96%E5%90%91%E8%83%8C%E9%9D%A20091_%280-00-00-00%29.png",
+                  "作品集文件/1000wh0000_%280-00-00-00%29.png",
+                  "作品集文件/%E4%B8%BB%E5%9B%BE%E7%AB%96%E5%90%910000_%280-00-00-00%29.png",
+                  "作品集文件/%E4%B8%BB%E5%9B%BE%E7%AB%96%E5%90%91%E9%BB%910000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%A3%81%E8%BD%B4hei0000_%280-00-00-00%29.png",
+                  "作品集文件/%E8%84%9A%E6%92%910000_%280-00-00-00%29%202.png",
+                  "作品集文件/%E4%B8%89%E6%A8%A10000_%280-00-00-00%29.png",
+                  "作品集文件/%E9%80%8F%E6%98%8E%E9%94%AE%E5%B8%BD%E6%96%9C%E8%A7%920001_%280-00-00-00%29.png",
+                  "作品集文件/%E9%80%8F%E6%98%8E%E9%94%AE%E5%B8%BD%E6%96%9C%E8%A7%92%E9%BB%910000_%280-00-00-00%29.png",
+                  "作品集文件/NuPhy_WH80%E9%94%AE%E5%B8%BD_%E7%99%BD%E8%89%B2_%E9%94%AE%E5%B8%BD.png",
+                  "作品集文件/NuPhy_WH80%E9%94%AE%E5%B8%BD_%E9%BB%91%E8%89%B2_%E9%94%AE%E5%B8%BD.png",
+                  "作品集文件/%E4%B8%BB%E5%9B%BE%E7%99%BD%E6%AD%A30000_%280-00-00-00%29.png",
+                  "作品集文件/%E4%B8%BB%E5%9B%BE%E7%99%BD%E5%8F%8D0000_%280-00-00-00%29.png",
+                  "作品集文件/%E4%B8%BB%E5%9B%BE%E9%BB%91%E6%AD%A30000_%280-00-00-00%29.png",
+                  "作品集文件/%E4%B8%BB%E5%9B%BE%E9%BB%91%E5%8F%8D0000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%8C%85%E8%A3%85%E7%9B%92%E7%99%BD%E8%89%B20002_%280-00-00-00%29_thumbnail.png",
+                  "作品集文件/%E5%8C%85%E8%A3%85%E7%9B%92%E9%BB%91%E8%89%B20002_%280-00-00-00%29_thumbnail.png"
+            ],
+            "year": "2025"
+      },
+      {
+            "id": 2,
+            "title": "Node 75",
+            "category": "Rendering",
+            "type": "键盘产品商业渲染",
+            "cover": "作品集文件/%E6%88%B7%E5%A4%96%E5%9C%BA%E6%99%AF0001_%280-00-00-00%29.png",
+            "desc": "Node 75 项目收录 18 张产品渲染与场景图，覆盖主视觉、细节卖点、结构表现和电商传播画面。",
+            "tags": [
+                  "Rendering",
+                  "工作",
+                  "键盘"
+            ],
+            "process": [
+                  "产品结构分析",
+                  "材质与灯光设定",
+                  "场景/卖点构图",
+                  "商业输出整理"
+            ],
+            "images": [
+                  "作品集文件/%E6%88%B7%E5%A4%96%E5%9C%BA%E6%99%AF0001_%280-00-00-00%29.png",
+                  "作品集文件/%E6%B7%B1%E5%A4%9C%E5%B1%85%E5%AE%B6%E5%8A%9E%E5%85%AC0000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%8A%9E%E5%85%AC%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%BC%96%E7%A8%8B%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%8A%9E%E5%85%AC%E6%A1%8C%E9%9D%A20001_%280-00-00-00%29.png",
+                  "作品集文件/%E5%AD%A6%E7%94%9F%E6%A1%8C%E9%9D%A20000_%280-00-00-00%29_1.png",
+                  "作品集文件/%E7%B2%89%E8%89%B2%E6%A1%8C%E9%9D%A20001_%280-00-00-00%29.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF%E7%99%BD0000_%280-00-00-00%29%201.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF%E7%99%BD0002_%280-00-00-00%29.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF%E9%BB%910000_%280-00-00-00%29%201.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF%E9%BB%910002_%280-00-00-00%29.png",
+                  "作品集文件/%E5%9B%BD%E5%86%85%E8%AF%A6%E6%83%85%E9%A6%96%E5%9B%BE0000_%280-00-00-00%29.png",
+                  "作品集文件/shou0000_%280-00-00-01%29.png",
+                  "作品集文件/%E8%84%9A%E5%9E%AB%E5%85%BC%E5%AE%B940000_%280-00-00-00%29.png",
+                  "作品集文件/%E8%84%9A%E5%9E%AB%E5%85%BC%E5%AE%B940002_%280-00-00-00%29.png",
+                  "作品集文件/%E7%83%AD%E6%8F%92%E6%8B%940000_%280-00-00-00%29%202.png",
+                  "作品集文件/%E7%88%86%E7%82%B8%E5%9B%BE0001_%280-00-00-00%29.png",
+                  "作品集文件/%E6%A1%8C%E5%9E%AB%E5%85%BC%E5%AE%B91000_%280-00-00-00%29.png"
+            ],
+            "year": "2025"
+      },
+      {
+            "id": 3,
+            "title": "Halo  LITE",
+            "category": "Rendering",
+            "type": "键盘产品商业渲染",
+            "cover": "作品集文件/%E5%8A%9E%E5%85%AC%E5%9C%BA%E6%99%AF%E7%99%BD0000_%280-00-00-00%29.png",
+            "desc": "Halo  LITE 项目收录 35 张产品渲染与场景图，覆盖主视觉、细节卖点、结构表现和电商传播画面。",
+            "tags": [
+                  "Rendering",
+                  "工作",
+                  "键盘"
+            ],
+            "process": [
+                  "产品结构分析",
+                  "材质与灯光设定",
+                  "场景/卖点构图",
+                  "商业输出整理"
+            ],
+            "images": [
+                  "作品集文件/%E5%8A%9E%E5%85%AC%E5%9C%BA%E6%99%AF%E7%99%BD0000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%8A%9E%E5%85%AC%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29.png",
+                  "作品集文件/75%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29.png",
+                  "作品集文件/65%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29.png",
+                  "作品集文件/96%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29.png",
+                  "作品集文件/65%E5%9C%BA%E6%99%AF10000_%280-00-00-00%29.png",
+                  "作品集文件/75%E5%9C%BA%E6%99%AF10000_%280-00-00-00%29.png",
+                  "作品集文件/96%E5%9C%BA%E6%99%AF10000_%280-00-00-00%29.png",
+                  "作品集文件/%E6%9A%97%E7%8E%AF%E5%A2%83%E7%8E%AF%E5%BD%A2%E5%85%890000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%88%86%E7%82%B8%E5%9B%BE0000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF%E7%99%BD0000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF%E9%BB%910000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%8E%AF%E5%BD%A2%E7%81%AF%E5%85%892_%280-00-00-00%29.png",
+                  "作品集文件/%E6%8E%A5%E6%94%B6%E5%99%A8%E7%99%BD0000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%BC%80%E5%85%B30000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%8E%AF%E5%BD%A2%E7%81%AF%E5%85%8910000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%85%A8%E4%BD%A9%E5%88%97%E9%A2%9C%E8%89%B20000_%280-00-00-00%29.png",
+                  "作品集文件/%E4%B8%89%E4%BD%A9%E5%88%97%E9%A2%9C%E8%89%B20002_%280-00-00-00%29.png",
+                  "作品集文件/%E5%9B%9B%E8%BD%B40000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%83%AD%E6%8F%92%E6%8B%940000_%280-00-00-00%29.png",
+                  "作品集文件/%E4%BE%A7%E5%85%89%E7%81%AF0000_%280-00-00-00%29.png",
+                  "作品集文件/%E6%AD%A3%E5%8F%8D%E7%89%B9%E5%86%991.png",
+                  "作品集文件/%E8%84%9A%E6%92%910000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%89%B9%E5%86%99%E8%A7%92%E5%BA%A630000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%89%B9%E5%86%99%E8%A7%92%E5%BA%A61%E7%99%BD0000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%89%B9%E5%86%99%E8%A7%92%E5%BA%A640000_%280-00-00-00%29.png",
+                  "作品集文件/%E8%83%AD%E4%BA%91%E4%B8%BB%E9%A2%98%E9%A1%B6%E8%A7%86%E5%9B%BE0000_%280-00-00-00%29.png",
+                  "作品集文件/Y2K%E4%B8%BB%E9%A2%98%E9%A1%B6%E8%A7%86%E5%9B%BE0000_%280-00-00-00%29.png",
+                  "作品集文件/90%E4%B8%BB%E9%A2%98%E9%A1%B6%E8%A7%86%E5%9B%BE0000_%280-00-00-00%29.png",
+                  "作品集文件/%E6%AD%A3%E8%AF%95%E5%9B%BE_30000_%280-00-00-00%29_%E6%8B%B7%E8%B4%9D.png",
+                  "作品集文件/%E6%8B%86%E8%A7%A3%E8%BD%B40000_%280-00-00-00%29.png",
+                  "作品集文件/%E6%89%8B%E6%89%98%E6%AD%A3%E9%9D%A2%E7%99%BD%E9%80%8F0000_%280-00-00-00%29.png",
+                  "作品集文件/65%E5%8C%85%E8%A3%85%E7%9B%920002_%280-00-00-00%29.png",
+                  "作品集文件/75%E5%8C%85%E8%A3%85%E7%9B%920002_%280-00-00-00%29.png",
+                  "作品集文件/96%E5%8C%85%E8%A3%85%E7%9B%920002_%280-00-00-00%29.png"
+            ],
+            "year": "2025"
+      },
+      {
+            "id": 4,
+            "title": "Air 75 V3",
+            "category": "Rendering",
+            "type": "键盘产品商业渲染",
+            "cover": "作品集文件/%E5%B1%85%E5%AE%B6%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29.png",
+            "desc": "Air 75 V3 项目收录 32 张产品渲染与场景图，覆盖主视觉、细节卖点、结构表现和电商传播画面。",
+            "tags": [
+                  "Rendering",
+                  "工作",
+                  "键盘"
+            ],
+            "process": [
+                  "产品结构分析",
+                  "材质与灯光设定",
+                  "场景/卖点构图",
+                  "商业输出整理"
+            ],
+            "images": [
+                  "作品集文件/%E5%B1%85%E5%AE%B6%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%B1%85%E5%AE%B6%E5%9C%BA%E6%99%AF2-10000_%280-00-00-00%29.png",
+                  "作品集文件/%E8%8A%AF%E7%89%8720000_%280-00-00-00%29.png",
+                  "作品集文件/10001%E5%B0%8F%E6%97%B6_OC1_0000_%280-00-00-00%29.png",
+                  "作品集文件/%E8%BD%B4%E4%BD%93%E5%B1%95%E7%A4%BA0011_%280-00-00-00%29.png",
+                  "作品集文件/%E8%BD%B4%E4%BD%93%E5%B1%95%E7%A4%BA20000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%B1%85%E5%AE%B6%E5%9C%BA%E6%99%AF%E7%AB%96%E5%90%9110000_%280-00-00-00%29.png",
+                  "作品集文件/oi%E5%9C%BA%E6%99%AF%E7%9F%AE%E8%BD%B40000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%99%BD%E8%89%B2%E6%AD%A3%E5%8F%8D%E9%9D%A20000_%280-00-00-00%29.png",
+                  "作品集文件/%E9%BB%91%E8%89%B2%E6%AD%A3%E5%8F%8D0000_%280-00-00-00%29.png",
+                  "作品集文件/%E6%AD%A3%E9%9D%A2%E9%AB%98%E5%BA%A6_0000_%280-00-00-00%29.png",
+                  "作品集文件/%E4%B8%89%E6%A8%A1_0000_%280-00-00-00%29.png",
+                  "作品集文件/%E4%B8%89%E6%A8%A1%E5%BC%80%E5%85%B3_0000_%280-00-00-00%29.png",
+                  "作品集文件/%E6%97%8B%E9%92%AE%E6%AF%94%E8%BE%8320091_%280-00-00-00%29.png",
+                  "作品集文件/%E9%94%AE%E7%9B%98%E6%A1%8C%E5%9E%AB170000_%280-00-00-00%29.png",
+                  "作品集文件/%E9%94%AE%E7%9B%98%E6%A1%8C%E5%9E%AB0000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF2.png",
+                  "作品集文件/%E4%BE%A7%E9%9D%A2%E9%AB%98%E5%BA%A6_20000_%280-00-00-00%29.png",
+                  "作品集文件/%E4%BE%A7%E9%9D%A2%E9%AB%98%E5%BA%A6_30000_%280-00-00-00%29.png",
+                  "作品集文件/%E9%94%AE%E7%9B%98%E5%A5%970000_%280-00-00-00%29.png",
+                  "作品集文件/%E6%97%8B%E9%92%AE0000_%280-00-00-00%29_1.png",
+                  "作品集文件/v3macbook00001_%280-00-00-00%29.png",
+                  "作品集文件/%E7%83%AD%E6%8F%92%E6%8B%940000_%280-00-00-00%29%201.png",
+                  "作品集文件/%E7%B2%89%E8%BD%B40000_%280-00-00-00%29.png",
+                  "作品集文件/%E4%B8%89%E8%BD%B40000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%9B%92%E5%AD%90%E7%99%BD0000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%9B%92%E5%AD%90%E9%BB%910000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%99%BD%E8%89%B2%E6%AD%A30000_%280-00-00-00%29.png",
+                  "作品集文件/%E9%BB%91%E8%89%B2%E6%AD%A30000_%280-00-00-00%29.png",
+                  "作品集文件/%E8%84%9A%E6%92%910000_%280-00-00-00%29%201.png",
+                  "作品集文件/%E9%80%8F%E6%98%8E%E5%8C%85%E8%A3%8520000_%280-00-00-00%29.png",
+                  "作品集文件/%E9%80%8F%E6%98%8E%E5%8C%85%E8%A3%8510000_%280-00-00-00%29.png"
+            ],
+            "year": "2025"
+      },
+      {
+            "id": 5,
+            "title": "GH65",
+            "category": "Rendering",
+            "type": "键盘产品商业渲染",
+            "cover": "作品集文件/d1a2f22af7da12147accc918f59f08c.png",
+            "desc": "GH65 项目收录 10 张产品渲染与场景图，覆盖主视觉、细节卖点、结构表现和电商传播画面。",
+            "tags": [
+                  "Rendering",
+                  "工作",
+                  "键盘"
+            ],
+            "process": [
+                  "产品结构分析",
+                  "材质与灯光设定",
+                  "场景/卖点构图",
+                  "商业输出整理"
+            ],
+            "images": [
+                  "作品集文件/d1a2f22af7da12147accc918f59f08c.png",
+                  "作品集文件/2-2.png",
+                  "作品集文件/diy_0000_%280-00-00-01%29.png",
+                  "作品集文件/%E7%89%B9%E5%86%99%E6%AD%A3%E9%9D%A20000_%280-00-00-00%29_1.png",
+                  "作品集文件/%E7%A9%BA%E5%BF%83%E7%BB%93%E6%9E%84_0000_%280-00-00-00%29.png",
+                  "作品集文件/%E8%8D%A7%E5%B9%95_10000_%280-00-00-00%29.png",
+                  "作品集文件/%E8%B6%85%E7%BA%A2%E8%BD%B40000_%280-00-00-00%29.png",
+                  "作品集文件/Clipboard_-_2025-03-20_15.20.57.png",
+                  "作品集文件/oi%E6%AD%A3%E9%9D%A22_%280-00-00-00%29.png",
+                  "作品集文件/%E5%8C%85%E8%A3%850000_%280-00-00-00%29_1.png"
+            ],
+            "year": "2025"
+      },
+      {
+            "id": 6,
+            "title": "Air 75 HE",
+            "category": "Rendering",
+            "type": "键盘产品商业渲染",
+            "cover": "作品集文件/%E5%9C%BA%E6%99%AF23-1.png",
+            "desc": "Air 75 HE 项目收录 8 张产品渲染与场景图，覆盖主视觉、细节卖点、结构表现和电商传播画面。",
+            "tags": [
+                  "Rendering",
+                  "工作",
+                  "键盘"
+            ],
+            "process": [
+                  "产品结构分析",
+                  "材质与灯光设定",
+                  "场景/卖点构图",
+                  "商业输出整理"
+            ],
+            "images": [
+                  "作品集文件/%E5%9C%BA%E6%99%AF23-1.png",
+                  "作品集文件/%E9%A2%84%E7%83%AD%E6%8B%86%E8%A7%A3%E8%BD%B4%E4%BD%930007_%280-00-00-00%292.png",
+                  "作品集文件/%E5%9B%BD%E5%86%85%E9%A2%84%E7%83%AD%E4%BA%8C_50000_%280-00-00-03%29.png",
+                  "作品集文件/%E5%9B%BD%E5%86%85%E9%A2%84%E7%83%ADSAN__0000_%280-00-00-00%29_5.png",
+                  "作品集文件/%E6%89%8B%E6%89%98.png",
+                  "作品集文件/%E6%A1%8C%E5%9E%AB%E8%A7%92%E5%BA%A6.png",
+                  "作品集文件/%E6%8B%89%E9%93%BE0074_%280-00-00-00%29.png",
+                  "作品集文件/%E5%8C%85%E8%A3%850000_%280-00-00-00%29%E9%80%8F%E6%98%8E.png"
+            ],
+            "year": "2024"
+      },
+      {
+            "id": 7,
+            "title": "KICK",
+            "category": "Rendering",
+            "type": "键帽 / 配件产品渲染",
+            "cover": "作品集文件/ec6456226552503.png",
+            "desc": "KICK 项目收录 10 张产品渲染与场景图，覆盖主视觉、细节卖点、结构表现和电商传播画面。",
+            "tags": [
+                  "Rendering",
+                  "工作",
+                  "键帽"
+            ],
+            "process": [
+                  "产品结构分析",
+                  "材质与灯光设定",
+                  "场景/卖点构图",
+                  "商业输出整理"
+            ],
+            "images": [
+                  "作品集文件/ec6456226552503.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF_0000_%280-00-00-00%29_3.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AFlv_1-10000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%AE%A3%E5%8F%910068_%280-00-00-00%29.png",
+                  "作品集文件/oi%E5%9C%BA%E6%99%AF20000_%280-00-00-00%29.png",
+                  "作品集文件/oi%E5%9C%BA%E6%99%AF0000_%280-00-00-00.png",
+                  "作品集文件/%E9%AB%98%E7%9F%AE%E5%AF%B9%E6%AF%9410000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%9F%AE%E8%BD%B4%E4%BE%A7%E9%9D%A20000_%280-00-00-00%29.png",
+                  "作品集文件/%E6%89%8B%E6%89%98%E4%B8%8A2-10000_%280-00-00-00%29.png",
+                  "作品集文件/%E6%A1%8C%E5%9E%AB%E8%A7%92%E5%BA%A60000_%280-00-00-00%29.png"
+            ],
+            "year": "2025"
+      },
+      {
+            "id": 8,
+            "title": "键盘零散",
+            "category": "Rendering",
+            "type": "商业视觉 / 电商场景",
+            "cover": "作品集文件/%E5%9C%BA%E6%99%AF0001_%280-00-00-00%29.png",
+            "desc": "键盘零散 项目收录 21 张产品渲染与场景图，覆盖主视觉、细节卖点、结构表现和电商传播画面。",
+            "tags": [
+                  "Rendering",
+                  "工作"
+            ],
+            "process": [
+                  "产品结构分析",
+                  "材质与灯光设定",
+                  "场景/卖点构图",
+                  "商业输出整理"
+            ],
+            "images": [
+                  "作品集文件/%E5%9C%BA%E6%99%AF0001_%280-00-00-00%29.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF20000_%280-00-00-00%29.png",
+                  "作品集文件/%E6%B2%99%E6%BC%A00058_%280-00-00-00%29.png",
+                  "作品集文件/%E4%BF%83%E9%94%80%E6%B5%B7%E6%8A%A50000_%280-00-00-00%29.png",
+                  "作品集文件/%E8%AF%A6%E6%83%85%E8%A7%92%E5%BA%A630000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%83%AD%E5%8D%96%E5%9E%8B%E5%8F%B7_0000_%280-00-00-00%29.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF.png",
+                  "作品集文件/G80%E4%B8%BB%E5%9B%BE%E7%B2%89%E8%89%B2Z0000_%E6%8B%B7%E8%B4%9D.png",
+                  "作品集文件/931275b8f0b47ae8a7429e080a624de.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF0000_%280-00-00-00%29%201.png",
+                  "作品集文件/80d4b460c6c624fb976b71fde99c20da_raw.mp4",
+                  "作品集文件/%E5%9C%BA%E6%99%AF2_0000_%280-00-00-00%29_%E6%8B%B7%E8%B4%9D.png",
+                  "作品集文件/%E5%B9%B3%E9%93%BA2.png",
+                  "作品集文件/%E5%9C%BA%E6%99%AF%201.png",
+                  "作品集文件/%E6%AD%A3%E8%AF%95%E5%9B%BE3.png",
+                  "作品集文件/%E8%BD%B4%E4%BD%93pro0000_%280-00-00-00%29.png",
+                  "作品集文件/%E8%BD%B4%E4%BD%93gaming0000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%86%8A%E7%8C%AB%E8%BD%B4%E4%B8%BB%E5%9B%BE0000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%86%8A%E7%8C%AB%E7%9F%AE%E8%BD%B40000_%280-00-00-00%29.png",
+                  "作品集文件/%E7%86%8A%E7%8C%AB%E7%9F%AE%E8%BD%B4%E4%B8%BB%E5%9B%BE00000024_%280-00-00-00%29.png",
+                  "作品集文件/%E7%86%8A%E7%8C%AB%E8%BD%B4%E7%9B%92%E5%AD%90%E4%B8%BB%E5%9B%BE_0000_%280-00-00-00%29.png"
+            ],
+            "year": "2025"
+      },
+      {
+            "id": 9,
+            "title": "KV",
+            "category": "Rendering",
+            "type": "商业视觉 / 电商场景",
+            "cover": "作品集文件/%E5%9C%B0%E8%B4%B40000_%280-00-00-00%29.png",
+            "desc": "KV 项目收录 17 张产品渲染与场景图，覆盖主视觉、细节卖点、结构表现和电商传播画面。",
+            "tags": [
+                  "Rendering",
+                  "练习"
+            ],
+            "process": [
+                  "产品结构分析",
+                  "材质与灯光设定",
+                  "场景/卖点构图",
+                  "商业输出整理"
+            ],
+            "images": [
+                  "作品集文件/%E5%9C%B0%E8%B4%B40000_%280-00-00-00%29.png",
+                  "作品集文件/BZAM2908.jpg",
+                  "作品集文件/3f75d161db9479ed42492a6e9d36cbd.png",
+                  "作品集文件/0f683a032afc545ab2773c320821174.png",
+                  "作品集文件/b36c81b9dbe2e4cafffad4db4678888.png",
+                  "作品集文件/ea8710c3ba6cfe5c6802db004d7ce86.png",
+                  "作品集文件/c37fec32caae84d115447fd49dcf5b6.png",
+                  "作品集文件/QGZJ6243.jpg",
+                  "作品集文件/42db8972902f32e482b02d79ff2f54d.png",
+                  "作品集文件/PKZM3392.jpg",
+                  "作品集文件/XVSK0694.jpg",
+                  "作品集文件/ab84047a4c11a7d9310ba3da78d0f71.png",
+                  "作品集文件/RZGL5737.jpg",
+                  "作品集文件/1b0a481eac0672eac322b9d6b2697c7.png",
+                  "作品集文件/93f1e2cc977a21e0755470e766662f8.png",
+                  "作品集文件/855d68db44fa8b14578971e83372c69.png",
+                  "作品集文件/20c06ff5846d68d58d87bcf63d171fe.png",
+                  "作品集文件/34e01fdd2fefd5cbd24136c0a3fa3b16_raw.mp4"
+            ],
+            "year": "2025"
+      },
+      {
+            "id": 10,
+            "title": "电商产品场景",
+            "category": "Rendering",
+            "type": "商业视觉 / 电商场景",
+            "cover": "作品集文件/cb481292956a130cc9f67b6d3ebb81e.png",
+            "desc": "电商产品场景 项目收录 12 张产品渲染与场景图，覆盖主视觉、细节卖点、结构表现和电商传播画面。",
+            "tags": [
+                  "Rendering"
+            ],
+            "process": [
+                  "产品结构分析",
+                  "材质与灯光设定",
+                  "场景/卖点构图",
+                  "商业输出整理"
+            ],
+            "images": [
+                  "作品集文件/cb481292956a130cc9f67b6d3ebb81e.png",
+                  "作品集文件/RCPD5410.jpg",
+                  "作品集文件/XKDQ8373.jpg",
+                  "作品集文件/WQPE7486.jpg",
+                  "作品集文件/KFRV9395.jpg",
+                  "作品集文件/d1f88a54ed80cdd74ebc1a7c0ff52d5.png",
+                  "作品集文件/50e6e44c32c34a04f3eaae9dc172b0a.png",
+                  "作品集文件/WDKD3305.jpg",
+                  "作品集文件/4.png",
+                  "作品集文件/1.jpg",
+                  "作品集文件/b0e087f2-a5a4-4f56-b23e-7292c5e3d70d.png",
+                  "作品集文件/2_0000_%280-00-00-01%29.png"
+            ],
+            "year": "2025"
+      },
+      {
+            "id": 11,
+            "title": "AIGC 产品合集",
+            "category": "AIGC",
+            "type": "AI 产品概念合集",
+            "cover": "作品集文件/%E4%BA%A7%E5%93%81%E5%90%88%E9%9B%86/Clipboard%20-%202025-12-21%2014.38.30.png",
+            "desc": "集中展示多品类产品概念视觉，作为 AIGC 产品方向的总览入口，覆盖不同材质、形态和商业画面气质。 本组收录 8 张/个媒体文件。",
+            "tags": [
+                  "AIGC",
+                  "Product Collection",
+                  "Concept"
+            ],
+            "process": [
+                  "方向与品类设定",
+                  "AI 造型发散",
+                  "场景与材质筛选",
+                  "作品集整理输出"
+            ],
+            "images": [
+                  "作品集文件/%E4%BA%A7%E5%93%81%E5%90%88%E9%9B%86/Clipboard%20-%202025-12-21%2012.54.45.png",
+                  "作品集文件/%E4%BA%A7%E5%93%81%E5%90%88%E9%9B%86/Clipboard%20-%202025-12-21%2013.07.03.png",
+                  "作品集文件/%E4%BA%A7%E5%93%81%E5%90%88%E9%9B%86/Clipboard%20-%202025-12-21%2013.37.44.png",
+                  "作品集文件/%E4%BA%A7%E5%93%81%E5%90%88%E9%9B%86/Clipboard%20-%202025-12-21%2013.47.25.png",
+                  "作品集文件/%E4%BA%A7%E5%93%81%E5%90%88%E9%9B%86/Clipboard%20-%202025-12-21%2014.24.59.png",
+                  "作品集文件/%E4%BA%A7%E5%93%81%E5%90%88%E9%9B%86/Clipboard%20-%202025-12-21%2014.38.30.png",
+                  "作品集文件/%E4%BA%A7%E5%93%81%E5%90%88%E9%9B%86/Clipboard%20-%202025-12-21%2014.40.10.png",
+                  "作品集文件/%E4%BA%A7%E5%93%81%E5%90%88%E9%9B%86/Clipboard%20-%202025-12-21%2014.59.30.png"
+            ],
+            "year": "2026"
+      },
+      {
+            "id": 12,
+            "title": "AIGC 鼠标概念",
+            "category": "AIGC",
+            "type": "AI 数码产品概念",
+            "cover": "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2017.23.03.png",
+            "desc": "围绕鼠标产品的造型、灯效、材质和电竞氛围进行 AI 视觉探索，适合作为小型 3C 产品概念提案。 本组收录 19 张/个媒体文件。",
+            "tags": [
+                  "AIGC",
+                  "Mouse",
+                  "3C"
+            ],
+            "process": [
+                  "方向与品类设定",
+                  "AI 造型发散",
+                  "场景与材质筛选",
+                  "作品集整理输出"
+            ],
+            "images": [
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2016.42.54.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2016.47.54.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2016.57.22.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2017.04.16.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2017.16.59.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2017.23.03.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2017.30.13.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2017.39.20.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2017.42.43.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2017.47.05.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2017.50.38.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2018.19.02.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2018.27.43.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2018.35.31.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2018.38.48.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2018.40.51.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2018.41.48.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2018.43.47.png",
+                  "作品集文件/%E9%BC%A0%E6%A0%87/Clipboard%20-%202026-03-15%2018.48.12.png"
+            ],
+            "year": "2026"
+      },
+      {
+            "id": 13,
+            "title": "AIGC 手持运动相机",
+            "category": "AIGC",
+            "type": "AI 数码影像产品",
+            "cover": "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2016.12.01.png",
+            "desc": "以运动相机为主体，探索手持设备的结构、镜头语言、科技感和生活方式场景。 本组收录 27 张/个媒体文件。",
+            "tags": [
+                  "AIGC",
+                  "Camera",
+                  "Lifestyle"
+            ],
+            "process": [
+                  "方向与品类设定",
+                  "AI 造型发散",
+                  "场景与材质筛选",
+                  "作品集整理输出"
+            ],
+            "images": [
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2012.06.38.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2013.28.17.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2013.42.06.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2014.29.43.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2015.10.30.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2015.57.43.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2016.12.01.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2016.43.12.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2016.49.53.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2016.51.10.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.01.42.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.08.07.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.09.30.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.30.55.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.31.40.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.36.21.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.36.41.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.37.56.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.43.10.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.45.41.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.46.01.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2017.58.45.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2018.17.36.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2018.17.50.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2018.18.21.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2018.25.18.png",
+                  "作品集文件/%E6%89%8B%E6%8C%81%E8%BF%90%E5%8A%A8%E7%9B%B8%E6%9C%BA/Clipboard%20-%202025-12-28%2018.25.47.png"
+            ],
+            "year": "2026"
+      },
+      {
+            "id": 14,
+            "title": "AIGC 空气净化器",
+            "category": "AIGC",
+            "type": "AI 家居电器概念",
+            "cover": "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2014.27.27.png",
+            "desc": "聚焦家居电器的空间融合、材质表现和轻科技氛围，呈现空气净化器的产品概念方向。 本组收录 12 张/个媒体文件。",
+            "tags": [
+                  "AIGC",
+                  "Appliance",
+                  "Home"
+            ],
+            "process": [
+                  "方向与品类设定",
+                  "AI 造型发散",
+                  "场景与材质筛选",
+                  "作品集整理输出"
+            ],
+            "images": [
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2012.44.16.png",
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2013.31.33.png",
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2013.33.55.png",
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2013.56.16.png",
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2014.04.14.png",
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2014.14.31.png",
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2014.22.47.png",
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2014.23.03.png",
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2014.27.27.png",
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2014.44.06.png",
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2014.54.49.png",
+                  "作品集文件/%E7%A9%BA%E6%B0%94%E5%87%80%E5%8C%96%E5%99%A8/Clipboard%20-%202025-12-19%2015.01.18.png"
+            ],
+            "year": "2026"
+      },
+      {
+            "id": 15,
+            "title": "AIGC 扫地机概念 01",
+            "category": "AIGC",
+            "type": "AI 家居电器概念",
+            "cover": "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.02.04.png",
+            "desc": "围绕扫地机器人进行多轮造型与场景探索，展示家居清洁产品的概念发散过程。 本组收录 32 张/个媒体文件。",
+            "tags": [
+                  "AIGC",
+                  "Robot Vacuum",
+                  "Home"
+            ],
+            "process": [
+                  "方向与品类设定",
+                  "AI 造型发散",
+                  "场景与材质筛选",
+                  "作品集整理输出"
+            ],
+            "images": [
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2000.56.18.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2000.56.39.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.01.56.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.02.04.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.19.30.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.21.19.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.23.26.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.30.29.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.32.08.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.41.32.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.41.48.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.48.09.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2001.52.27.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2002.01.27.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2002.07.19.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2002.07.43.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2002.21.32.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2002.22.37.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2002.23.00.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2002.29.25.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2002.33.25.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2002.33.47.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2002.47.54.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2003.06.48.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2003.07.01.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2003.07.20.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2003.19.23.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2003.20.36.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2003.29.03.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2004.21.03.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2004.21.15.png",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA/Clipboard%20-%202025-12-20%2014.01.29.png"
+            ],
+            "year": "2026"
+      },
+      {
+            "id": 16,
+            "title": "AIGC 扫地机概念 02",
+            "category": "AIGC",
+            "type": "AI 家居电器概念",
+            "cover": "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/45224c1d-44ed-4ba3-8436-82979932250d.jpg",
+            "desc": "延续扫地机器人方向，补充不同外观语言、材质细节和使用环境下的视觉方案。 本组收录 15 张/个媒体文件。",
+            "tags": [
+                  "AIGC",
+                  "Robot Vacuum",
+                  "Product"
+            ],
+            "process": [
+                  "方向与品类设定",
+                  "AI 造型发散",
+                  "场景与材质筛选",
+                  "作品集整理输出"
+            ],
+            "images": [
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/1d285f71-abbf-43f6-8ba1-9acbbc3ab066.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/43aef2b8-eac2-4195-88ec-cdae74e143c8.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/131d2b50-6952-4716-b007-c9ea89ce98b4.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/40399bbd-c75c-4406-8fec-dab1e30aa33c.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/45224c1d-44ed-4ba3-8436-82979932250d.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/0723864d-fc08-4f67-bca0-64a9a17261dc.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/39104474-4db7-4f41-9238-ecccf3515227.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/aa6212f2-618b-460c-a82d-52996a03a6ed.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/ae1e7997-6d8a-444a-8469-684e58e40852.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/b4693118-fd79-4c14-900b-74216975422f.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/b7131046-f944-4e8b-905f-d14238436e24.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/c12ed08b-58a4-4021-afc1-27470e90f528.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/d5538fdc-57f9-42d8-a682-ec94cbc1402a.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/e3bdffb7-6302-4b2b-82d0-4df50692bf0c.jpg",
+                  "作品集文件/%E6%89%AB%E5%9C%B0%E6%9C%BA2/f0694c76-6f24-4ea5-9cf0-2ef9e0731009.jpg"
+            ],
+            "year": "2026"
+      },
+      {
+            "id": 17,
+            "title": "AIGC 洗衣机概念",
+            "category": "AIGC",
+            "type": "AI 家居电器概念",
+            "cover": "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T13-23-05.jpg",
+            "desc": "以洗衣机为核心探索家电产品的商业画面、室内环境和高级生活方式视觉。 本组收录 23 张/个媒体文件。",
+            "tags": [
+                  "AIGC",
+                  "Appliance",
+                  "Interior"
+            ],
+            "process": [
+                  "方向与品类设定",
+                  "AI 造型发散",
+                  "场景与材质筛选",
+                  "作品集整理输出"
+            ],
+            "images": [
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/%E9%A2%84%E8%A7%88%E8%8A%82%E7%82%B9%20%284%29.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/%E9%A2%84%E8%A7%88%E8%8A%82%E7%82%B9%20%287%29.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/%E9%A2%84%E8%A7%88%E8%8A%82%E7%82%B9%20%288%29.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/%E9%A2%84%E8%A7%88%E8%8A%82%E7%82%B9%20%289%29.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/%E9%A2%84%E8%A7%88%E8%8A%82%E7%82%B9%20%2810%29.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/Image-1768651525914.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T12-51-46.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T13-09-33.jpg",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T13-23-05.jpg",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T13-24-07.jpg",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T13-30-43.jpg",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T13-47-28.jpg",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T14-05-24.jpg",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T14-10-04.jpg",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T14-36-30.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T15-09-58.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T15-27-08.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T15-33-46.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T15-35-10.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T15-40-48.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________________________2026-01-17T15-48-30.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image_____________________________________________35mm___2026-01-17T15-26-14.png",
+                  "作品集文件/%E6%B4%97%E8%A1%A3%E6%9C%BA/otoy_studio_image____________________________________2001____________2026-01-17T13-25-09.jpg"
+            ],
+            "year": "2026"
+      },
+      {
+            "id": 18,
+            "title": "AIGC 人体工学椅",
+            "category": "AIGC",
+            "type": "AI 家具产品概念",
+            "cover": "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/3e84a22b-8a42-417a-b47d-1ce4cd8298ed.jpg",
+            "desc": "探索人体工学椅的结构语言、坐感暗示和办公场景氛围，衔接家居与工作空间视觉。 本组收录 15 张/个媒体文件。",
+            "tags": [
+                  "AIGC",
+                  "Furniture",
+                  "Ergonomic"
+            ],
+            "process": [
+                  "方向与品类设定",
+                  "AI 造型发散",
+                  "场景与材质筛选",
+                  "作品集整理输出"
+            ],
+            "images": [
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/3a44ddea-4d64-4df1-9a2a-3b5d244e4b43.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/3e84a22b-8a42-417a-b47d-1ce4cd8298ed.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/5b65c914-6b62-425a-9380-37121f63d7d8.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/6a3d0ed5-770f-4505-825b-47c397f60eba.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/6d1e7190-ad0b-4339-8771-682edca9ce73.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/7be5c753-2b69-40f7-b833-5f46dc965692.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/259e148e-0a68-41eb-9ab8-11ba7e3ee6be.png",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/384cafeb-93b5-4ff5-8bf0-babfa329a8bd.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/581b2bfd-4e20-4d10-93e7-d9ea448d77cf.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/01790c28-021d-4e2f-8941-406c606f741a.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/02466e11-bcb4-4f5b-9962-1c69435a00e2.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/5350bdb3-5e5f-47f1-b7bd-37ddf7a901dc.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/ec7acc47-4dd5-4a8f-9ab2-f50f61dae133.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/f4f3bd50-d60c-4109-8067-1aa5462aed5d.jpg",
+                  "作品集文件/%E4%BA%BA%E4%BD%93%E5%B7%A5%E5%AD%A6%E6%A4%85/f392af9e-7dae-4595-ac14-990776174169.jpg"
+            ],
+            "year": "2026"
+      },
+      {
+            "id": 19,
+            "title": "AIGC 除草机概念 01",
+            "category": "AIGC",
+            "type": "AI 户外工具概念",
+            "cover": "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2014.59.52.png",
+            "desc": "面向户外工具产品进行 AI 概念发散，强调机械结构、环境关系和使用场景。 本组收录 32 张/个媒体文件。",
+            "tags": [
+                  "AIGC",
+                  "Outdoor",
+                  "Tool"
+            ],
+            "process": [
+                  "方向与品类设定",
+                  "AI 造型发散",
+                  "场景与材质筛选",
+                  "作品集整理输出"
+            ],
+            "images": [
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2010.54.21.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2010.55.34.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2011.05.08.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2011.07.48.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2011.12.10.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2012.16.14.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2012.24.23.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2012.25.27.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2012.28.11.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2012.33.50.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2013.56.34.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2014.03.18.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2014.05.50.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2014.11.08.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2014.34.19.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2014.37.40.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2014.59.41.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2014.59.52.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2016.12.28.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2017.01.43.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2018.08.19.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2018.11.38.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2018.14.55.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2018.15.25.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/Clipboard%20-%202025-12-24%2018.30.03.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/image_0007.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/image_0013.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/image_0019.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/image_0032.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/image_0101.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/image_0108.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA/image_0160.jpg"
+            ],
+            "year": "2026"
+      },
+      {
+            "id": 20,
+            "title": "AIGC 除草机概念 02",
+            "category": "AIGC",
+            "type": "AI 户外工具概念",
+            "cover": "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/e466c4c8-49ff-4567-a553-6f42c7f5671d.jpg",
+            "desc": "补充除草机方向的外观方案与场景化表达，形成更完整的户外工具概念组。 本组收录 23 张/个媒体文件。",
+            "tags": [
+                  "AIGC",
+                  "Outdoor",
+                  "Tool"
+            ],
+            "process": [
+                  "方向与品类设定",
+                  "AI 造型发散",
+                  "场景与材质筛选",
+                  "作品集整理输出"
+            ],
+            "images": [
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/4bfa8041-0728-4cca-8750-038395b58cf8.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/5d03cd2c-fe34-4c86-b14a-e28de02816ae.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/6f74ec9a-3faf-42f9-be8a-237ae5932cd8.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/7bd92fe7-cf6c-442e-98d8-9a6c4237b087.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/72fb5f63-c713-4918-8dfd-7e2b906e0594.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/307c7158-01db-49c9-8d5d-5c2a6b55ecc2.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/974f89dd-83d6-450e-ba38-3554f585bf9f.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/3998b002-94d0-4aa6-8657-cbab048bc692.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/53852df5-45c0-409f-b32b-b3686450fccd.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/408962ac-f923-4888-8257-9bcd96eebbe2.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/b90961bf-4e62-4ff4-94bc-fd5a7d667b5a.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/b907381b-f60f-48bf-990e-e15241313f42.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/c823276a-fbb2-448d-bd95-b1560684b8b2.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/Clipboard%20-%202026-02-26%2023.08.55.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/Clipboard%20-%202026-02-26%2023.42.37.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/Clipboard%20-%202026-02-27%2022.59.41.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/Clipboard%20-%202026-02-27%2023.16.56.png",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/e5d64932-3f01-4aeb-a925-43363e184b0c.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/e466c4c8-49ff-4567-a553-6f42c7f5671d.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/ed736ac0-4c17-4f13-8381-91dc5768c3f0.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/ee681b91-3790-4ef7-9bef-149ac151d1a8.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/f3ebb084-0380-4b74-9fbc-187b94555816.jpg",
+                  "作品集文件/%E9%99%A4%E8%8D%89%E6%9C%BA2/f806dd38-5f18-49df-ad62-2aca5b20d819.png"
+            ],
+            "year": "2026"
+      },
+      {
+            "id": 21,
+            "title": "NEW 75键盘动画",
+            "category": "Motion",
+            "type": "产品动画 / 动态分镜",
+            "cover": "作品集文件/%E5%88%86%E9%95%9C%E4%B8%80-_%280-00-01-14%29.png",
+            "desc": "NEW 75键盘动画 项目收录动态视频与关键分镜，呈现产品动画节奏、镜头表达和阶段性视觉成果。",
+            "tags": [
+                  "Motion"
+            ],
+            "process": [
+                  "分镜与节奏规划",
+                  "产品运动设计",
+                  "关键帧画面输出",
+                  "动态成片整理"
+            ],
+            "images": [
+                  "作品集文件/%E5%B0%8F%E6%A0%B7%E9%A2%84%E8%A7%88.mp4",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%B8%80-_%280-00-01-14%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%BA%8C_%280-00-00-29%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%BA%8C_%280-00-02-08%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%BA%8C-_2_%280-00-00-20%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%BA%8C-_2_%280-00-01-05%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%B9%9D_%280-00-00-05%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%B9%9D_%280-00-02-00%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E5%85%AD_%280-00-01-03%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E5%85%AD_%280-00-02-08%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%B8%83_%280-00-00-05%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%B8%83_%280-00-00-25%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%B8%83_%280-00-01-20%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%B8%89-_%280-00-01-01%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%B8%89_2_%280-00-00-00%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E5%8D%81%E4%BA%8C_2_%280-00-00-00%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E5%8D%81%E4%BA%8C_2_%280-00-00-28%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E5%8D%81%E4%BA%8C_2_%280-00-01-28%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E5%8D%81%E5%9B%9B_%280-00-00-00%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E5%8D%81%E5%9B%9B_%280-00-01-21%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E5%8D%81%E4%BA%94_%280-00-00-18%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E5%8D%81%E4%BA%94_%280-00-01-12%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E5%8D%81%E4%BA%94_%280-00-02-20%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%B8%80-_%280-00-02-20%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E4%B8%80-_%280-00-02-27%29.png",
+                  "作品集文件/%E9%9B%B6%E4%BB%B6%E5%88%86%E9%95%9C_%280-00-00-00%29.png",
+                  "作品集文件/%E9%9B%B6%E4%BB%B6%E5%88%86%E9%95%9C_%280-00-01-15%29.png",
+                  "作品集文件/%E5%B9%B3%E6%89%AB_00015.png",
+                  "作品集文件/%E5%B9%B3%E6%89%AB_00038.png",
+                  "作品集文件/%E5%B9%B3%E6%89%AB_00045.png",
+                  "作品集文件/%E5%88%86%E9%95%9C_%E5%85%AB_%280-00-00-19%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C_%E5%85%AB_%280-00-01-07%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C_%E5%85%AB_%280-00-02-19%29.png",
+                  "作品集文件/%E5%88%86%E9%95%9C%E5%AE%9A%E4%BD%8D%E6%9D%BF_2_%280-00-01-10%29.png",
+                  "作品集文件/%E4%B8%BB%E6%9D%BF%E7%94%B5%E5%AE%B9%E9%9B%B6%E4%BB%B6_Main_0000.png"
+            ],
+            "year": "2026"
+      },
+      {
+            "id": 22,
+            "title": "游戏手柄动画（制作中）",
+            "category": "Motion",
+            "type": "动态作品制作中",
+            "cover": "作品集文件/a02ebb187f5839dbffd816578b0fc771_raw.mp4",
+            "desc": "游戏手柄动画（制作中） 项目收录动态视频与关键分镜，呈现产品动画节奏、镜头表达和阶段性视觉成果。",
+            "tags": [
+                  "Motion",
+                  "练习"
+            ],
+            "process": [
+                  "分镜与节奏规划",
+                  "产品运动设计",
+                  "关键帧画面输出",
+                  "动态成片整理"
+            ],
+            "images": [
+                  "作品集文件/a02ebb187f5839dbffd816578b0fc771_raw.mp4"
+            ],
+            "year": "2025"
+      }
+];
+    works.forEach(w=>{w.images=w.images||[w.cover]; w.year=w.year||'2026'});
+    const sections=[{key:'Rendering',title:'Rendering',subtitle:'Product-level 3D Visualization',icon:'box',text:'聚焦 3C 产品高精度渲染、材质表现、光影塑造与商业级视觉输出。'},{key:'AIGC',title:'AIGC Visual',subtitle:'AI-powered Creative Imaging',icon:'sparkles',text:'结合 AIGC 工具进行产品海报、风格探索、商业视觉实验与创意图像生成。'},{key:'Motion',title:'Motion',subtitle:'Dynamic Product Storytelling',icon:'play',text:'通过产品动画、镜头语言与动态设计，让静态产品拥有更强的叙事感。'}];
+    const $=s=>document.querySelector(s); const app=$('#app');
+    const icon=n=> n==='arrow'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg>': n==='mail'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>':'✦';
+    const escapeHTML=t=>String(t).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    const textfx=t=>`<span class="magtext">${[...String(t)].map(ch=>ch===' '?' ':`<span class="char">${escapeHTML(ch)}</span>`).join('')}</span>`;
+    const magnetizeText=(root=document.body)=>{const skip=new Set(['SCRIPT','STYLE','IMG','VIDEO','SVG','PATH','BR']);const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{if(!n.nodeValue.trim())return NodeFilter.FILTER_REJECT;const p=n.parentElement;if(!p||p.closest('.magtext,.char,.gradient'))return NodeFilter.FILTER_REJECT;for(let el=p;el&&el!==root.parentElement;el=el.parentElement){if(skip.has(el.tagName))return NodeFilter.FILTER_REJECT}return NodeFilter.FILTER_ACCEPT}});const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);nodes.forEach(n=>{const frag=document.createDocumentFragment();[...n.nodeValue].forEach(ch=>{if(ch===' '){frag.appendChild(document.createTextNode(' '));return}const s=document.createElement('span');s.className='char';s.textContent=ch;frag.appendChild(s)});const wrap=document.createElement('span');wrap.className='magtext';wrap.appendChild(frag);n.parentNode.replaceChild(wrap,n)})};
+    const tags=a=>(a||[]).map(t=>`<span class="tag">${textfx(t)}</span>`).join('');
+    const isVideo=src=>/\.(mp4|webm|mov)(\?|#|$)/i.test(src||'');
+    const media=(src,alt)=>isVideo(src)?`<video src="${src}" muted playsinline loop autoplay></video>`:`<img src="${src}" alt="${alt}" loading="lazy">`;
+    const galleryItem=(src,alt,i)=>isVideo(src)?`<div class="gallery-item"><video src="${src}" controls playsinline preload="metadata"></video></div>`:`<button onclick='openLightboxBySrc(${JSON.stringify(src)})'><img src="${src}" alt="${alt} ${i+1}" loading="lazy"></button>`;
+    const card=(w,i,featured=false)=>`<button class="work ${featured?'featured':''} reveal" data-id="${w.id}"><div class="work-img">${media(w.cover,w.title)}<span class="external">${icon('arrow')}</span><div class="work-body"><div class="mb">${(w.tags||[]).map(t=>`<span class="tag">${textfx(t)}</span>`).join('')}</div><h3>${textfx(w.title)}</h3><div class="work-type">${textfx(w.type)}</div></div></div></button>`;
+    const aigcHero=works.find(w=>w.title==='AIGC 鼠标概念')||works.find(w=>w.category==='AIGC')||works[8];
+    app.innerHTML=`<div class="wrap"><section class="hero"><div><div class="pill">✦ ${textfx('3C Rendering · AIGC Visual · Motion Design')}</div><h1>${textfx('Product Visuals')}<span class="gradient">with Precision.</span></h1><p class="intro">${profile.name}｜专注 3C 产品级高精度渲染、AI 视觉生成与动态视觉表达。为产品打造更高级、更具记忆点的商业视觉体验。</p><div class="actions"><a class="btn" href="#rendering">View Portfolio ${icon('arrow')}</a><button class="btn" type="button" id="heroWechat">Contact Me ${icon('arrow')}</button></div></div><div class="hero-media"><div class="float-card big">${media(works[0].cover,works[0].title)}<div class="caption"><div class="eyebrow">Featured Render</div><h3>${works[0].title}</h3></div></div><div class="float-card small">${media(aigcHero.cover,aigcHero.title)}<div class="caption"><div class="eyebrow">AIGC System</div><h3>${aigcHero.title}</h3></div></div></div></section><section id="about" class="about reveal"><div><p class="label">About</p><h2 class="title">${textfx('Product obsession, visual experimentation, premium presentation.')}</h2></div><p class="muted">${profile.intro} 以下是我的商业项目案例及个人作品，点击作品卡片可查看完整项目内容。</p></section><section class="core reveal"><p class="label">Core Sections</p><h2 class="title" style="margin-bottom:40px">三大能力板块</h2><div class="core-grid">${sections.map(s=>`<a class="core-card" href="#${s.key.toLowerCase()}"><h3>${textfx(s.title)}</h3><p>${s.subtitle}</p><p>${s.text}</p></a>`).join('')}</div></section>${sections.map(s=>sectionHTML(s)).join('')}</div><footer id="contact" class="contact"><div class="contact-box reveal"><div style="width:42px;height:42px;margin:0 auto 24px;color:rgba(255,255,255,.6)">${icon('mail')}</div><h2 class="title">Let’s Create Something Impressive.</h2><p class="muted" style="max-width:680px;margin:24px auto 0">如果你对我的作品感兴趣，欢迎通过微信、邮箱、小红书、站酷或 Behance 联系我。</p><div class="contact-actions"><button class="btn" type="button" id="copyWechat">WeChat QR ${icon('arrow')}</button><button class="btn" type="button" id="openEmail">Send Email ${icon('arrow')}</button><a class="btn" target="_blank" href="${profile.xiaohongshu}">Xiaohongshu</a><a class="btn" target="_blank" href="${profile.zcool}">Zcool</a><a class="btn" target="_blank" href="${profile.behance}">Behance</a></div></div></footer>`;
+    magnetizeText(document.body);
+    function sectionHTML(s){const sw=works.filter(w=>w.category===s.key);const ut=[...new Set(sw.flatMap(w=>w.tags||[]))];const glow=s.key==='Rendering'?'rgba(86,124,255,.2)':s.key==='AIGC'?'rgba(182,104,255,.22)':'rgba(255,146,77,.2)';const heroWork=s.key==='AIGC'?aigcHero:sw[0];return `<section id="${s.key.toLowerCase()}" class="portfolio-section reveal" style="--glow:${glow}"><div class="section-shell"><div class="section-hero">${heroWork?media(heroWork.cover,s.title):''}<div class="section-head"><p class="label">${s.subtitle}</p><div class="section-head-grid"><div><h2 class="title">${textfx(s.title)}</h2><p class="muted">${s.text}</p></div><div class="stats"><div class="stat"><small>Projects</small><b>${String(sw.length).padStart(2,'0')}</b></div><div class="stat"><small>Tags</small><b>${String(ut.length).padStart(2,'0')}</b></div><div class="stat"><small>Focus</small><b style="font-size:20px">${s.title}</b></div></div></div></div></div><div class="tag-row">${tags(ut.slice(0,10))}</div>${sw[0]?card(sw[0],0,true):''}<div class="work-grid">${sw.slice(1).map((w,i)=>card(w,i+1)).join('')}</div></div></section>`}
+    document.querySelectorAll('.work').forEach(el=>el.onclick=()=>openModal(works.find(w=>w.id==el.dataset.id)));
+    let currentGallery=[],currentLightboxIndex=0;
+    function openModal(w){currentGallery=(w.images||[w.cover]).filter(src=>!isVideo(src));const m=$('#modal');m.innerHTML=`<div class="modal-box"><button class="close" onclick="closeModal()">✕</button><div class="modal-content"><div class="modal-hero">${media(w.cover,w.title)}<div class="modal-title"><p class="eyebrow">${w.category} · ${w.year}</p><h2>${w.title}</h2></div></div><div class="info-grid"><div class="panel"><p class="label">Project Info</p><p>项目类型：${w.type}</p><p>能力板块：${w.category}</p><div class="tag-row">${tags(w.tags)}</div></div><div><p class="muted">${w.desc}</p><div class="process">${(w.process||[]).map((p,i)=>`<div><small>0${i+1}</small><br>${p}</div>`).join('')}</div></div></div><div class="gallery">${(w.images||[w.cover]).map((img,i)=>galleryItem(img,w.title,i)).join('')}</div></div></div>`;magnetizeText(m);m.classList.add('open')} window.closeModal=()=>$('#modal').classList.remove('open'); $('#modal').onclick=e=>{if(e.target.id==='modal')closeModal()};
+    window.openLightboxBySrc=src=>{const i=currentGallery.indexOf(src);currentLightboxIndex=i>=0?i:0;renderLightbox()}; function renderLightbox(){const l=$('#lightbox');const src=currentGallery[currentLightboxIndex];l.innerHTML=`<button class="close" style="position:absolute;right:28px;top:28px" onclick="closeLightbox()">✕</button>${currentGallery.length>1?`<button class="lightbox-arrow lightbox-prev" onclick="moveLightbox(-1)">‹</button><button class="lightbox-arrow lightbox-next" onclick="moveLightbox(1)">›</button><div class="lightbox-count">${currentLightboxIndex+1} / ${currentGallery.length}</div>`:''}<img src="${src}" alt="Preview">`;l.classList.add('open')} window.moveLightbox=dir=>{if(!currentGallery.length)return;currentLightboxIndex=(currentLightboxIndex+dir+currentGallery.length)%currentGallery.length;renderLightbox()}; window.closeLightbox=()=>$('#lightbox').classList.remove('open'); $('#lightbox').onclick=e=>{if(e.target.id==='lightbox')closeLightbox()};
+    const wechatQR='作品集文件/wechat-qr.jpg';
+    window.openWechat=()=>{const m=$('#wechatModal');m.innerHTML=`<div class="wechat-card"><button class="wechat-close" onclick="closeWechat()">✕</button><p class="label">WeChat</p><h2 class="wechat-title">扫码联系我</h2><p class="wechat-text">打开微信扫一扫，添加后可以直接沟通项目合作、产品渲染与 AIGC 视觉需求。</p><div class="qr-frame"><img src="${wechatQR}" alt="微信二维码"></div><div class="wechat-id">WeChat <b>${profile.wechat}</b></div></div>`;magnetizeText(m);m.classList.add('open')};
+    window.closeWechat=()=>$('#wechatModal').classList.remove('open'); $('#wechatModal').onclick=e=>{if(e.target.id==='wechatModal')closeWechat()};
+    window.openEmail=()=>{const m=$('#wechatModal');m.innerHTML=`<div class="wechat-card email-card"><button class="wechat-close" onclick="closeWechat()">✕</button><p class="label">Email</p><h2 class="wechat-title">邮箱联系</h2><p class="wechat-text">可以复制邮箱，或直接打开邮件客户端发送合作需求。</p><div class="qr-frame"><span class="email-address">${profile.email}</span></div><div class="email-actions"><button class="btn" type="button" onclick="navigator.clipboard.writeText(profile.email)">Copy Email</button><a class="btn" href="mailto:${profile.email}">Open Mail</a></div></div>`;magnetizeText(m);m.classList.add('open')};
+    $('#heroWechat').onclick=openWechat; $('#copyWechat').onclick=openWechat; $('#openEmail').onclick=openEmail;
+    window.addEventListener('keydown',e=>{if(!$('#lightbox').classList.contains('open'))return;if(e.key==='ArrowLeft')moveLightbox(-1);if(e.key==='ArrowRight')moveLightbox(1);if(e.key==='Escape')closeLightbox()});
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+    const clearMagnet=root=>(root||document).querySelectorAll('.char.hot,.char.warm,.char.soft').forEach(c=>c.classList.remove('hot','warm','soft'));
+    document.addEventListener('pointerover',e=>{const ch=e.target.closest('.char');if(!ch)return;const group=ch.closest('.magtext');if(!group)return;clearMagnet(group);const chars=[...group.querySelectorAll('.char')];const i=chars.indexOf(ch);chars.forEach((c,idx)=>{const d=Math.abs(idx-i);if(d===0)c.classList.add('hot');else if(d===1)c.classList.add('warm');else if(d===2)c.classList.add('soft')})});
+    document.addEventListener('pointerout',e=>{const group=e.target.closest('.magtext');if(group&&!group.contains(e.relatedTarget))clearMagnet(group)});
+    window.addEventListener('mousemove',e=>{$('#glow').style.transform=`translate(${e.clientX-380}px,${e.clientY-380}px)`});
+    window.addEventListener('scroll',()=>{document.querySelectorAll('.section-hero img,.section-hero video').forEach(img=>{const r=img.getBoundingClientRect();const p=(r.top-innerHeight)/(innerHeight+r.height);img.style.transform=`scale(${1.08-Math.max(-.08,Math.min(.08,p*.08))}) translateY(${p*-40}px)`})},{passive:true});
+  </script>
+</body>
+</html>

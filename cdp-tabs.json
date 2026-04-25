@@ -1,0 +1,50 @@
+﻿[ {
+   "description": "",
+   "devtoolsFrontendUrl": "https://aka.ms/docs-landing-page/serve_rev/@d4380ba2b9dc3452fbccdc737e69d7f67a09122c/inspector.html?ws=127.0.0.1:9223/devtools/page/2D6621C473B01C9FBA4C557D473361DD",
+   "id": "2D6621C473B01C9FBA4C557D473361DD",
+   "title": "Microsoft Voices",
+   "type": "background_page",
+   "url": "chrome-extension://jdiccldimpdaibmpdkjnbmckianbfold/_generated_background_page.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9223/devtools/page/2D6621C473B01C9FBA4C557D473361DD"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "https://aka.ms/docs-landing-page/serve_rev/@d4380ba2b9dc3452fbccdc737e69d7f67a09122c/inspector.html?ws=127.0.0.1:9223/devtools/page/AD34A05603880349881E95CDFDD3FB1E",
+   "id": "AD34A05603880349881E95CDFDD3FB1E",
+   "title": "WebRTC Internals Extension",
+   "type": "background_page",
+   "url": "chrome-extension://ncbjelpjchkpbikbpkcchkhkblodoama/_generated_background_page.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9223/devtools/page/AD34A05603880349881E95CDFDD3FB1E"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "https://aka.ms/docs-landing-page/serve_rev/@d4380ba2b9dc3452fbccdc737e69d7f67a09122c/inspector.html?ws=127.0.0.1:9223/devtools/page/7524068685762E56EC8D04956980C3D5",
+   "id": "7524068685762E56EC8D04956980C3D5",
+   "title": "Media Internals Services Extension",
+   "type": "background_page",
+   "url": "chrome-extension://fikbjbembnmfhppjfnmfkahdhfohhjmg/_generated_background_page.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9223/devtools/page/7524068685762E56EC8D04956980C3D5"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "https://aka.ms/docs-landing-page/serve_rev/@d4380ba2b9dc3452fbccdc737e69d7f67a09122c/inspector.html?ws=127.0.0.1:9223/devtools/page/3308BB6758BEE298EE6471EA01F697AF",
+   "id": "3308BB6758BEE298EE6471EA01F697AF",
+   "title": "Edge 反馈",
+   "type": "background_page",
+   "url": "chrome-extension://ihmafllikibpmigkcoadcmckbfhibefp/_generated_background_page.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9223/devtools/page/3308BB6758BEE298EE6471EA01F697AF"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "https://aka.ms/docs-landing-page/serve_rev/@d4380ba2b9dc3452fbccdc737e69d7f67a09122c/inspector.html?ws=127.0.0.1:9223/devtools/page/1F2CA10FD9AC74C2D74103ECEEDA2FD0",
+   "id": "1F2CA10FD9AC74C2D74103ECEEDA2FD0",
+   "title": "WebRTC Extension",
+   "type": "background_page",
+   "url": "chrome-extension://nkeimhogjdpnpccoofpliimaahmaaome/background.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9223/devtools/page/1F2CA10FD9AC74C2D74103ECEEDA2FD0"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "https://aka.ms/docs-landing-page/serve_rev/@d4380ba2b9dc3452fbccdc737e69d7f67a09122c/inspector.html?ws=127.0.0.1:9223/devtools/page/C1B8A8D4F01CE7A78C4BA4AADAB86C93",
+   "id": "C1B8A8D4F01CE7A78C4BA4AADAB86C93",
+   "title": "空空Studio作品集",
+   "type": "page",
+   "url": "file:///D:/BaiduSyncdisk/tapnow/%E4%BD%9C%E5%93%81%E9%9B%86%E7%BD%91%E7%AB%99/index.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9223/devtools/page/C1B8A8D4F01CE7A78C4BA4AADAB86C93"
+} ]
+
