@@ -11,4 +11,8 @@ if not exist "%~dp0update-site.ps1" (
 
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0update-site.ps1"
 
-pause
+if errorlevel 1 (
+    echo.
+    echo Upload script failed.
+    pause
+)
