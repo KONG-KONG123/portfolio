@@ -1236,24 +1236,30 @@
     /* Hero lanyard badge with the portfolio logo. */
     .lanyard-wrapper{
       position:absolute;
-      right:clamp(210px,14vw,340px);
-      top:clamp(34px,5vh,68px);
+      right:clamp(230px,16vw,390px);
+      top:0;
       z-index:4;
-      width:clamp(240px,21vw,370px);
-      height:clamp(480px,74vh,760px);
+      width:clamp(240px,20vw,380px);
+      height:100svh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       pointer-events:none;
-      perspective:1100px;
+      perspective:1300px;
+      transform:scale(1);
+      transform-origin:center;
     }
     .lanyard-rig{
-      position:absolute;
-      inset:0;
+      position:relative;
+      width:100%;
+      height:100%;
       pointer-events:auto;
       transform-style:preserve-3d;
     }
     .lanyard-rope{
       position:absolute;
       left:50%;
-      top:0;
+      top:-2%;
       width:100%;
       height:58%;
       transform:translateX(-50%);
@@ -1263,23 +1269,50 @@
     }
     .lanyard-rope path{
       fill:none;
-      stroke:rgba(255,255,255,.68);
-      stroke-width:12;
+      stroke:rgba(255,255,255,.72);
+      stroke-width:10;
       stroke-linecap:round;
-      stroke-dasharray:18 18;
-      opacity:.78;
+      stroke-dasharray:14 16;
+      opacity:.82;
     }
     .lanyard-rope path:last-child{
-      stroke:rgba(0,0,0,.42);
-      stroke-width:4;
+      stroke:rgba(0,0,0,.5);
+      stroke-width:3.5;
       stroke-dasharray:none;
       opacity:.45;
+    }
+    .lanyard-clip{
+      position:absolute;
+      left:50%;
+      top:38%;
+      z-index:2;
+      width:74px;
+      height:28px;
+      transform:translate3d(calc(-50% + var(--lanyard-x,0px)),var(--lanyard-y,0px),0) rotateZ(var(--lanyard-rz,-2deg));
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:999px;
+      background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.045));
+      box-shadow:0 18px 46px rgba(0,0,0,.44),inset 0 1px 10px rgba(255,255,255,.12);
+      backdrop-filter:blur(12px);
+      pointer-events:none;
+    }
+    .lanyard-clip:after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:44px;
+      height:9px;
+      transform:translate(-50%,-50%);
+      border-radius:999px;
+      background:rgba(0,0,0,.36);
+      box-shadow:inset 0 1px 7px rgba(0,0,0,.65);
     }
     .lanyard-card{
       position:absolute;
       left:50%;
-      top:42%;
-      width:clamp(150px,13vw,220px);
+      top:40%;
+      width:clamp(138px,10.4vw,188px);
       aspect-ratio:.72;
       padding:18px;
       border:1px solid rgba(255,255,255,.22);
@@ -1290,7 +1323,7 @@
       box-shadow:0 34px 90px rgba(0,0,0,.52);
       backdrop-filter:blur(18px);
       transform:translate3d(calc(-50% + var(--lanyard-x,0px)),var(--lanyard-y,0px),0) rotateX(var(--lanyard-rx,0deg)) rotateY(var(--lanyard-ry,0deg)) rotateZ(var(--lanyard-rz,-4deg));
-      transform-origin:50% -34%;
+      transform-origin:50% -18%;
       cursor:grab;
       overflow:hidden;
       user-select:none;
@@ -1368,8 +1401,9 @@
       text-transform:uppercase;
     }
     @media(max-width:1100px){
-      .lanyard-wrapper{right:24px;top:104px;width:210px;height:390px;opacity:.82}
-      .lanyard-card{width:138px}
+      .lanyard-wrapper{right:20px;width:210px;height:100svh;opacity:.82}
+      .lanyard-card{width:132px}
+      .lanyard-clip{width:62px;height:24px}
       .lanyard-logo{width:66px;height:66px;margin-top:32px}
       .lanyard-logo svg{width:44px}
     }
@@ -2495,7 +2529,7 @@
     const coreCardHTML=s=>{const preview=imageWork(w=>w.category===s.key,works[0]);return `<a class="core-card" href="#${s.key.toLowerCase()}"><div class="core-preview">${preview?media(preview.cover,preview.title):''}</div><h3>${textfx(s.title)}</h3><p>${s.subtitle}</p><p>${s.text}</p></a>`};
     app.innerHTML=`<div class="wrap"><section class="hero"><div class="hero-copy"><h1>${textfx('Designed for')}<span class="gradient">Product Impact.</span></h1><p class="intro">${profile.name}｜以产品级渲染、AI 视觉生成和动态叙事，为 3C 产品打造像官网首图一样克制、清晰、有记忆点的视觉表达。</p><div class="actions no-mag"><a class="btn" href="#rendering"><span>View Portfolio</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact Me</span>${icon('arrow')}</button></div></div></section><section id="about" class="about reveal"><div><p class="label">About</p><h2 class="title">${textfx('Product obsession, visual experimentation, premium presentation.')}</h2></div><p class="muted">${profile.intro} 以下是我的商业项目案例及个人作品，点击作品卡片可查看完整项目内容。</p></section><section class="core reveal"><p class="label">Core Sections</p><h2 class="title" style="margin-bottom:40px">三大能力板块</h2><div class="core-grid">${sections.map(coreCardHTML).join('')}</div>${portfolioCarouselHTML()}</section>${sections.map(s=>sectionHTML(s)).join('')}</div><footer id="contact" class="contact"><div class="contact-box reveal"><div style="width:42px;height:42px;margin:0 auto 24px;color:rgba(255,255,255,.6)">${icon('mail')}</div><h2 class="title no-mag">Let’s Create Something Impressive.</h2><p class="muted" style="max-width:680px;margin:24px auto 0">如果你对我的作品感兴趣，欢迎通过微信、邮箱、小红书、站酷或 Behance 联系我。</p><div class="contact-actions no-mag"><button class="btn" type="button" id="copyWechat"><span class="brand-logo"><img src="logo/weixin.svg" alt=""></span><span>WeChat QR</span>${icon('arrow')}</button><button class="btn" type="button" id="openEmail"><span class="brand-logo"><img src="logo/qqyouxiang.svg" alt=""></span><span>Send Email</span>${icon('arrow')}</button><a class="btn" target="_blank" href="${profile.xiaohongshu}"><span class="brand-logo"><img src="logo/xiaohongshu.svg" alt=""></span><span>Xiaohongshu</span></a><a class="btn" target="_blank" href="${profile.zcool}"><span class="brand-logo"><img src="logo/zhanku123.svg" alt=""></span><span>Zcool</span></a><a class="btn" target="_blank" href="${profile.behance}"><span class="brand-logo"><img src="logo/Behance.svg" alt=""></span><span>Behance</span></a></div></div></footer>`;
     const logoMark='<svg viewBox="0 0 322 244" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20,21.888888888061047 L21,222.88888888806105 L74,223.88888888806105 L71.77777099609375,138 Q116,173.88888888806105 134.77777099609375,224 L190,222.88888888806105 Q176,171.88888888806105 114.77777099609375,122 Q152,97.88888888806105 174.77777099609375,58 L224.77777099609375,58 L164.77777099609375,122 Q216,171.88888888806105 245,222.88888888806105 L301,222.88888888806105 Q277,172.88888888806105 220.77777099609375,122 Q276,82.88888888806105 301.77777099609375,20 L135.77777099609375,20 Q113,74.88888888806105 72.77777099609375,107 L73.77777099609375,21 L20,21.888888888061047 Z" fill="currentColor"/></svg>';
-    const lanyardHTML=`<div class="lanyard-wrapper no-mag" aria-hidden="true"><div class="lanyard-rig"><svg class="lanyard-rope" viewBox="0 0 320 520"><path class="lanyard-path" d="M160 0 C 112 118, 118 206, 160 254 C 202 206, 208 118, 160 0"/><path class="lanyard-path-shadow" d="M160 0 C 112 118, 118 206, 160 254 C 202 206, 208 118, 160 0"/></svg><div class="lanyard-card"><span class="lanyard-logo">${logoMark}</span><span class="lanyard-name">空空Studio</span><span class="lanyard-role">Product Visual<br>Designer</span><span class="lanyard-meta"><b>KK</b><b>2026</b></span></div></div></div>`;
+    const lanyardHTML=`<div class="lanyard-wrapper no-mag" aria-hidden="true" data-position="0,0,33" data-gravity="0,-40,0"><div class="lanyard-rig"><svg class="lanyard-rope" viewBox="0 0 320 620"><path class="lanyard-path" d="M160 -10 C 98 118, 106 302, 160 418 C 214 302, 222 118, 160 -10"/><path class="lanyard-path-shadow" d="M160 -10 C 98 118, 106 302, 160 418 C 214 302, 222 118, 160 -10"/></svg><span class="lanyard-clip"></span><div class="lanyard-card"><span class="lanyard-logo">${logoMark}</span><span class="lanyard-name">空空Studio</span><span class="lanyard-role">Product Visual<br>Designer</span><span class="lanyard-meta"><b>KK</b><b>2026</b></span></div></div></div>`;
     const hero=$('.hero');hero.classList.add('home-hero','brand-hero','brand-final');hero.innerHTML=`<div id="heroOrb" class="hero-orb-bg no-mag" data-hover-intensity="2" data-hue="0" data-background-color="#000000" aria-hidden="true"></div><aside class="brand-rail no-mag"><span>01</span><span>REEL</span></aside><div class="brand-stage no-mag"><div class="brand-meta brand-meta-left"><b>Visual<br>Systems</b><span>3C Product Films</span><span>Rendering / AIGC / Motion</span></div><div class="brand-mark"><span>Directed by</span><strong>空空Studio</strong><em>Product Visual Designer</em></div><svg class="brand-signature" viewBox="0 0 620 220" aria-hidden="true"><path d="M20 142C66 44 132 34 116 116c-12 60-1 86 40 48 70-66 106-158 151-134 31 17-31 107-10 130 24 26 85-86 137-118 38-23 58-3 30 36-25 35-50 73-33 84 30 19 92-80 151-116"/></svg>${lanyardHTML}<div class="brand-meta brand-meta-right"><b>2025<br>2026</b><span>Product Rendering</span><span>AIGC Campaign Visual</span><span>Motion Storytelling</span></div><h1 class="brand-title">Visual Reel</h1><p class="brand-intro">Cinematic product imagery shaped through rendering, AI image systems and motion direction for 3C brands.</p><div class="brand-actions"><a class="btn" href="#rendering"><span>View Works</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact</span>${icon('arrow')}</button></div><div class="brand-index"><span>01 Rendering</span><span>02 AIGC Visual</span><span>03 Motion Story</span></div></div>`;
     hero.querySelector('.intro')?.classList.add('no-mag');
     const homeHero=$('.home-hero');
@@ -2507,7 +2541,7 @@
     magnetizeText(document.body);
     function initHeroForceField(){const canvas=$('#forceField');if(!canvas)return;const ctx=canvas.getContext('2d',{alpha:true});let particles=[],mouse={x:0,y:0,active:false,last:0},w=0,h=0,dpr=1;const rand=(a,b)=>a+Math.random()*(b-a);function resize(){const r=canvas.getBoundingClientRect();w=Math.max(1,r.width);h=Math.max(1,r.height);dpr=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);const count=Math.max(58,Math.min(112,Math.floor(w*h/11000)));particles=Array.from({length:count},()=>{const x=rand(w*.08,w*.96),y=rand(h*.08,h*.9);return{x,y,ox:x,oy:y,vx:0,vy:0,r:rand(.7,1.55),a:rand(.12,.32),phase:rand(0,Math.PI*2)}})}function draw(t){ctx.clearRect(0,0,w,h);const pulse=mouse.active?1:Math.max(0,1-(performance.now()-mouse.last)/1300);for(const p of particles){const driftX=Math.sin(t*.00025+p.phase)*.22,driftY=Math.cos(t*.0002+p.phase)*.18;let tx=p.ox+driftX*18,ty=p.oy+driftY*16;if(mouse.active){const dx=mouse.x-p.x,dy=mouse.y-p.y,dist=Math.hypot(dx,dy)||1,range=210;if(dist<range){const f=(1-dist/range);const pull=dist<58?-36:82;p.vx+=dx/dist*f*pull*.004;p.vy+=dy/dist*f*pull*.004}}p.vx+=(tx-p.x)*.008;p.vy+=(ty-p.y)*.008;p.vx*=.88;p.vy*=.88;p.x+=p.vx;p.y+=p.vy}if(pulse>.02){for(let i=0;i<particles.length;i++){const a=particles[i],dam=Math.hypot(a.x-mouse.x,a.y-mouse.y);if(dam>230)continue;for(let j=i+1;j<particles.length;j++){const b=particles[j],dm=Math.hypot(b.x-mouse.x,b.y-mouse.y);if(dm>230)continue;const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<76){ctx.strokeStyle=`rgba(176,188,255,${(1-d/76)*.18*pulse})`;ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}}}for(const p of particles){const near=mouse.active?Math.max(0,1-Math.hypot(p.x-mouse.x,p.y-mouse.y)/210):0;ctx.fillStyle=`rgba(${205+near*35|0},${212+near*28|0},${225+near*30|0},${p.a+near*.38})`;ctx.beginPath();ctx.arc(p.x,p.y,p.r+near*1.35,0,Math.PI*2);ctx.fill()}if(pulse>.02){const g=ctx.createRadialGradient(mouse.x,mouse.y,0,mouse.x,mouse.y,250);g.addColorStop(0,`rgba(135,150,255,${.13*pulse})`);g.addColorStop(.42,`rgba(178,128,255,${.045*pulse})`);g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(mouse.x-260,mouse.y-260,520,520)}requestAnimationFrame(draw)}canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;mouse.active=true;mouse.last=performance.now()});canvas.addEventListener('pointerleave',()=>{mouse.active=false;mouse.last=performance.now()});new ResizeObserver(resize).observe(canvas);resize();requestAnimationFrame(draw)}
     if(!isMobileViewport)initHeroForceField();else{document.querySelector('#forceField')?.remove();document.querySelector('.field-vignette')?.remove();}
-    function initLanyard(){const wrap=document.querySelector('.lanyard-wrapper'),card=wrap?.querySelector('.lanyard-card'),rope=wrap?.querySelectorAll('.lanyard-path');if(!wrap||!card)return;let x=0,y=0,vx=0,vy=0,targetX=0,targetY=0,dragging=false,last={x:0,y:0};const clamp=(v,min,max)=>Math.min(Math.max(v,min),max);function render(){if(!dragging){vx+=(targetX-x)*.035;vy+=(targetY-y)*.035;vx*=.88;vy*=.88;x+=vx;y+=vy}else{x=targetX;y=targetY}const rx=clamp(-y*.06,-10,10),ry=clamp(x*.045,-12,12),rz=clamp(x*.045,-9,9)-4;card.style.setProperty('--lanyard-x',`${x}px`);card.style.setProperty('--lanyard-y',`${y}px`);card.style.setProperty('--lanyard-rx',`${rx}deg`);card.style.setProperty('--lanyard-ry',`${ry}deg`);card.style.setProperty('--lanyard-rz',`${rz}deg`);card.style.setProperty('--lanyard-shine',`${-35+x*.18}%`);const bend=clamp(x*.35,-44,44),drop=clamp(y*.18,-18,34);rope.forEach(path=>path.setAttribute('d',`M160 0 C ${112+bend} ${118+drop}, ${118+bend*.45} ${206+drop}, 160 254 C ${202+bend*.45} ${206+drop}, ${208+bend} ${118+drop}, 160 0`));requestAnimationFrame(render)}card.addEventListener('pointerdown',e=>{dragging=true;card.classList.add('is-dragging');card.setPointerCapture?.(e.pointerId);last={x:e.clientX,y:e.clientY};vx=0;vy=0});card.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-last.x,dy=e.clientY-last.y;targetX=clamp(targetX+dx,-92,92);targetY=clamp(targetY+dy,-42,92);vx=dx*1.4;vy=dy*1.4;last={x:e.clientX,y:e.clientY}});const release=()=>{if(!dragging)return;dragging=false;card.classList.remove('is-dragging');targetX=0;targetY=0};card.addEventListener('pointerup',release);card.addEventListener('pointercancel',release);card.addEventListener('lostpointercapture',release);requestAnimationFrame(render)}
+    function initLanyard(){const wrap=document.querySelector('.lanyard-wrapper'),card=wrap?.querySelector('.lanyard-card'),clip=wrap?.querySelector('.lanyard-clip'),rope=wrap?.querySelectorAll('.lanyard-path');if(!wrap||!card)return;let x=0,y=0,vx=0,vy=0,targetX=0,targetY=0,dragging=false,last={x:0,y:0};const clamp=(v,min,max)=>Math.min(Math.max(v,min),max);function render(){if(!dragging){vx+=(targetX-x)*.045;vy+=(targetY-y)*.045;vx*=.9;vy*=.9;x+=vx;y+=vy}else{x=targetX;y=targetY}const rx=clamp(-y*.05,-9,9),ry=clamp(x*.04,-11,11),rz=clamp(x*.052,-10,10)-3;[card,clip].filter(Boolean).forEach(el=>{el.style.setProperty('--lanyard-x',`${x}px`);el.style.setProperty('--lanyard-y',`${y}px`);el.style.setProperty('--lanyard-rx',`${rx}deg`);el.style.setProperty('--lanyard-ry',`${ry}deg`);el.style.setProperty('--lanyard-rz',`${rz}deg`);el.style.setProperty('--lanyard-shine',`${-35+x*.18}%`)});const endX=160+clamp(x*.42,-52,52),endY=418+clamp(y*.2,-22,34),leftX=98+clamp(x*.16,-22,22),rightX=222+clamp(x*.16,-22,22),midDrop=clamp(y*.12,-10,24);rope.forEach(path=>path.setAttribute('d',`M160 -10 C ${leftX} ${118+midDrop}, ${106+x*.12} ${302+midDrop}, ${endX} ${endY} C ${214+x*.12} ${302+midDrop}, ${rightX} ${118+midDrop}, 160 -10`));requestAnimationFrame(render)}card.addEventListener('pointerdown',e=>{dragging=true;card.classList.add('is-dragging');card.setPointerCapture?.(e.pointerId);last={x:e.clientX,y:e.clientY};vx=0;vy=0});card.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-last.x,dy=e.clientY-last.y;targetX=clamp(targetX+dx,-92,92);targetY=clamp(targetY+dy,-34,86);vx=dx*1.25;vy=dy*1.25;last={x:e.clientX,y:e.clientY}});const release=()=>{if(!dragging)return;dragging=false;card.classList.remove('is-dragging');targetX=0;targetY=0};card.addEventListener('pointerup',release);card.addEventListener('pointercancel',release);card.addEventListener('lostpointercapture',release);requestAnimationFrame(render)}
     initLanyard();
     function initBorderGlow(root=document){const selector='.core-card,.work,.highlight-card,.dome-item-image,.modal-box,.wechat-card,.panel,.stat,.gallery button,.gallery .gallery-item';root.querySelectorAll(selector).forEach(card=>{if(card.dataset.borderGlowReady)return;card.dataset.borderGlowReady='1';card.classList.add('border-glow-card');const move=e=>{const rect=card.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,cx=rect.width/2,cy=rect.height/2,dx=x-cx,dy=y-cy,kx=dx!==0?cx/Math.abs(dx):Infinity,ky=dy!==0?cy/Math.abs(dy):Infinity,edge=Math.min(Math.max(1/Math.min(kx,ky),0),1),angle=(Math.atan2(dy,dx)*180/Math.PI+450)%360;card.style.setProperty('--edge-proximity',(edge*100).toFixed(3));card.style.setProperty('--cursor-angle',`${angle.toFixed(3)}deg`)};const leave=()=>card.style.setProperty('--edge-proximity','0');card.addEventListener('pointermove',move);card.addEventListener('pointerleave',leave)})}
     initBorderGlow();
