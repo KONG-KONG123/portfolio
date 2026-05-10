@@ -728,10 +728,12 @@
     .bg{overflow:hidden}
     .bg:before,#glow,.field-vignette{display:none!important}
     .bg:after{z-index:1;background:radial-gradient(circle at 50% 32%,rgba(0,0,0,.08),rgba(0,0,0,.74) 72%),linear-gradient(180deg,rgba(0,0,0,.36),rgba(0,0,0,.68))!important}
-    .faulty-terminal-bg{position:absolute;inset:0;z-index:0;overflow:hidden;opacity:0;transition:opacity .65s ease;filter:contrast(1.08);transform:translateZ(0)}
-    .faulty-terminal-bg canvas{width:100%!important;height:100%!important;display:block}
-    body.terminal-zone .faulty-terminal-bg{opacity:.78}
-    body.hero-zone .faulty-terminal-bg{opacity:0}
+    .faulty-terminal-bg,.pixel-blast-bg{position:absolute;inset:0;z-index:0;overflow:hidden;opacity:0;transition:opacity .65s ease;transform:translateZ(0)}
+    .faulty-terminal-bg{filter:contrast(1.08)}
+    .faulty-terminal-bg canvas,.pixel-blast-bg canvas{width:100%!important;height:100%!important;display:block}
+    .pixel-blast-bg{filter:contrast(1.08);mix-blend-mode:screen}
+    body.terminal-zone .pixel-blast-bg{opacity:.72}
+    body.hero-zone .pixel-blast-bg{opacity:0}
     .site-header{
       height:56px!important;
       background:rgba(0,0,0,.62)!important;
@@ -1247,17 +1249,17 @@
     /* Hero lanyard badge with the portfolio logo. */
     .lanyard-wrapper{
       position:absolute;
-      right:clamp(230px,16vw,390px);
-      top:0;
+      right:clamp(170px,12vw,320px);
+      top:-3svh;
       z-index:4;
-      width:clamp(240px,20vw,380px);
+      width:clamp(260px,17vw,340px);
       height:100svh;
       display:flex;
       align-items:center;
       justify-content:center;
       pointer-events:none;
-      perspective:1300px;
-      transform:scale(1);
+      perspective:1700px;
+      transform:scale(var(--lanyard-scale,.86));
       transform-origin:center;
     }
     .lanyard-rig{
@@ -1270,9 +1272,9 @@
     .lanyard-rope{
       position:absolute;
       left:50%;
-      top:-2%;
+      top:-7%;
       width:100%;
-      height:58%;
+      height:65%;
       transform:translateX(-50%);
       overflow:visible;
       pointer-events:none;
@@ -1281,10 +1283,10 @@
     .lanyard-rope path{
       fill:none;
       stroke:rgba(255,255,255,.72);
-      stroke-width:10;
+      stroke-width:8.5;
       stroke-linecap:round;
-      stroke-dasharray:14 16;
-      opacity:.82;
+      stroke-dasharray:16 18;
+      opacity:.78;
     }
     .lanyard-rope path:last-child{
       stroke:rgba(0,0,0,.5);
@@ -1295,10 +1297,10 @@
     .lanyard-clip{
       position:absolute;
       left:50%;
-      top:38%;
+      top:37%;
       z-index:2;
-      width:74px;
-      height:28px;
+      width:68px;
+      height:25px;
       transform:translate3d(calc(-50% + var(--lanyard-x,0px)),var(--lanyard-y,0px),0) rotateZ(var(--lanyard-rz,-2deg));
       border:1px solid rgba(255,255,255,.18);
       border-radius:999px;
@@ -1322,16 +1324,16 @@
     .lanyard-card{
       position:absolute;
       left:50%;
-      top:40%;
-      width:clamp(138px,10.4vw,188px);
+      top:39%;
+      width:clamp(128px,9vw,170px);
       aspect-ratio:.72;
-      padding:18px;
+      padding:16px;
       border:1px solid rgba(255,255,255,.22);
-      border-radius:18px;
+      border-radius:16px;
       background:
         linear-gradient(145deg,rgba(255,255,255,.18),rgba(255,255,255,.035) 42%,rgba(255,255,255,.12)),
         rgba(8,8,8,.72);
-      box-shadow:0 34px 90px rgba(0,0,0,.52);
+      box-shadow:0 38px 95px rgba(0,0,0,.56);
       backdrop-filter:blur(18px);
       transform:translate3d(calc(-50% + var(--lanyard-x,0px)),var(--lanyard-y,0px),0) rotateX(var(--lanyard-rx,0deg)) rotateY(var(--lanyard-ry,0deg)) rotateZ(var(--lanyard-rz,-4deg));
       transform-origin:50% -18%;
@@ -1370,19 +1372,19 @@
       place-items:center;
       width:86px;
       height:86px;
-      margin:36px auto 22px;
-      border-radius:22px;
+      margin:34px auto 18px;
+      border-radius:20px;
       color:#050505;
       background:#fff;
       box-shadow:0 18px 48px rgba(255,255,255,.18);
     }
-    .lanyard-logo svg{width:58px;height:auto}
+    .lanyard-logo svg{width:55px;height:auto}
     .lanyard-name{
       position:relative;
       display:block;
       color:#fff;
       text-align:center;
-      font-size:clamp(20px,1.7vw,30px);
+      font-size:clamp(18px,1.35vw,26px);
       font-weight:650;
       letter-spacing:-.04em;
     }
@@ -1392,7 +1394,7 @@
       margin-top:8px;
       color:rgba(255,255,255,.58);
       text-align:center;
-      font-size:11px;
+      font-size:10px;
       letter-spacing:.16em;
       text-transform:uppercase;
       line-height:1.35;
@@ -1412,7 +1414,7 @@
       text-transform:uppercase;
     }
     @media(max-width:1100px){
-      .lanyard-wrapper{right:20px;width:210px;height:100svh;opacity:.82}
+      .lanyard-wrapper{right:16px;width:210px;height:100svh;opacity:.82;transform:scale(.78)}
       .lanyard-card{width:132px}
       .lanyard-clip{width:62px;height:24px}
       .lanyard-logo{width:66px;height:66px;margin-top:32px}
@@ -1598,7 +1600,7 @@
   </style>
 </head>
 <body>
-  <div id="glow"></div><div class="bg"><div id="faultyTerminalBg" class="faulty-terminal-bg" aria-hidden="true"></div></div>
+  <div id="glow"></div><div class="bg"><canvas id="pixelBlastBg" class="pixel-blast-bg" aria-hidden="true"></canvas></div>
   <div id="cursor" class="cursor"></div>
   <div id="scrollProgress" class="scroll-progress"></div>
   <header class="site-header"><a class="site-logo" href="#" aria-label="Home"><svg id="defaultLogo" width="36" height="28" viewBox="0 0 322 244" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20,21.888888888061047 L21,222.88888888806105 L74,223.88888888806105 L71.77777099609375,138 Q116,173.88888888806105 134.77777099609375,224 L190,222.88888888806105 Q176,171.88888888806105 114.77777099609375,122 Q152,97.88888888806105 174.77777099609375,58 L224.77777099609375,58 L164.77777099609375,122 Q216,171.88888888806105 245,222.88888888806105 L301,222.88888888806105 Q277,172.88888888806105 220.77777099609375,122 Q276,82.88888888806105 301.77777099609375,20 L135.77777099609375,20 Q113,74.88888888806105 72.77777099609375,107 L73.77777099609375,21 L20,21.888888888061047 Z" fill="currentColor"/></svg></a><nav class="nav"><a href="#about">About</a><a href="#rendering">Rendering</a><a href="#aigc">AIGC</a><a href="#motion">Motion</a><a href="#contact">Contact</a></nav><button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme"></button></header>
@@ -2654,7 +2656,7 @@
     const flowingMenuHTML=()=>`<div class="flowing-menu-wrap no-mag"><nav class="flowing-menu">${sections.map(s=>{const allImages=works.filter(w=>!isVideo(w.cover));const pool=works.filter(w=>w.category===s.key&&!isVideo(w.cover));const images=[...pool,...allImages.filter(w=>w.category!==s.key)].slice(0,8);const parts=Array.from({length:8},(_,i)=>{const preview=images[i%images.length];return `<div class="flowing-part"><span>${escapeHTML(s.title)}</span><div class="flowing-img" style="background-image:url('${preview?.cover||''}')"></div></div>`}).join('');return `<div class="flowing-menu-item" data-flowing-item><a class="flowing-menu-link" href="#${s.key.toLowerCase()}">${escapeHTML(s.title)}</a><div class="flowing-marquee"><div class="flowing-marquee-inner" style="--flow-speed:18s">${parts}</div></div></div>`}).join('')}</nav></div>`;
     app.innerHTML=`<div class="wrap"><section class="hero"><div class="hero-copy"><h1>${textfx('Designed for')}<span class="gradient">Product Impact.</span></h1><p class="intro">${profile.name}｜以产品级渲染、AI 视觉生成和动态叙事，为 3C 产品打造像官网首图一样克制、清晰、有记忆点的视觉表达。</p><div class="actions no-mag"><a class="btn" href="#rendering"><span>View Portfolio</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact Me</span>${icon('arrow')}</button></div></div></section><section id="about" class="about reveal"><div><p class="label">About</p><h2 class="title">${textfx('Product obsession, visual experimentation, premium presentation.')}</h2></div><p class="muted">${profile.intro} 以下是我的商业项目案例及个人作品，点击作品卡片可查看完整项目内容。</p></section><section class="core reveal"><p class="label">Core Sections</p><h2 class="title" style="margin-bottom:40px">三大能力板块</h2>${flowingMenuHTML()}${portfolioCarouselHTML()}</section>${sections.map(s=>sectionHTML(s)).join('')}</div><footer id="contact" class="contact"><div class="contact-box reveal"><div style="width:42px;height:42px;margin:0 auto 24px;color:rgba(255,255,255,.6)">${icon('mail')}</div><h2 class="title no-mag">Let’s Create Something Impressive.</h2><p class="muted" style="max-width:680px;margin:24px auto 0">如果你对我的作品感兴趣，欢迎通过微信、邮箱、小红书、站酷或 Behance 联系我。</p><div class="contact-actions no-mag"><button class="btn" type="button" id="copyWechat"><span class="brand-logo"><img src="logo/weixin.svg" alt=""></span><span>WeChat QR</span>${icon('arrow')}</button><button class="btn" type="button" id="openEmail"><span class="brand-logo"><img src="logo/qqyouxiang.svg" alt=""></span><span>Send Email</span>${icon('arrow')}</button><a class="btn" target="_blank" href="${profile.xiaohongshu}"><span class="brand-logo"><img src="logo/xiaohongshu.svg" alt=""></span><span>Xiaohongshu</span></a><a class="btn" target="_blank" href="${profile.zcool}"><span class="brand-logo"><img src="logo/zhanku123.svg" alt=""></span><span>Zcool</span></a><a class="btn" target="_blank" href="${profile.behance}"><span class="brand-logo"><img src="logo/Behance.svg" alt=""></span><span>Behance</span></a></div></div></footer>`;
     const logoMark='<svg viewBox="0 0 322 244" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20,21.888888888061047 L21,222.88888888806105 L74,223.88888888806105 L71.77777099609375,138 Q116,173.88888888806105 134.77777099609375,224 L190,222.88888888806105 Q176,171.88888888806105 114.77777099609375,122 Q152,97.88888888806105 174.77777099609375,58 L224.77777099609375,58 L164.77777099609375,122 Q216,171.88888888806105 245,222.88888888806105 L301,222.88888888806105 Q277,172.88888888806105 220.77777099609375,122 Q276,82.88888888806105 301.77777099609375,20 L135.77777099609375,20 Q113,74.88888888806105 72.77777099609375,107 L73.77777099609375,21 L20,21.888888888061047 Z" fill="currentColor"/></svg>';
-    const lanyardHTML=`<div class="lanyard-wrapper no-mag" aria-hidden="true" data-position="0,0,33" data-gravity="0,-40,0"><div class="lanyard-rig"><svg class="lanyard-rope" viewBox="0 0 320 620"><path class="lanyard-path" d="M160 -10 C 98 118, 106 302, 160 418 C 214 302, 222 118, 160 -10"/><path class="lanyard-path-shadow" d="M160 -10 C 98 118, 106 302, 160 418 C 214 302, 222 118, 160 -10"/></svg><span class="lanyard-clip"></span><div class="lanyard-card"><span class="lanyard-logo">${logoMark}</span><span class="lanyard-name">空空Studio</span><span class="lanyard-role">Product Visual<br>Designer</span><span class="lanyard-meta"><b>KK</b><b>2026</b></span></div></div></div>`;
+    const lanyardHTML=`<div class="lanyard-wrapper no-mag" aria-hidden="true" data-position="0,0,39" data-camera-distance="39" data-gravity="0,-40,0"><div class="lanyard-rig"><svg class="lanyard-rope" viewBox="0 0 320 640"><path class="lanyard-path" d="M160 -18 C 102 122, 108 318, 160 438 C 212 318, 218 122, 160 -18"/><path class="lanyard-path-shadow" d="M160 -18 C 102 122, 108 318, 160 438 C 212 318, 218 122, 160 -18"/></svg><span class="lanyard-clip"></span><div class="lanyard-card"><span class="lanyard-logo">${logoMark}</span><span class="lanyard-name">空空Studio</span><span class="lanyard-role">Product Visual<br>Designer</span><span class="lanyard-meta"><b>KK</b><b>2026</b></span></div></div></div>`;
     const hero=$('.hero');hero.classList.add('home-hero','brand-hero','brand-final');hero.innerHTML=`<div id="heroDither" class="hero-dither-bg no-mag" aria-hidden="true"></div><aside class="brand-rail no-mag"><span>01</span><span>REEL</span></aside><div class="brand-stage no-mag"><div class="brand-meta brand-meta-left"><b>Visual<br>Systems</b><span>3C Product Films</span><span>Rendering / AIGC / Motion</span></div><div class="brand-mark"><span>Directed by</span><strong>空空Studio</strong><em>Product Visual Designer</em></div><svg class="brand-signature" viewBox="0 0 620 220" aria-hidden="true"><path d="M20 142C66 44 132 34 116 116c-12 60-1 86 40 48 70-66 106-158 151-134 31 17-31 107-10 130 24 26 85-86 137-118 38-23 58-3 30 36-25 35-50 73-33 84 30 19 92-80 151-116"/></svg>${lanyardHTML}<div class="brand-meta brand-meta-right"><b>2025<br>2026</b><span>Product Rendering</span><span>AIGC Campaign Visual</span><span>Motion Storytelling</span></div><h1 class="brand-title">Visual Reel</h1><p class="brand-intro">Cinematic product imagery shaped through rendering, AI image systems and motion direction for 3C brands.</p><div class="brand-actions"><a class="btn" href="#rendering"><span>View Works</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact</span>${icon('arrow')}</button></div><div class="brand-index"><span>01 Rendering</span><span>02 AIGC Visual</span><span>03 Motion Story</span></div></div>`;
     hero.querySelector('.intro')?.classList.add('no-mag');
     const homeHero=$('.home-hero');
@@ -2666,7 +2668,7 @@
     magnetizeText(document.body);
     function initHeroForceField(){const canvas=$('#forceField');if(!canvas)return;const ctx=canvas.getContext('2d',{alpha:true});let particles=[],mouse={x:0,y:0,active:false,last:0},w=0,h=0,dpr=1;const rand=(a,b)=>a+Math.random()*(b-a);function resize(){const r=canvas.getBoundingClientRect();w=Math.max(1,r.width);h=Math.max(1,r.height);dpr=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);const count=Math.max(58,Math.min(112,Math.floor(w*h/11000)));particles=Array.from({length:count},()=>{const x=rand(w*.08,w*.96),y=rand(h*.08,h*.9);return{x,y,ox:x,oy:y,vx:0,vy:0,r:rand(.7,1.55),a:rand(.12,.32),phase:rand(0,Math.PI*2)}})}function draw(t){ctx.clearRect(0,0,w,h);const pulse=mouse.active?1:Math.max(0,1-(performance.now()-mouse.last)/1300);for(const p of particles){const driftX=Math.sin(t*.00025+p.phase)*.22,driftY=Math.cos(t*.0002+p.phase)*.18;let tx=p.ox+driftX*18,ty=p.oy+driftY*16;if(mouse.active){const dx=mouse.x-p.x,dy=mouse.y-p.y,dist=Math.hypot(dx,dy)||1,range=210;if(dist<range){const f=(1-dist/range);const pull=dist<58?-36:82;p.vx+=dx/dist*f*pull*.004;p.vy+=dy/dist*f*pull*.004}}p.vx+=(tx-p.x)*.008;p.vy+=(ty-p.y)*.008;p.vx*=.88;p.vy*=.88;p.x+=p.vx;p.y+=p.vy}if(pulse>.02){for(let i=0;i<particles.length;i++){const a=particles[i],dam=Math.hypot(a.x-mouse.x,a.y-mouse.y);if(dam>230)continue;for(let j=i+1;j<particles.length;j++){const b=particles[j],dm=Math.hypot(b.x-mouse.x,b.y-mouse.y);if(dm>230)continue;const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<76){ctx.strokeStyle=`rgba(176,188,255,${(1-d/76)*.18*pulse})`;ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}}}for(const p of particles){const near=mouse.active?Math.max(0,1-Math.hypot(p.x-mouse.x,p.y-mouse.y)/210):0;ctx.fillStyle=`rgba(${205+near*35|0},${212+near*28|0},${225+near*30|0},${p.a+near*.38})`;ctx.beginPath();ctx.arc(p.x,p.y,p.r+near*1.35,0,Math.PI*2);ctx.fill()}if(pulse>.02){const g=ctx.createRadialGradient(mouse.x,mouse.y,0,mouse.x,mouse.y,250);g.addColorStop(0,`rgba(135,150,255,${.13*pulse})`);g.addColorStop(.42,`rgba(178,128,255,${.045*pulse})`);g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(mouse.x-260,mouse.y-260,520,520)}requestAnimationFrame(draw)}canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;mouse.active=true;mouse.last=performance.now()});canvas.addEventListener('pointerleave',()=>{mouse.active=false;mouse.last=performance.now()});new ResizeObserver(resize).observe(canvas);resize();requestAnimationFrame(draw)}
     if(!isMobileViewport)initHeroForceField();else{document.querySelector('#forceField')?.remove();document.querySelector('.field-vignette')?.remove();}
-    function initLanyard(){const wrap=document.querySelector('.lanyard-wrapper'),card=wrap?.querySelector('.lanyard-card'),clip=wrap?.querySelector('.lanyard-clip'),rope=wrap?.querySelectorAll('.lanyard-path');if(!wrap||!card)return;let x=0,y=0,vx=0,vy=0,targetX=0,targetY=0,dragging=false,last={x:0,y:0};const clamp=(v,min,max)=>Math.min(Math.max(v,min),max);function render(){if(!dragging){vx+=(targetX-x)*.045;vy+=(targetY-y)*.045;vx*=.9;vy*=.9;x+=vx;y+=vy}else{x=targetX;y=targetY}const rx=clamp(-y*.05,-9,9),ry=clamp(x*.04,-11,11),rz=clamp(x*.052,-10,10)-3;[card,clip].filter(Boolean).forEach(el=>{el.style.setProperty('--lanyard-x',`${x}px`);el.style.setProperty('--lanyard-y',`${y}px`);el.style.setProperty('--lanyard-rx',`${rx}deg`);el.style.setProperty('--lanyard-ry',`${ry}deg`);el.style.setProperty('--lanyard-rz',`${rz}deg`);el.style.setProperty('--lanyard-shine',`${-35+x*.18}%`)});const endX=160+clamp(x*.42,-52,52),endY=418+clamp(y*.2,-22,34),leftX=98+clamp(x*.16,-22,22),rightX=222+clamp(x*.16,-22,22),midDrop=clamp(y*.12,-10,24);rope.forEach(path=>path.setAttribute('d',`M160 -10 C ${leftX} ${118+midDrop}, ${106+x*.12} ${302+midDrop}, ${endX} ${endY} C ${214+x*.12} ${302+midDrop}, ${rightX} ${118+midDrop}, 160 -10`));requestAnimationFrame(render)}card.addEventListener('pointerdown',e=>{dragging=true;card.classList.add('is-dragging');card.setPointerCapture?.(e.pointerId);last={x:e.clientX,y:e.clientY};vx=0;vy=0});card.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-last.x,dy=e.clientY-last.y;targetX=clamp(targetX+dx,-92,92);targetY=clamp(targetY+dy,-34,86);vx=dx*1.25;vy=dy*1.25;last={x:e.clientX,y:e.clientY}});const release=()=>{if(!dragging)return;dragging=false;card.classList.remove('is-dragging');targetX=0;targetY=0};card.addEventListener('pointerup',release);card.addEventListener('pointercancel',release);card.addEventListener('lostpointercapture',release);requestAnimationFrame(render)}
+    function initLanyard(){const wrap=document.querySelector('.lanyard-wrapper'),card=wrap?.querySelector('.lanyard-card'),clip=wrap?.querySelector('.lanyard-clip'),rope=wrap?.querySelectorAll('.lanyard-path');if(!wrap||!card)return;const cameraDistance=Number(wrap.dataset.cameraDistance||wrap.dataset.position?.split(',')[2]||39),cameraScale=Math.max(.76,Math.min(1.02,33/cameraDistance));wrap.style.setProperty('--lanyard-scale',cameraScale.toFixed(3));let x=0,y=0,vx=0,vy=0,targetX=0,targetY=0,dragging=false,last={x:0,y:0};const clamp=(v,min,max)=>Math.min(Math.max(v,min),max),motionScale=cameraScale*.9;function render(){if(!dragging){vx+=(targetX-x)*.038;vy+=(targetY-y)*.038;vx*=.91;vy*=.91;x+=vx;y+=vy}else{x=targetX;y=targetY}const rx=clamp(-y*.042,-7,7),ry=clamp(x*.034,-9,9),rz=clamp(x*.043,-8,8)-2;[card,clip].filter(Boolean).forEach(el=>{el.style.setProperty('--lanyard-x',`${x}px`);el.style.setProperty('--lanyard-y',`${y}px`);el.style.setProperty('--lanyard-rx',`${rx}deg`);el.style.setProperty('--lanyard-ry',`${ry}deg`);el.style.setProperty('--lanyard-rz',`${rz}deg`);el.style.setProperty('--lanyard-shine',`${-35+x*.14}%`)});const endX=160+clamp(x*.34,-44,44),endY=438+clamp(y*.18,-18,30),leftX=102+clamp(x*.13,-18,18),rightX=218+clamp(x*.13,-18,18),midDrop=clamp(y*.1,-8,20);rope.forEach(path=>path.setAttribute('d',`M160 -18 C ${leftX} ${122+midDrop}, ${108+x*.1} ${318+midDrop}, ${endX} ${endY} C ${212+x*.1} ${318+midDrop}, ${rightX} ${122+midDrop}, 160 -18`));requestAnimationFrame(render)}card.addEventListener('pointerdown',e=>{dragging=true;card.classList.add('is-dragging');card.setPointerCapture?.(e.pointerId);last={x:e.clientX,y:e.clientY};vx=0;vy=0});card.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-last.x,dy=e.clientY-last.y;targetX=clamp(targetX+dx*motionScale,-78,78);targetY=clamp(targetY+dy*motionScale,-28,76);vx=dx*.9;vy=dy*.9;last={x:e.clientX,y:e.clientY}});const release=()=>{if(!dragging)return;dragging=false;card.classList.remove('is-dragging');targetX=0;targetY=0};card.addEventListener('pointerup',release);card.addEventListener('pointercancel',release);card.addEventListener('lostpointercapture',release);requestAnimationFrame(render)}
     initLanyard();
     function initBorderGlow(root=document){const selector='.core-card,.highlight-card,.modal-box,.wechat-card,.panel,.stat,.gallery button,.gallery .gallery-item';root.querySelectorAll(selector).forEach(card=>{if(card.dataset.borderGlowReady)return;card.dataset.borderGlowReady='1';card.classList.add('border-glow-card');const move=e=>{const rect=card.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,cx=rect.width/2,cy=rect.height/2,dx=x-cx,dy=y-cy,kx=dx!==0?cx/Math.abs(dx):Infinity,ky=dy!==0?cy/Math.abs(dy):Infinity,edge=Math.min(Math.max(1/Math.min(kx,ky),0),1),angle=(Math.atan2(dy,dx)*180/Math.PI+450)%360;card.style.setProperty('--edge-proximity',(edge*100).toFixed(3));card.style.setProperty('--cursor-angle',`${angle.toFixed(3)}deg`)};const leave=()=>card.style.setProperty('--edge-proximity','0');card.addEventListener('pointermove',move);card.addEventListener('pointerleave',leave)})}
     initBorderGlow();
@@ -3470,22 +3472,138 @@
       }, { once: true });
     }
 
-    initFaultyTerminal(document.getElementById('faultyTerminalBg'), {
-      scale: 2.3,
-      gridMul: [2, 1],
-      digitSize: 2.6,
-      timeScale: 0.2,
-      scanlineIntensity: 1,
-      glitchAmount: 1,
-      flickerAmount: 1,
-      noiseAmp: 1,
-      chromaticAberration: 0,
-      dither: 0,
-      curvature: 0.23,
-      tint: '#909090',
-      mouseReact: true,
-      mouseStrength: 0.5,
-      brightness: 0.2
+    function initPixelBlast(canvas, options = {}) {
+      if (!canvas || canvas.dataset.pixelBlastReady === 'true') return;
+      canvas.dataset.pixelBlastReady = 'true';
+      const settings = {
+        variant: 'diamond',
+        pixelSize: 4,
+        color: '#393939',
+        patternScale: 2,
+        patternDensity: 1.25,
+        enableRipples: true,
+        rippleSpeed: 0.3,
+        rippleThickness: 0.1,
+        rippleIntensityScale: 1,
+        speed: 0.5,
+        transparent: true,
+        edgeFade: 0.16,
+        ...options
+      };
+      const ctx = canvas.getContext('2d', { alpha: settings.transparent });
+      if (!ctx) return;
+      const rgb = hexToRgb(settings.color).map(v => Math.round(v * 255));
+      const mouse = { x: 0, y: 0, active: false };
+      const ripples = [];
+      let width = 1;
+      let height = 1;
+      let dpr = 1;
+      const clamp01 = v => Math.min(Math.max(v, 0), 1);
+      const hash = (x, y) => {
+        const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
+        return n - Math.floor(n);
+      };
+      const resize = () => {
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        width = Math.max(1, window.innerWidth);
+        height = Math.max(1, window.innerHeight);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+      const pointerMove = e => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouse.active = true;
+      };
+      const pointerDown = e => {
+        if (!settings.enableRipples) return;
+        ripples.push({ x: e.clientX, y: e.clientY, t: performance.now() });
+        if (ripples.length > 8) ripples.shift();
+      };
+      const pointerLeave = () => {
+        mouse.active = false;
+      };
+      const drawDiamond = (x, y, r) => {
+        ctx.beginPath();
+        ctx.moveTo(x, y - r);
+        ctx.lineTo(x + r, y);
+        ctx.lineTo(x, y + r);
+        ctx.lineTo(x - r, y);
+        ctx.closePath();
+        ctx.fill();
+      };
+      let rafId;
+      const render = t => {
+        rafId = requestAnimationFrame(render);
+        ctx.clearRect(0, 0, width, height);
+        const time = t * 0.001 * settings.speed;
+        const step = Math.max(4, settings.pixelSize * settings.patternScale);
+        const radius = step * 0.48;
+        const maxDist = Math.hypot(width, height);
+        ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+        for (let y = -step; y <= height + step; y += step) {
+          for (let x = -step; x <= width + step; x += step) {
+            const nx = x / Math.max(width, 1);
+            const ny = y / Math.max(height, 1);
+            const drift = Math.sin((nx * 12 + ny * 9 + time) * Math.PI) * 0.22;
+            const grain = hash(Math.floor(x / step), Math.floor(y / step));
+            let intensity = grain * settings.patternDensity + drift;
+            if (mouse.active) {
+              const md = Math.hypot(x - mouse.x, y - mouse.y) / 360;
+              intensity += Math.max(0, 1 - md) * 0.18;
+            }
+            for (const ripple of ripples) {
+              const age = (t - ripple.t) * 0.001;
+              const wave = age * 520 * settings.rippleSpeed;
+              const dist = Math.hypot(x - ripple.x, y - ripple.y);
+              const band = Math.abs(dist - wave) / Math.max(1, maxDist * settings.rippleThickness);
+              intensity += Math.max(0, 1 - band) * (1 - age * 0.55) * settings.rippleIntensityScale;
+            }
+            const edge = Math.min(x / width, y / height, (width - x) / width, (height - y) / height);
+            const fade = clamp01(edge / settings.edgeFade);
+            const alpha = clamp01((intensity - 0.48) * 0.32) * fade;
+            if (alpha <= 0.015) continue;
+            ctx.globalAlpha = alpha;
+            drawDiamond(x, y, radius * (0.68 + alpha * 0.8));
+          }
+        }
+        ctx.globalAlpha = 1;
+        const now = performance.now();
+        for (let i = ripples.length - 1; i >= 0; i--) {
+          if ((now - ripples[i].t) > 2600) ripples.splice(i, 1);
+        }
+      };
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+      window.addEventListener('pointermove', pointerMove, { passive: true });
+      window.addEventListener('pointerdown', pointerDown, { passive: true });
+      window.addEventListener('pointerleave', pointerLeave, { passive: true });
+      rafId = requestAnimationFrame(render);
+      window.addEventListener('pagehide', () => {
+        cancelAnimationFrame(rafId);
+        window.removeEventListener('resize', resize);
+        window.removeEventListener('pointermove', pointerMove);
+        window.removeEventListener('pointerdown', pointerDown);
+        window.removeEventListener('pointerleave', pointerLeave);
+      }, { once: true });
+    }
+
+    initPixelBlast(document.getElementById('pixelBlastBg'), {
+      variant: 'diamond',
+      pixelSize: 4,
+      color: '#393939',
+      patternScale: 2,
+      patternDensity: 1.25,
+      enableRipples: true,
+      rippleSpeed: 0.3,
+      rippleThickness: 0.1,
+      rippleIntensityScale: 1,
+      speed: 0.5,
+      transparent: true,
+      edgeFade: 0.16
     });
 
     initDither(document.getElementById('heroDither'), {
