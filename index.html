@@ -1470,6 +1470,109 @@
       .border-glow-card:before{filter:blur(18px)}
       .border-glow-card{--glow-padding:26px}
     }
+
+    /* Flowing menu for core sections */
+    .flowing-menu-wrap{
+      position:relative;
+      width:100%;
+      height:clamp(430px,54vh,620px);
+      overflow:hidden;
+      border-top:1px solid rgba(255,255,255,.14);
+      border-bottom:1px solid rgba(255,255,255,.14);
+      background:#050505;
+      margin-top:40px;
+    }
+    .flowing-menu{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+      margin:0;
+      padding:0;
+    }
+    .flowing-menu-item{
+      position:relative;
+      flex:1;
+      overflow:hidden;
+      border-top:1px solid rgba(255,255,255,.12);
+      text-align:center;
+      isolation:isolate;
+    }
+    .flowing-menu-item:first-child{border-top:0}
+    .flowing-menu-link{
+      position:relative;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:100%;
+      color:#fff;
+      text-transform:uppercase;
+      text-decoration:none;
+      white-space:nowrap;
+      font-size:88px;
+      font-weight:420;
+      letter-spacing:0;
+      cursor:pointer;
+      transition:color .35s,opacity .35s;
+    }
+    .flowing-menu-item:hover .flowing-menu-link{color:#050505;opacity:0}
+    .flowing-marquee{
+      position:absolute;
+      inset:0;
+      z-index:3;
+      overflow:hidden;
+      pointer-events:none;
+      background:#f4f7ff;
+      color:#050505;
+      transform:translate3d(0,101%,0);
+      transition:transform .62s cubic-bezier(.16,1,.3,1);
+    }
+    .flowing-menu-item.from-top .flowing-marquee{transform:translate3d(0,-101%,0)}
+    .flowing-menu-item.is-active .flowing-marquee{transform:translate3d(0,0,0)}
+    .flowing-marquee-inner{
+      display:flex;
+      align-items:center;
+      height:100%;
+      width:max-content;
+      will-change:transform;
+      animation:flowingMarquee var(--flow-speed,15s) linear infinite;
+    }
+    .flowing-part{
+      display:flex;
+      align-items:center;
+      flex-shrink:0;
+    }
+    .flowing-part span{
+      white-space:nowrap;
+      text-transform:uppercase;
+      font-weight:420;
+      font-size:88px;
+      line-height:1;
+      letter-spacing:0;
+      padding:0 1.4vw;
+    }
+    .flowing-img{
+      width:clamp(160px,15vw,300px);
+      height:clamp(58px,8vh,98px);
+      margin:0 2vw;
+      border-radius:999px;
+      background-size:cover;
+      background-position:center;
+      box-shadow:0 18px 45px rgba(0,0,0,.24);
+      filter:saturate(.86) contrast(1.04);
+    }
+    @keyframes flowingMarquee{
+      to{transform:translate3d(calc(var(--flow-distance,-420px) * -1),0,0)}
+    }
+    @media(max-width:900px){
+      .flowing-menu-wrap{height:430px;margin-top:28px}
+      .flowing-menu-link,.flowing-part span{font-size:58px}
+      .flowing-img{width:150px;height:64px}
+    }
+    @media(max-width:560px){
+      .flowing-menu-link,.flowing-part span{font-size:38px}
+      .flowing-img{width:124px;height:56px}
+    }
   </style>
 </head>
 <body>
@@ -2526,8 +2629,8 @@
     const imageWork=(predicate,fallback)=>works.find(w=>predicate(w)&&!isVideo(w.cover))||fallback;
     const heroPicks=[imageWork(w=>w.title==='AIGC 扫地机概念 01',works.find(w=>!isVideo(w.cover))),imageWork(w=>w.title==='WH 80',works[0]),imageWork(w=>w.title==='KICK'||w.title==='Node 75',works[1])].filter(Boolean);
     const heroShowcaseHTML=()=>`<div class="hero-showcase no-mag"><div class="hero-orbit"></div>${heroPicks.map((w,i)=>`<button class="hero-shot ${['primary','secondary','tertiary'][i]||''}" type="button" data-id="${w.id}" aria-label="Open ${escapeHTML(w.title)}"><img src="${w.cover}" alt="${escapeHTML(w.title)}" loading="${i===0?'eager':'lazy'}"><span class="hero-shot-info"><small>${escapeHTML(w.category)} · ${escapeHTML(w.year||'2026')}</small><strong>${escapeHTML(w.title)}</strong></span></button>`).join('')}</div>`;
-    const coreCardHTML=s=>{const preview=imageWork(w=>w.category===s.key,works[0]);return `<a class="core-card" href="#${s.key.toLowerCase()}"><div class="core-preview">${preview?media(preview.cover,preview.title):''}</div><h3>${textfx(s.title)}</h3><p>${s.subtitle}</p><p>${s.text}</p></a>`};
-    app.innerHTML=`<div class="wrap"><section class="hero"><div class="hero-copy"><h1>${textfx('Designed for')}<span class="gradient">Product Impact.</span></h1><p class="intro">${profile.name}｜以产品级渲染、AI 视觉生成和动态叙事，为 3C 产品打造像官网首图一样克制、清晰、有记忆点的视觉表达。</p><div class="actions no-mag"><a class="btn" href="#rendering"><span>View Portfolio</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact Me</span>${icon('arrow')}</button></div></div></section><section id="about" class="about reveal"><div><p class="label">About</p><h2 class="title">${textfx('Product obsession, visual experimentation, premium presentation.')}</h2></div><p class="muted">${profile.intro} 以下是我的商业项目案例及个人作品，点击作品卡片可查看完整项目内容。</p></section><section class="core reveal"><p class="label">Core Sections</p><h2 class="title" style="margin-bottom:40px">三大能力板块</h2><div class="core-grid">${sections.map(coreCardHTML).join('')}</div>${portfolioCarouselHTML()}</section>${sections.map(s=>sectionHTML(s)).join('')}</div><footer id="contact" class="contact"><div class="contact-box reveal"><div style="width:42px;height:42px;margin:0 auto 24px;color:rgba(255,255,255,.6)">${icon('mail')}</div><h2 class="title no-mag">Let’s Create Something Impressive.</h2><p class="muted" style="max-width:680px;margin:24px auto 0">如果你对我的作品感兴趣，欢迎通过微信、邮箱、小红书、站酷或 Behance 联系我。</p><div class="contact-actions no-mag"><button class="btn" type="button" id="copyWechat"><span class="brand-logo"><img src="logo/weixin.svg" alt=""></span><span>WeChat QR</span>${icon('arrow')}</button><button class="btn" type="button" id="openEmail"><span class="brand-logo"><img src="logo/qqyouxiang.svg" alt=""></span><span>Send Email</span>${icon('arrow')}</button><a class="btn" target="_blank" href="${profile.xiaohongshu}"><span class="brand-logo"><img src="logo/xiaohongshu.svg" alt=""></span><span>Xiaohongshu</span></a><a class="btn" target="_blank" href="${profile.zcool}"><span class="brand-logo"><img src="logo/zhanku123.svg" alt=""></span><span>Zcool</span></a><a class="btn" target="_blank" href="${profile.behance}"><span class="brand-logo"><img src="logo/Behance.svg" alt=""></span><span>Behance</span></a></div></div></footer>`;
+    const flowingMenuHTML=()=>`<div class="flowing-menu-wrap no-mag"><nav class="flowing-menu">${sections.map(s=>{const preview=imageWork(w=>w.category===s.key,works[0]);const parts=Array.from({length:5},()=>`<div class="flowing-part"><span>${escapeHTML(s.title)}</span><div class="flowing-img" style="background-image:url('${preview?.cover||''}')"></div></div>`).join('');return `<div class="flowing-menu-item" data-flowing-item><a class="flowing-menu-link" href="#${s.key.toLowerCase()}">${escapeHTML(s.title)}</a><div class="flowing-marquee"><div class="flowing-marquee-inner" style="--flow-speed:15s">${parts}</div></div></div>`}).join('')}</nav></div>`;
+    app.innerHTML=`<div class="wrap"><section class="hero"><div class="hero-copy"><h1>${textfx('Designed for')}<span class="gradient">Product Impact.</span></h1><p class="intro">${profile.name}｜以产品级渲染、AI 视觉生成和动态叙事，为 3C 产品打造像官网首图一样克制、清晰、有记忆点的视觉表达。</p><div class="actions no-mag"><a class="btn" href="#rendering"><span>View Portfolio</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact Me</span>${icon('arrow')}</button></div></div></section><section id="about" class="about reveal"><div><p class="label">About</p><h2 class="title">${textfx('Product obsession, visual experimentation, premium presentation.')}</h2></div><p class="muted">${profile.intro} 以下是我的商业项目案例及个人作品，点击作品卡片可查看完整项目内容。</p></section><section class="core reveal"><p class="label">Core Sections</p><h2 class="title" style="margin-bottom:40px">三大能力板块</h2>${flowingMenuHTML()}${portfolioCarouselHTML()}</section>${sections.map(s=>sectionHTML(s)).join('')}</div><footer id="contact" class="contact"><div class="contact-box reveal"><div style="width:42px;height:42px;margin:0 auto 24px;color:rgba(255,255,255,.6)">${icon('mail')}</div><h2 class="title no-mag">Let’s Create Something Impressive.</h2><p class="muted" style="max-width:680px;margin:24px auto 0">如果你对我的作品感兴趣，欢迎通过微信、邮箱、小红书、站酷或 Behance 联系我。</p><div class="contact-actions no-mag"><button class="btn" type="button" id="copyWechat"><span class="brand-logo"><img src="logo/weixin.svg" alt=""></span><span>WeChat QR</span>${icon('arrow')}</button><button class="btn" type="button" id="openEmail"><span class="brand-logo"><img src="logo/qqyouxiang.svg" alt=""></span><span>Send Email</span>${icon('arrow')}</button><a class="btn" target="_blank" href="${profile.xiaohongshu}"><span class="brand-logo"><img src="logo/xiaohongshu.svg" alt=""></span><span>Xiaohongshu</span></a><a class="btn" target="_blank" href="${profile.zcool}"><span class="brand-logo"><img src="logo/zhanku123.svg" alt=""></span><span>Zcool</span></a><a class="btn" target="_blank" href="${profile.behance}"><span class="brand-logo"><img src="logo/Behance.svg" alt=""></span><span>Behance</span></a></div></div></footer>`;
     const logoMark='<svg viewBox="0 0 322 244" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20,21.888888888061047 L21,222.88888888806105 L74,223.88888888806105 L71.77777099609375,138 Q116,173.88888888806105 134.77777099609375,224 L190,222.88888888806105 Q176,171.88888888806105 114.77777099609375,122 Q152,97.88888888806105 174.77777099609375,58 L224.77777099609375,58 L164.77777099609375,122 Q216,171.88888888806105 245,222.88888888806105 L301,222.88888888806105 Q277,172.88888888806105 220.77777099609375,122 Q276,82.88888888806105 301.77777099609375,20 L135.77777099609375,20 Q113,74.88888888806105 72.77777099609375,107 L73.77777099609375,21 L20,21.888888888061047 Z" fill="currentColor"/></svg>';
     const lanyardHTML=`<div class="lanyard-wrapper no-mag" aria-hidden="true" data-position="0,0,33" data-gravity="0,-40,0"><div class="lanyard-rig"><svg class="lanyard-rope" viewBox="0 0 320 620"><path class="lanyard-path" d="M160 -10 C 98 118, 106 302, 160 418 C 214 302, 222 118, 160 -10"/><path class="lanyard-path-shadow" d="M160 -10 C 98 118, 106 302, 160 418 C 214 302, 222 118, 160 -10"/></svg><span class="lanyard-clip"></span><div class="lanyard-card"><span class="lanyard-logo">${logoMark}</span><span class="lanyard-name">空空Studio</span><span class="lanyard-role">Product Visual<br>Designer</span><span class="lanyard-meta"><b>KK</b><b>2026</b></span></div></div></div>`;
     const hero=$('.hero');hero.classList.add('home-hero','brand-hero','brand-final');hero.innerHTML=`<div id="heroOrb" class="hero-orb-bg no-mag" data-hover-intensity="2" data-hue="0" data-background-color="#000000" aria-hidden="true"></div><aside class="brand-rail no-mag"><span>01</span><span>REEL</span></aside><div class="brand-stage no-mag"><div class="brand-meta brand-meta-left"><b>Visual<br>Systems</b><span>3C Product Films</span><span>Rendering / AIGC / Motion</span></div><div class="brand-mark"><span>Directed by</span><strong>空空Studio</strong><em>Product Visual Designer</em></div><svg class="brand-signature" viewBox="0 0 620 220" aria-hidden="true"><path d="M20 142C66 44 132 34 116 116c-12 60-1 86 40 48 70-66 106-158 151-134 31 17-31 107-10 130 24 26 85-86 137-118 38-23 58-3 30 36-25 35-50 73-33 84 30 19 92-80 151-116"/></svg>${lanyardHTML}<div class="brand-meta brand-meta-right"><b>2025<br>2026</b><span>Product Rendering</span><span>AIGC Campaign Visual</span><span>Motion Storytelling</span></div><h1 class="brand-title">Visual Reel</h1><p class="brand-intro">Cinematic product imagery shaped through rendering, AI image systems and motion direction for 3C brands.</p><div class="brand-actions"><a class="btn" href="#rendering"><span>View Works</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact</span>${icon('arrow')}</button></div><div class="brand-index"><span>01 Rendering</span><span>02 AIGC Visual</span><span>03 Motion Story</span></div></div>`;
@@ -2545,6 +2648,8 @@
     initLanyard();
     function initBorderGlow(root=document){const selector='.core-card,.work,.highlight-card,.dome-item-image,.modal-box,.wechat-card,.panel,.stat,.gallery button,.gallery .gallery-item';root.querySelectorAll(selector).forEach(card=>{if(card.dataset.borderGlowReady)return;card.dataset.borderGlowReady='1';card.classList.add('border-glow-card');const move=e=>{const rect=card.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,cx=rect.width/2,cy=rect.height/2,dx=x-cx,dy=y-cy,kx=dx!==0?cx/Math.abs(dx):Infinity,ky=dy!==0?cy/Math.abs(dy):Infinity,edge=Math.min(Math.max(1/Math.min(kx,ky),0),1),angle=(Math.atan2(dy,dx)*180/Math.PI+450)%360;card.style.setProperty('--edge-proximity',(edge*100).toFixed(3));card.style.setProperty('--cursor-angle',`${angle.toFixed(3)}deg`)};const leave=()=>card.style.setProperty('--edge-proximity','0');card.addEventListener('pointermove',move);card.addEventListener('pointerleave',leave)})}
     initBorderGlow();
+    function initFlowingMenu(root=document){root.querySelectorAll('[data-flowing-item]').forEach(item=>{if(item.dataset.flowingReady)return;item.dataset.flowingReady='1';const inner=item.querySelector('.flowing-marquee-inner'),part=item.querySelector('.flowing-part');const setDistance=()=>{if(part)inner?.style.setProperty('--flow-distance',`${part.offsetWidth}px`)};setDistance();addEventListener('resize',setDistance);const closestEdge=e=>{const r=item.getBoundingClientRect(),y=e.clientY-r.top;return y<r.height/2?'top':'bottom'};item.addEventListener('pointerenter',e=>{item.classList.toggle('from-top',closestEdge(e)==='top');item.classList.add('is-active')});item.addEventListener('pointerleave',e=>{item.classList.toggle('from-top',closestEdge(e)==='top');item.classList.remove('is-active')})})}
+    initFlowingMenu();
     function sectionHTML(s){const sw=works.filter(w=>w.category===s.key);const ut=[...new Set(sw.flatMap(w=>w.tags||[]))];const glow=s.key==='Rendering'?'rgba(86,124,255,.2)':s.key==='AIGC'?'rgba(182,104,255,.22)':'rgba(255,146,77,.2)';const heroWork=s.key==='AIGC'?aigcHero:sw[0];return `<section id="${s.key.toLowerCase()}" class="portfolio-section reveal" style="--glow:${glow}"><div class="section-shell"><div class="section-hero">${heroWork?media(heroWork.cover,s.title):''}<div class="section-head"><p class="label">${s.subtitle}</p><div class="section-head-grid"><div><h2 class="title">${textfx(s.title)}</h2><p class="muted">${s.text}</p></div><div class="stats"><div class="stat"><small>Projects</small><b>${String(sw.length).padStart(2,'0')}</b></div><div class="stat"><small>Tags</small><b>${String(ut.length).padStart(2,'0')}</b></div><div class="stat"><small>Focus</small><b style="font-size:20px">${s.title}</b></div></div></div></div></div><div class="tag-row">${tags(ut.slice(0,10))}</div>${sw[0]?card(sw[0],0,true):''}<div class="work-grid">${sw.slice(1).map((w,i)=>card(w,i+1)).join('')}</div></div></section>`}
     document.querySelectorAll('.work,.hero-shot').forEach(el=>el.onclick=()=>openModal(works.find(w=>w.id==el.dataset.id)));
     function initCarousels(){document.querySelectorAll('.section-carousel').forEach(carousel=>{const track=carousel.querySelector('.carousel-track'),cards=[...carousel.querySelectorAll('.highlight-card')],dots=[...carousel.querySelectorAll('.carousel-dot')],play=carousel.querySelector('.carousel-btn');let index=0,timer=null;const setActive=i=>{index=(i+cards.length)%cards.length;cards.forEach((card,idx)=>card.classList.toggle('active',idx===index));dots.forEach((dot,idx)=>dot.classList.toggle('active',idx===index))};const go=i=>{setActive(i);const card=cards[index],left=card.offsetLeft-(track.clientWidth-card.clientWidth)/2;track.scrollTo({left,behavior:'smooth'})};const stop=()=>{clearInterval(timer);timer=null;play.classList.remove('is-paused');play.setAttribute('aria-label','Play carousel')};const start=()=>{stop();timer=setInterval(()=>go(index+1),4200);play.classList.add('is-paused');play.setAttribute('aria-label','Pause carousel')};cards.forEach((card,i)=>card.onclick=()=>openModal(works.find(w=>w.id==card.dataset.id)));dots.forEach((dot,i)=>dot.onclick=()=>{stop();go(i)});play.onclick=()=>timer?stop():start();track.addEventListener('scroll',()=>{clearTimeout(track._snapTimer);track._snapTimer=setTimeout(()=>{const center=track.getBoundingClientRect().left+track.clientWidth/2;let nearest=0,dist=Infinity;cards.forEach((card,i)=>{const r=card.getBoundingClientRect();const d=Math.abs(r.left+r.width/2-center);if(d<dist){dist=d;nearest=i}});setActive(nearest)},80)},{passive:true});setActive(0);isMobileViewport?stop():start()})}
