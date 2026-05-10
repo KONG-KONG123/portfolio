@@ -524,6 +524,194 @@
         line-height:1.2;
       }
     }
+    /* DESIGN.md inspired polish: tighter system, quieter chrome, clearer case browsing. */
+    :root{
+      --studio-black:#050505;
+      --gallery-white:#f7f7f2;
+      --soft-graphite:#9aa4b2;
+      --electric-blue:#2f7cff;
+      --cool-silver:rgba(216,221,230,.16);
+      --surface-quiet:rgba(255,255,255,.045);
+      --surface-raised:rgba(255,255,255,.075);
+      --radius-card:8px;
+      --radius-control:8px;
+    }
+    body{background:var(--studio-black)!important;text-rendering:geometricPrecision}
+    .site-header{
+      height:52px!important;
+      padding:0 max(22px,calc((100vw - 1740px)/2 + 28px))!important;
+      border-bottom:1px solid rgba(255,255,255,.08)!important;
+      background:rgba(5,5,5,.74)!important;
+      color:var(--gallery-white)!important;
+      backdrop-filter:blur(22px) saturate(150%)!important;
+    }
+    .site-logo,.nav a,.theme-toggle{color:var(--gallery-white)!important}
+    .nav a{
+      position:relative!important;
+      height:52px!important;
+      padding:0 16px!important;
+      color:rgba(247,247,242,.68)!important;
+      letter-spacing:0!important;
+    }
+    .nav a:after{
+      content:"";
+      position:absolute;
+      left:16px;
+      right:16px;
+      bottom:0;
+      height:2px;
+      background:var(--electric-blue);
+      transform:scaleX(0);
+      transform-origin:center;
+      transition:transform .24s ease;
+    }
+    .nav a:hover,.nav a.active{color:#fff!important}
+    .nav a:hover:after,.nav a.active:after{transform:scaleX(1)}
+    h1,h2,h3,p,small,span,a,button,.title,.brand-title,.label,.eyebrow,.work-type,.highlight-info small{letter-spacing:0!important}
+    .label,.eyebrow,.highlight-info small,.stat small{
+      color:rgba(247,247,242,.54)!important;
+      font-size:.72rem!important;
+      font-weight:680!important;
+      text-transform:uppercase!important;
+    }
+    .home-hero.brand-final{
+      min-height:100svh!important;
+      padding-top:82px!important;
+      background:
+        linear-gradient(90deg,rgba(255,255,255,.035),transparent 24%,rgba(47,124,255,.045) 58%,transparent 84%),
+        radial-gradient(circle at 78% 22%,rgba(47,124,255,.18),transparent 28%),
+        #050505!important;
+    }
+    .home-hero.brand-final:after{
+      background:
+        linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),
+        linear-gradient(0deg,rgba(255,255,255,.028) 1px,transparent 1px)!important;
+      background-size:96px 96px!important;
+      opacity:.5!important;
+      mask-image:linear-gradient(to bottom,#000 0,transparent 88%)!important;
+    }
+    .brand-final .brand-title{
+      color:var(--gallery-white)!important;
+      font-size:17.5rem!important;
+      font-weight:560!important;
+      letter-spacing:0!important;
+      text-shadow:0 28px 90px rgba(0,0,0,.78)!important;
+    }
+    .brand-final .brand-title:after{
+      height:.22em!important;
+      background:linear-gradient(90deg,rgba(47,124,255,.72),rgba(247,247,242,.1) 46%,rgba(47,124,255,.22))!important;
+      filter:blur(18px)!important;
+    }
+    .brand-final .brand-meta,.brand-final .brand-intro,.muted,.core-card p{
+      color:rgba(247,247,242,.66)!important;
+    }
+    .brand-final .brand-meta b,.title,.core-card h3,.work h3,.highlight-info h3{
+      color:var(--gallery-white)!important;
+      letter-spacing:0!important;
+    }
+    .brand-signature path{stroke:var(--electric-blue)!important;filter:drop-shadow(0 0 16px rgba(47,124,255,.48))!important}
+    .btn{
+      min-height:46px!important;
+      border-radius:var(--radius-control)!important;
+      border-color:rgba(255,255,255,.14)!important;
+      background:rgba(255,255,255,.06)!important;
+      box-shadow:none!important;
+    }
+    .btn:hover,.brand-actions .btn:first-child:hover{
+      background:var(--gallery-white)!important;
+      color:#050505!important;
+      border-color:var(--gallery-white)!important;
+      transform:translateY(-2px)!important;
+    }
+    .brand-actions .btn:first-child{
+      background:var(--gallery-white)!important;
+      color:#050505!important;
+      border-color:var(--gallery-white)!important;
+    }
+    .section-shell,.core-card,.work,.highlight-card,.modal-box,.modal-hero,.gallery button,.gallery .gallery-item,.contact-box,.stat,.panel,.process div{
+      border-radius:var(--radius-card)!important;
+    }
+    .section-shell{
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.022))!important;
+      border-color:var(--cool-silver)!important;
+      box-shadow:none!important;
+    }
+    .section-shell:before,.core-card:before,.wechat-card:before{opacity:.38!important}
+    .section-hero{
+      border-radius:var(--radius-card)!important;
+      border-color:rgba(255,255,255,.1)!important;
+    }
+    .section-hero:after{
+      background:linear-gradient(90deg,rgba(0,0,0,.86),rgba(0,0,0,.48) 52%,rgba(0,0,0,.08))!important;
+    }
+    .section-head .title{font-size:4.75rem!important;line-height:1.02!important}
+    .stats{align-items:stretch!important}
+    .stat{background:rgba(5,5,5,.46)!important;border-color:rgba(255,255,255,.12)!important}
+    .stat b{font-size:2rem!important}
+    .tag{
+      border-radius:999px!important;
+      background:rgba(247,247,242,.065)!important;
+      border-color:rgba(247,247,242,.14)!important;
+      color:rgba(247,247,242,.74)!important;
+    }
+    .work,.highlight-card,.core-card{
+      border-color:rgba(255,255,255,.1)!important;
+      background:rgba(255,255,255,.028)!important;
+    }
+    .work:hover,.highlight-card:hover,.core-card:hover{
+      border-color:rgba(47,124,255,.5)!important;
+      box-shadow:0 24px 80px rgba(47,124,255,.12)!important;
+    }
+    .work-img:after{
+      background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.24) 44%,transparent 78%)!important;
+    }
+    .work-body{left:24px!important;right:76px!important;bottom:22px!important}
+    .work h3{line-height:1.12!important}
+    .work-type{color:rgba(247,247,242,.72)!important;text-shadow:0 8px 24px rgba(0,0,0,.7)!important}
+    .external{
+      border-radius:var(--radius-control)!important;
+      background:rgba(5,5,5,.46)!important;
+      border-color:rgba(255,255,255,.16)!important;
+    }
+    .highlight-info h3{line-height:1.08!important}
+    .carousel-dots,.carousel-btn,.back-to-top,.close,.wechat-close,.wechat-id{
+      border-radius:var(--radius-control)!important;
+    }
+    .modal{background:rgba(0,0,0,.82)!important}
+    .modal-box{background:#080808!important;border-color:rgba(255,255,255,.14)!important}
+    .info-grid{gap:28px!important}
+    .contact{
+      background:linear-gradient(180deg,rgba(47,124,255,.08),rgba(255,255,255,.018) 38%,rgba(0,0,0,0))!important;
+    }
+    .contact-box>.title{font-size:4.5rem!important;line-height:1.02!important}
+    .brand-logo{border-radius:6px!important}
+    @media(min-width:1500px){
+      .brand-final .brand-title{font-size:20rem!important}
+      .section-head .title{font-size:5.75rem!important}
+    }
+    @media(max-width:1100px){
+      .site-header{height:52px!important}
+      .brand-final .brand-title{font-size:8rem!important}
+      .section-head .title{font-size:3.5rem!important}
+      .contact-box>.title{font-size:3.5rem!important}
+    }
+    @media(max-width:640px){
+      .site-header{height:56px!important;background:rgba(5,5,5,.86)!important}
+      .home-hero.brand-final{padding:42px 22px 46px!important}
+      .brand-title,.brand-final .brand-title{font-size:4.1rem!important;line-height:.92!important}
+      .brand-intro{font-size:.95rem!important;line-height:1.68!important}
+      .brand-actions .btn,.contact-actions .btn{border-radius:var(--radius-control)!important}
+      .section-head .title{font-size:2.35rem!important}
+      .section-hero img,.section-hero video{height:230px!important}
+      .work-grid{grid-template-columns:1fr!important}
+      .work-body{left:14px!important;right:52px!important;bottom:14px!important}
+      .work h3{font-size:1.1rem!important}
+      .featured .work h3{font-size:1.45rem!important}
+      .contact-box>.title{font-size:2.35rem!important}
+      .modal{padding:12px!important}
+      .modal-content{padding:18px!important}
+      .info-grid,.process{grid-template-columns:1fr!important}
+    }
   </style>
 </head>
 <body>
