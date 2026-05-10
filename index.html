@@ -937,7 +937,8 @@
       border-radius:var(--runway-radius)!important;
       box-shadow:none!important;
     }
-    .contact{background:#030303!important;border-top:1px solid rgba(255,255,255,.08)!important}
+    .contact{position:relative!important;z-index:12!important;isolation:isolate;background:#000!important;border-top:1px solid rgba(255,255,255,.08)!important}
+    .contact:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:100vw;z-index:-1;transform:translateX(-50%);background:#000;pointer-events:none}
     .contact-box{background:transparent!important;border:0!important}
     @media(max-width:900px){
       .about,.core-grid,.portfolio-section .section-head-grid{grid-template-columns:1fr!important}
