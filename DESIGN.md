@@ -1,41 +1,46 @@
-# 空空Studio Portfolio DESIGN.md
+# Kongkong Studio DESIGN.md
+
+Source style: Runway from `awesome-design-md-main/design-md/runwayml/DESIGN.md`.
 
 ## Visual Theme & Atmosphere
 
-Premium 3C product portfolio with a dark gallery-first canvas. The UI should feel calm, technical, and editorial: product visuals lead, interface chrome stays quiet, and motion/hover states are precise instead of decorative.
+The portfolio should feel like a cinematic reel for 3C product visuals. Imagery and motion are the primary UI. Interface chrome must stay quiet: dark canvas, minimal borders, no ornamental shadows, and no decorative color beyond the work itself.
 
 ## Color Palette & Roles
 
-- `#050505` / Studio Black: primary background.
-- `#f7f7f2` / Gallery White: primary text and high-priority actions.
-- `#9aa4b2` / Soft Graphite: secondary copy.
-- `#2f7cff` / Electric Blue: active navigation, focus rings, signature accent.
-- `#d8dde6` / Cool Silver: borders and low-contrast dividers.
+- `#000000` / Runway Black: primary page background.
+- `#030303` / Deep Black: layered dark sections.
+- `#1a1a1a` / Dark Surface: quiet cards and modal surfaces.
+- `#ffffff` / Pure White: main text on dark imagery.
+- `#767d88` / Cool Slate: secondary copy and captions.
+- `#27272a` / Border Dark: nearly invisible section and card borders.
+- `#fefefe` / Near White: rare light text/action fill.
 
 ## Typography Rules
 
-- Use a neutral sans stack: Inter, system UI, PingFang SC, Microsoft YaHei.
-- Keep letter spacing at `0`; rely on font weight, spacing, and scale for hierarchy.
-- Hero titles are monumental but restrained. Section titles should be readable before expressive.
-- Chinese and English text should remain compact, with line heights around `1.55` to `1.85` depending on size.
+- Use one neutral sans family across everything: Inter, system UI, PingFang SC, Microsoft YaHei.
+- Display text should feel like film titles: tight line-height, controlled weight, slightly compressed tracking.
+- Labels are uppercase with measured letter spacing and low contrast.
+- Body copy stays concise, cool gray, and secondary to the work.
 
 ## Component Styling
 
-- Buttons: compact, icon-aligned, high-contrast hover, minimum touch height `44px`.
-- Cards: 8px radius, thin borders, image-first composition, no nested card surfaces.
-- Navigation: quiet fixed header, active state shown by color and subtle underline.
-- Modals: dark focused surface, strong media area, readable metadata, scrollable content.
+- Navigation: transparent/frosted black, no heavy background, no loud active chrome.
+- Buttons: small radius, restrained border, quiet fill. No pill buttons except where legacy contact affordance requires it.
+- Cards: image-first. The card is the artwork; text sits as a caption or overlay.
+- Modals: dark screening-room surface, large media, clean project metadata.
+- Carousels: cinematic horizontal reels with minimal controls.
 
 ## Layout Principles
 
-- Use a wide editorial grid, max visual content around `1740px`.
-- Keep section rhythm generous on desktop and compact on mobile.
-- Let images and videos carry the portfolio; labels and stats should support scanning.
-- Avoid large decorative blobs. Use only restrained gradients and technical lines.
+- Use full-bleed hero and wide editorial sections.
+- Alternate cinematic dark chapters with media-heavy portfolio grids.
+- Keep UI density low but visual density high: large images, small captions.
+- Avoid decorative gradients, blobs, and drop shadows. Depth comes from photography, contrast, and section rhythm.
 
 ## Responsive Behavior
 
-- Mobile header becomes a simple sticky bar.
-- Work cards use a two-column compact grid on small screens, with featured work full-width.
-- Carousels stay horizontally scrollable with stable snap sizing.
-- Text must not overlap media or controls; use fixed breakpoints rather than viewport-scaled type where possible.
+- Mobile collapses to a single-column film reel with large tappable artwork.
+- Text must never compete with images; reduce metadata before reducing artwork.
+- Preserve aspect ratios for cards and hero media.
+- Keep controls at least 44px tall on touch devices.

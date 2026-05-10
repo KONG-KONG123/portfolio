@@ -712,6 +712,321 @@
       .modal-content{padding:18px!important}
       .info-grid,.process{grid-template-columns:1fr!important}
     }
+    /* Runway-inspired cinematic pass: image-led, dark editorial, nearly invisible chrome. */
+    :root{
+      --runway-black:#000;
+      --runway-deep:#030303;
+      --runway-surface:#1a1a1a;
+      --runway-border:#27272a;
+      --runway-slate:#767d88;
+      --runway-mid:#7d848e;
+      --runway-white:#fff;
+      --runway-radius:6px;
+      --runway-section:clamp(72px,9vw,148px);
+    }
+    body{background:#000!important;color:#fff!important}
+    .bg:before,#glow,.field-vignette{display:none!important}
+    .bg:after{background:linear-gradient(180deg,rgba(0,0,0,.25),#000 78%)!important}
+    .site-header{
+      height:56px!important;
+      background:rgba(0,0,0,.62)!important;
+      border-bottom:1px solid rgba(255,255,255,.055)!important;
+      backdrop-filter:blur(18px)!important;
+    }
+    .nav a{height:56px!important;color:rgba(255,255,255,.6)!important;font-size:13px!important}
+    .nav a:after{height:1px!important;background:#fff!important;opacity:.75}
+    .nav a:hover,.nav a.active{color:#fff!important}
+    .home-hero.brand-final{
+      min-height:100svh!important;
+      background:#000!important;
+      overflow:hidden!important;
+    }
+    .home-hero.brand-final:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:0;
+      background:
+        linear-gradient(90deg,rgba(0,0,0,.86) 0%,rgba(0,0,0,.42) 42%,rgba(0,0,0,.18) 74%,rgba(0,0,0,.72) 100%),
+        url("作品集文件/场景.webp") center/cover no-repeat!important;
+      opacity:.92!important;
+      filter:saturate(.88) contrast(1.04)!important;
+    }
+    .home-hero.brand-final:after{
+      background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.18) 58%,#000 100%)!important;
+      opacity:1!important;
+      mask-image:none!important;
+    }
+    .force-field{opacity:.2!important;mix-blend-mode:screen}
+    .brand-final .brand-stage{z-index:3!important}
+    .brand-final .brand-title{
+      width:min(78vw,1500px)!important;
+      color:#fff!important;
+      font-size:clamp(98px,13.4vw,260px)!important;
+      font-weight:420!important;
+      line-height:.86!important;
+      letter-spacing:-.055em!important;
+      text-shadow:none!important;
+      bottom:clamp(210px,23vh,300px)!important;
+    }
+    .brand-final .brand-title:after{display:none!important}
+    .brand-final .brand-meta,.brand-final .brand-intro,.brand-final .brand-index{
+      color:rgba(255,255,255,.66)!important;
+      text-shadow:none!important;
+    }
+    .brand-final .brand-meta b{
+      font-weight:420!important;
+      color:#fff!important;
+      line-height:1!important;
+      letter-spacing:-.035em!important;
+    }
+    .brand-final .brand-mark{color:rgba(255,255,255,.7)!important}
+    .brand-final .brand-signature{opacity:.5!important}
+    .brand-final .brand-signature path{stroke:#fff!important;filter:none!important}
+    .brand-final .brand-intro{
+      max-width:740px!important;
+      font-size:clamp(17px,1.3vw,24px)!important;
+      line-height:1.34!important;
+      color:rgba(255,255,255,.74)!important;
+    }
+    .brand-final .brand-index{
+      border-top-color:rgba(255,255,255,.16)!important;
+      background:rgba(0,0,0,.26)!important;
+      backdrop-filter:blur(12px)!important;
+      font-size:12px!important;
+      letter-spacing:.12em!important;
+      text-transform:uppercase!important;
+    }
+    .btn{
+      border-radius:var(--runway-radius)!important;
+      border-color:rgba(255,255,255,.18)!important;
+      background:rgba(0,0,0,.34)!important;
+      color:#fff!important;
+      box-shadow:none!important;
+      backdrop-filter:blur(12px)!important;
+    }
+    .brand-actions .btn:first-child,.btn:hover{
+      background:#fff!important;
+      color:#000!important;
+      border-color:#fff!important;
+      transform:none!important;
+    }
+    .about,.core,.portfolio-section,.contact{
+      padding-top:var(--runway-section)!important;
+      padding-bottom:var(--runway-section)!important;
+    }
+    .about{
+      grid-template-columns:minmax(0,1.1fr) minmax(320px,.68fr)!important;
+      border:0!important;
+    }
+    .label,.eyebrow,.highlight-info small,.stat small{
+      color:rgba(255,255,255,.48)!important;
+      letter-spacing:.12em!important;
+      font-size:11px!important;
+      font-weight:500!important;
+    }
+    .title,.section-head .title,.contact-box>.title{
+      color:#fff!important;
+      font-weight:400!important;
+      line-height:1!important;
+      letter-spacing:-.035em!important;
+    }
+    .muted,.core-card p,.section-head .muted{
+      color:var(--runway-slate)!important;
+      line-height:1.42!important;
+    }
+    .core-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+    .core-card{
+      min-height:430px!important;
+      border-radius:var(--runway-radius)!important;
+      border-color:rgba(255,255,255,.08)!important;
+      background:#111!important;
+      box-shadow:none!important;
+      overflow:hidden!important;
+    }
+    .core-preview{opacity:.74!important}
+    .core-preview:after{background:linear-gradient(to top,#000 0%,rgba(0,0,0,.5) 45%,rgba(0,0,0,.05) 100%)!important}
+    .core-card h3{font-size:clamp(34px,3.8vw,68px)!important;font-weight:400!important;letter-spacing:-.04em!important}
+    .section-shell{
+      padding:0!important;
+      border:0!important;
+      border-radius:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+    }
+    .portfolio-section .section-hero{
+      min-height:clamp(420px,56vw,760px)!important;
+      margin-bottom:28px!important;
+      border:0!important;
+      border-radius:var(--runway-radius)!important;
+      background:#030303!important;
+    }
+    .portfolio-section .section-hero img,.portfolio-section .section-hero video{
+      height:clamp(420px,56vw,760px)!important;
+      opacity:.9!important;
+      filter:saturate(.92) contrast(1.05)!important;
+    }
+    .section-hero:after{
+      background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.28) 54%,rgba(0,0,0,.08))!important;
+    }
+    .portfolio-section .section-head{bottom:clamp(34px,5vw,76px)!important}
+    .portfolio-section .section-head-grid{grid-template-columns:minmax(0,1fr) minmax(260px,.44fr)!important}
+    .section-head .title{font-size:clamp(52px,7vw,116px)!important}
+    .stats{grid-template-columns:1fr!important}
+    .stat{
+      border-radius:var(--runway-radius)!important;
+      border-color:rgba(255,255,255,.1)!important;
+      background:rgba(0,0,0,.36)!important;
+      box-shadow:none!important;
+    }
+    .tag-row{margin:0 0 18px!important}
+    .tag{
+      border-radius:4px!important;
+      border-color:rgba(255,255,255,.1)!important;
+      background:rgba(255,255,255,.045)!important;
+      color:rgba(255,255,255,.62)!important;
+      backdrop-filter:none!important;
+    }
+    .work-grid{
+      grid-template-columns:repeat(12,minmax(0,1fr))!important;
+      gap:12px!important;
+    }
+    .work{
+      grid-column:span 4!important;
+      border:0!important;
+      border-radius:var(--runway-radius)!important;
+      background:#111!important;
+      box-shadow:none!important;
+    }
+    .work:nth-child(4n+1){grid-column:span 7!important}
+    .work:nth-child(4n+2){grid-column:span 5!important}
+    .featured{grid-column:1/-1!important}
+    .featured .work-img{aspect-ratio:21/10!important}
+    .work-img{aspect-ratio:4/3!important}
+    .work-img img,.work-img video{opacity:.98!important;filter:saturate(.94) contrast(1.02)!important}
+    .work-img:after{background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.2) 42%,transparent 72%)!important}
+    .work:hover{transform:none!important;box-shadow:none!important}
+    .work:hover .work-img img,.work:hover .work-img video{transform:scale(1.025)!important}
+    .work-body{left:18px!important;right:58px!important;bottom:16px!important}
+    .work h3{font-weight:400!important;font-size:clamp(20px,1.6vw,30px)!important;letter-spacing:-.035em!important}
+    .featured .work h3{font-size:clamp(32px,4.2vw,70px)!important}
+    .work-type{color:rgba(255,255,255,.62)!important;font-weight:400!important}
+    .external{border-radius:4px!important;background:rgba(0,0,0,.42)!important;box-shadow:none!important}
+    .highlight-card{
+      border:0!important;
+      border-radius:var(--runway-radius)!important;
+      background:#111!important;
+      box-shadow:none!important;
+    }
+    .highlight-card.active{box-shadow:none!important;outline:1px solid rgba(255,255,255,.16)}
+    .carousel-dots,.carousel-btn{border-radius:4px!important;background:rgba(255,255,255,.06)!important}
+    .modal-box,.wechat-card{
+      border-radius:var(--runway-radius)!important;
+      border-color:rgba(255,255,255,.12)!important;
+      background:#050505!important;
+      box-shadow:none!important;
+    }
+    .modal-hero,.gallery button,.gallery .gallery-item,.panel,.process div{
+      border-radius:var(--runway-radius)!important;
+      box-shadow:none!important;
+    }
+    .contact{background:#030303!important;border-top:1px solid rgba(255,255,255,.08)!important}
+    .contact-box{background:transparent!important;border:0!important}
+    @media(max-width:900px){
+      .about,.core-grid,.portfolio-section .section-head-grid{grid-template-columns:1fr!important}
+      .work-grid{grid-template-columns:1fr!important}
+      .work,.work:nth-child(n){grid-column:1/-1!important}
+      .stats{display:none!important}
+    }
+    @media(max-width:640px){
+      .home-hero.brand-final:before{background:linear-gradient(180deg,rgba(0,0,0,.42),#000 92%),url("作品集文件/场景.webp") center/cover no-repeat!important}
+      .brand-final .brand-stage{display:block!important;min-height:auto!important;overflow:visible!important}
+      .brand-final .brand-title{
+        position:relative!important;
+        inset:auto!important;
+        width:100%!important;
+        margin:56px 0 22px!important;
+        font-size:clamp(48px,15vw,62px)!important;
+        line-height:.92!important;
+        white-space:normal!important;
+      }
+      .brand-final .brand-meta-left,.brand-final .brand-meta-right,.brand-final .brand-mark{position:relative!important;inset:auto!important;width:auto!important;text-align:left!important;transform:none!important}
+      .brand-final .brand-meta-left{margin-bottom:28px!important}
+      .brand-final .brand-mark{margin-bottom:110px!important}
+      .brand-final .brand-meta-right{margin:0!important}
+      .brand-final .brand-meta-right b{font-size:34px!important;margin-bottom:16px!important}
+      .brand-final .brand-intro{font-size:16px!important;line-height:1.42!important}
+      .brand-final .brand-actions{position:relative!important;inset:auto!important;margin-top:28px!important}
+      .brand-final .brand-index{position:relative!important;inset:auto!important;width:100%!important;margin-top:34px!important;text-align:left!important;justify-items:start!important}
+      .core-card{min-height:300px!important}
+      .portfolio-section .section-hero,.portfolio-section .section-hero img,.portfolio-section .section-hero video{height:330px!important;min-height:330px!important}
+      .section-head .title{font-size:clamp(38px,12vw,54px)!important}
+      .featured .work h3{font-size:clamp(26px,9vw,42px)!important}
+    }
+
+    /* Portfolio layout guardrail: keep works orderly while retaining the cinematic surface. */
+    .portfolio-section .tag-row,
+    .portfolio-section .featured,
+    .portfolio-section .work-grid{
+      width:100%;
+      max-width:var(--page-max);
+      margin-left:auto!important;
+      margin-right:auto!important;
+    }
+    .portfolio-section .tag-row{
+      margin-top:0!important;
+      margin-bottom:28px!important;
+    }
+    .work-grid{
+      display:grid!important;
+      grid-template-columns:repeat(3,minmax(0,1fr))!important;
+      gap:clamp(18px,1.5vw,28px)!important;
+      margin-top:24px!important;
+    }
+    .work,
+    .work:nth-child(n),
+    .work:nth-child(4n+1),
+    .work:nth-child(4n+2){
+      grid-column:auto!important;
+    }
+    .featured{
+      grid-column:1/-1!important;
+      margin-bottom:24px!important;
+    }
+    .work,
+    .work.featured{
+      border:1px solid rgba(255,255,255,.1)!important;
+      border-radius:8px!important;
+      background:rgba(255,255,255,.028)!important;
+      overflow:hidden!important;
+    }
+    .work-img,
+    .featured .work-img{
+      aspect-ratio:16/9!important;
+    }
+    .work-body{
+      left:22px!important;
+      right:64px!important;
+      bottom:18px!important;
+    }
+    .work h3{
+      font-size:clamp(20px,1.35vw,28px)!important;
+      line-height:1.02!important;
+    }
+    .featured h3{
+      font-size:clamp(28px,2.4vw,44px)!important;
+    }
+    @media(max-width:1100px){
+      .work-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+      .featured{grid-column:1/-1!important}
+    }
+    @media(max-width:640px){
+      .work-grid{grid-template-columns:1fr!important;gap:16px!important}
+      .work,.work:nth-child(n){grid-column:auto!important}
+      .work-body{left:14px!important;right:50px!important;bottom:14px!important}
+      .work h3{font-size:18px!important}
+      .featured h3{font-size:24px!important}
+    }
   </style>
 </head>
 <body>
@@ -1770,7 +2085,7 @@
     const heroShowcaseHTML=()=>`<div class="hero-showcase no-mag"><div class="hero-orbit"></div>${heroPicks.map((w,i)=>`<button class="hero-shot ${['primary','secondary','tertiary'][i]||''}" type="button" data-id="${w.id}" aria-label="Open ${escapeHTML(w.title)}"><img src="${w.cover}" alt="${escapeHTML(w.title)}" loading="${i===0?'eager':'lazy'}"><span class="hero-shot-info"><small>${escapeHTML(w.category)} · ${escapeHTML(w.year||'2026')}</small><strong>${escapeHTML(w.title)}</strong></span></button>`).join('')}</div>`;
     const coreCardHTML=s=>{const preview=imageWork(w=>w.category===s.key,works[0]);return `<a class="core-card" href="#${s.key.toLowerCase()}"><div class="core-preview">${preview?media(preview.cover,preview.title):''}</div><h3>${textfx(s.title)}</h3><p>${s.subtitle}</p><p>${s.text}</p></a>`};
     app.innerHTML=`<div class="wrap"><section class="hero"><div class="hero-copy"><h1>${textfx('Designed for')}<span class="gradient">Product Impact.</span></h1><p class="intro">${profile.name}｜以产品级渲染、AI 视觉生成和动态叙事，为 3C 产品打造像官网首图一样克制、清晰、有记忆点的视觉表达。</p><div class="actions no-mag"><a class="btn" href="#rendering"><span>View Portfolio</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact Me</span>${icon('arrow')}</button></div></div></section><section id="about" class="about reveal"><div><p class="label">About</p><h2 class="title">${textfx('Product obsession, visual experimentation, premium presentation.')}</h2></div><p class="muted">${profile.intro} 以下是我的商业项目案例及个人作品，点击作品卡片可查看完整项目内容。</p></section><section class="core reveal"><p class="label">Core Sections</p><h2 class="title" style="margin-bottom:40px">三大能力板块</h2><div class="core-grid">${sections.map(coreCardHTML).join('')}</div>${portfolioCarouselHTML()}</section>${sections.map(s=>sectionHTML(s)).join('')}</div><footer id="contact" class="contact"><div class="contact-box reveal"><div style="width:42px;height:42px;margin:0 auto 24px;color:rgba(255,255,255,.6)">${icon('mail')}</div><h2 class="title no-mag">Let’s Create Something Impressive.</h2><p class="muted" style="max-width:680px;margin:24px auto 0">如果你对我的作品感兴趣，欢迎通过微信、邮箱、小红书、站酷或 Behance 联系我。</p><div class="contact-actions no-mag"><button class="btn" type="button" id="copyWechat"><span class="brand-logo"><img src="logo/weixin.svg" alt=""></span><span>WeChat QR</span>${icon('arrow')}</button><button class="btn" type="button" id="openEmail"><span class="brand-logo"><img src="logo/qqyouxiang.svg" alt=""></span><span>Send Email</span>${icon('arrow')}</button><a class="btn" target="_blank" href="${profile.xiaohongshu}"><span class="brand-logo"><img src="logo/xiaohongshu.svg" alt=""></span><span>Xiaohongshu</span></a><a class="btn" target="_blank" href="${profile.zcool}"><span class="brand-logo"><img src="logo/zhanku123.svg" alt=""></span><span>Zcool</span></a><a class="btn" target="_blank" href="${profile.behance}"><span class="brand-logo"><img src="logo/Behance.svg" alt=""></span><span>Behance</span></a></div></div></footer>`;
-    const hero=$('.hero');hero.classList.add('home-hero','brand-hero','brand-final');hero.innerHTML=`<aside class="brand-rail no-mag"><span>01</span><span>INTRO</span></aside><div class="brand-stage no-mag"><div class="brand-meta brand-meta-left"><b>Design<br>Work</b><span>3C Product Visual</span><span>Rendering / AIGC / Motion</span></div><div class="brand-mark"><span>From</span><strong>空空Studio</strong><em>Visual Designer</em></div><svg class="brand-signature" viewBox="0 0 620 220" aria-hidden="true"><path d="M20 142C66 44 132 34 116 116c-12 60-1 86 40 48 70-66 106-158 151-134 31 17-31 107-10 130 24 26 85-86 137-118 38-23 58-3 30 36-25 35-50 73-33 84 30 19 92-80 151-116"/></svg><div class="brand-meta brand-meta-right"><b>2025<br>2026</b><span>Product Rendering</span><span>AIGC Campaign Visual</span><span>Motion Storytelling</span></div><h1 class="brand-title">Portfolio</h1><p class="brand-intro">Premium 3C product visuals shaped through rendering, AI image systems and motion direction.</p><div class="brand-actions"><a class="btn" href="#rendering"><span>View Works</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact</span>${icon('arrow')}</button></div><div class="brand-index"><span>01 Rendering</span><span>02 AIGC Visual</span><span>03 Motion Story</span></div></div>`;
+    const hero=$('.hero');hero.classList.add('home-hero','brand-hero','brand-final');hero.innerHTML=`<aside class="brand-rail no-mag"><span>01</span><span>REEL</span></aside><div class="brand-stage no-mag"><div class="brand-meta brand-meta-left"><b>Visual<br>Systems</b><span>3C Product Films</span><span>Rendering / AIGC / Motion</span></div><div class="brand-mark"><span>Directed by</span><strong>空空Studio</strong><em>Product Visual Designer</em></div><svg class="brand-signature" viewBox="0 0 620 220" aria-hidden="true"><path d="M20 142C66 44 132 34 116 116c-12 60-1 86 40 48 70-66 106-158 151-134 31 17-31 107-10 130 24 26 85-86 137-118 38-23 58-3 30 36-25 35-50 73-33 84 30 19 92-80 151-116"/></svg><div class="brand-meta brand-meta-right"><b>2025<br>2026</b><span>Product Rendering</span><span>AIGC Campaign Visual</span><span>Motion Storytelling</span></div><h1 class="brand-title">Visual Reel</h1><p class="brand-intro">Cinematic product imagery shaped through rendering, AI image systems and motion direction for 3C brands.</p><div class="brand-actions"><a class="btn" href="#rendering"><span>View Works</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact</span>${icon('arrow')}</button></div><div class="brand-index"><span>01 Rendering</span><span>02 AIGC Visual</span><span>03 Motion Story</span></div></div>`;
     hero.querySelector('.intro')?.classList.add('no-mag');
     const homeHero=$('.home-hero');
     if(homeHero&&!isMobileViewport)homeHero.insertAdjacentHTML('afterbegin','<canvas id="forceField" class="force-field"></canvas><div class="field-vignette"></div>');
