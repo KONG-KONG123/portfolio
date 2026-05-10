@@ -2724,6 +2724,7 @@
       let currentRot = 0;
       const rotationSpeed = 0.3;
 
+      const hoverSurface = container.closest('.home-hero') || container;
       const handleMouseMove = e => {
         const rect = container.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -2735,15 +2736,16 @@
         const centerY = height / 2;
         const uvX = ((x - centerX) / size) * 2.0;
         const uvY = ((y - centerY) / size) * 2.0;
-        targetHover = Math.sqrt(uvX * uvX + uvY * uvY) < 0.8 ? 1 : 0;
+        const insideFrame = x >= 0 && x <= width && y >= 0 && y <= height;
+        targetHover = insideFrame && Math.sqrt(uvX * uvX + uvY * uvY) < 1.45 ? 1 : 0;
       };
 
       const handleMouseLeave = () => {
         targetHover = 0;
       };
 
-      container.addEventListener('mousemove', handleMouseMove);
-      container.addEventListener('mouseleave', handleMouseLeave);
+      hoverSurface.addEventListener('mousemove', handleMouseMove);
+      hoverSurface.addEventListener('mouseleave', handleMouseLeave);
 
       const resizeObserver = new ResizeObserver(resize);
       resizeObserver.observe(container);
@@ -2760,7 +2762,7 @@
         program.uniforms.backgroundColor.value = hexToVec3(backgroundColor);
 
         const effectiveHover = forceHoverState ? 1 : targetHover;
-        program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * 0.1;
+        program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * (effectiveHover ? 0.16 : 0.08);
         if (rotateOnHover && effectiveHover > 0.5) currentRot += dt * rotationSpeed;
         program.uniforms.rot.value = currentRot;
 
@@ -2771,8 +2773,8 @@
       window.addEventListener('pagehide', () => {
         cancelAnimationFrame(rafId);
         resizeObserver.disconnect();
-        container.removeEventListener('mousemove', handleMouseMove);
-        container.removeEventListener('mouseleave', handleMouseLeave);
+        hoverSurface.removeEventListener('mousemove', handleMouseMove);
+        hoverSurface.removeEventListener('mouseleave', handleMouseLeave);
         gl.getExtension('WEBGL_lose_context')?.loseContext();
       }, { once: true });
     }
