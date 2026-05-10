@@ -1495,13 +1495,14 @@
     /* Flowing menu for core sections */
     .flowing-menu-wrap{
       position:relative;
-      width:100%;
+      left:50%;
+      width:100vw;
       height:clamp(430px,54vh,620px);
       overflow:hidden;
       border-top:1px solid rgba(255,255,255,.14);
       border-bottom:1px solid rgba(255,255,255,.14);
       background:#050505;
-      margin-top:40px;
+      margin:40px 0 0 -50vw;
     }
     .flowing-menu{
       display:flex;
@@ -1573,8 +1574,8 @@
       padding:0 1.4vw;
     }
     .flowing-img{
-      width:clamp(160px,15vw,300px);
-      height:clamp(58px,8vh,98px);
+      width:clamp(280px,28vw,620px);
+      height:clamp(92px,12vh,150px);
       margin:0 2vw;
       border-radius:999px;
       background-size:cover;
@@ -1588,11 +1589,11 @@
     @media(max-width:900px){
       .flowing-menu-wrap{height:430px;margin-top:28px}
       .flowing-menu-link,.flowing-part span{font-size:58px}
-      .flowing-img{width:150px;height:64px}
+      .flowing-img{width:240px;height:88px}
     }
     @media(max-width:560px){
       .flowing-menu-link,.flowing-part span{font-size:38px}
-      .flowing-img{width:124px;height:56px}
+      .flowing-img{width:170px;height:64px}
     }
   </style>
 </head>
@@ -2650,7 +2651,7 @@
     const imageWork=(predicate,fallback)=>works.find(w=>predicate(w)&&!isVideo(w.cover))||fallback;
     const heroPicks=[imageWork(w=>w.title==='AIGC 扫地机概念 01',works.find(w=>!isVideo(w.cover))),imageWork(w=>w.title==='WH 80',works[0]),imageWork(w=>w.title==='KICK'||w.title==='Node 75',works[1])].filter(Boolean);
     const heroShowcaseHTML=()=>`<div class="hero-showcase no-mag"><div class="hero-orbit"></div>${heroPicks.map((w,i)=>`<button class="hero-shot ${['primary','secondary','tertiary'][i]||''}" type="button" data-id="${w.id}" aria-label="Open ${escapeHTML(w.title)}"><img src="${w.cover}" alt="${escapeHTML(w.title)}" loading="${i===0?'eager':'lazy'}"><span class="hero-shot-info"><small>${escapeHTML(w.category)} · ${escapeHTML(w.year||'2026')}</small><strong>${escapeHTML(w.title)}</strong></span></button>`).join('')}</div>`;
-    const flowingMenuHTML=()=>`<div class="flowing-menu-wrap no-mag"><nav class="flowing-menu">${sections.map(s=>{const preview=imageWork(w=>w.category===s.key,works[0]);const parts=Array.from({length:5},()=>`<div class="flowing-part"><span>${escapeHTML(s.title)}</span><div class="flowing-img" style="background-image:url('${preview?.cover||''}')"></div></div>`).join('');return `<div class="flowing-menu-item" data-flowing-item><a class="flowing-menu-link" href="#${s.key.toLowerCase()}">${escapeHTML(s.title)}</a><div class="flowing-marquee"><div class="flowing-marquee-inner" style="--flow-speed:15s">${parts}</div></div></div>`}).join('')}</nav></div>`;
+    const flowingMenuHTML=()=>`<div class="flowing-menu-wrap no-mag"><nav class="flowing-menu">${sections.map(s=>{const allImages=works.filter(w=>!isVideo(w.cover));const pool=works.filter(w=>w.category===s.key&&!isVideo(w.cover));const images=[...pool,...allImages.filter(w=>w.category!==s.key)].slice(0,8);const parts=Array.from({length:8},(_,i)=>{const preview=images[i%images.length];return `<div class="flowing-part"><span>${escapeHTML(s.title)}</span><div class="flowing-img" style="background-image:url('${preview?.cover||''}')"></div></div>`}).join('');return `<div class="flowing-menu-item" data-flowing-item><a class="flowing-menu-link" href="#${s.key.toLowerCase()}">${escapeHTML(s.title)}</a><div class="flowing-marquee"><div class="flowing-marquee-inner" style="--flow-speed:18s">${parts}</div></div></div>`}).join('')}</nav></div>`;
     app.innerHTML=`<div class="wrap"><section class="hero"><div class="hero-copy"><h1>${textfx('Designed for')}<span class="gradient">Product Impact.</span></h1><p class="intro">${profile.name}｜以产品级渲染、AI 视觉生成和动态叙事，为 3C 产品打造像官网首图一样克制、清晰、有记忆点的视觉表达。</p><div class="actions no-mag"><a class="btn" href="#rendering"><span>View Portfolio</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact Me</span>${icon('arrow')}</button></div></div></section><section id="about" class="about reveal"><div><p class="label">About</p><h2 class="title">${textfx('Product obsession, visual experimentation, premium presentation.')}</h2></div><p class="muted">${profile.intro} 以下是我的商业项目案例及个人作品，点击作品卡片可查看完整项目内容。</p></section><section class="core reveal"><p class="label">Core Sections</p><h2 class="title" style="margin-bottom:40px">三大能力板块</h2>${flowingMenuHTML()}${portfolioCarouselHTML()}</section>${sections.map(s=>sectionHTML(s)).join('')}</div><footer id="contact" class="contact"><div class="contact-box reveal"><div style="width:42px;height:42px;margin:0 auto 24px;color:rgba(255,255,255,.6)">${icon('mail')}</div><h2 class="title no-mag">Let’s Create Something Impressive.</h2><p class="muted" style="max-width:680px;margin:24px auto 0">如果你对我的作品感兴趣，欢迎通过微信、邮箱、小红书、站酷或 Behance 联系我。</p><div class="contact-actions no-mag"><button class="btn" type="button" id="copyWechat"><span class="brand-logo"><img src="logo/weixin.svg" alt=""></span><span>WeChat QR</span>${icon('arrow')}</button><button class="btn" type="button" id="openEmail"><span class="brand-logo"><img src="logo/qqyouxiang.svg" alt=""></span><span>Send Email</span>${icon('arrow')}</button><a class="btn" target="_blank" href="${profile.xiaohongshu}"><span class="brand-logo"><img src="logo/xiaohongshu.svg" alt=""></span><span>Xiaohongshu</span></a><a class="btn" target="_blank" href="${profile.zcool}"><span class="brand-logo"><img src="logo/zhanku123.svg" alt=""></span><span>Zcool</span></a><a class="btn" target="_blank" href="${profile.behance}"><span class="brand-logo"><img src="logo/Behance.svg" alt=""></span><span>Behance</span></a></div></div></footer>`;
     const logoMark='<svg viewBox="0 0 322 244" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20,21.888888888061047 L21,222.88888888806105 L74,223.88888888806105 L71.77777099609375,138 Q116,173.88888888806105 134.77777099609375,224 L190,222.88888888806105 Q176,171.88888888806105 114.77777099609375,122 Q152,97.88888888806105 174.77777099609375,58 L224.77777099609375,58 L164.77777099609375,122 Q216,171.88888888806105 245,222.88888888806105 L301,222.88888888806105 Q277,172.88888888806105 220.77777099609375,122 Q276,82.88888888806105 301.77777099609375,20 L135.77777099609375,20 Q113,74.88888888806105 72.77777099609375,107 L73.77777099609375,21 L20,21.888888888061047 Z" fill="currentColor"/></svg>';
     const lanyardHTML=`<div class="lanyard-wrapper no-mag" aria-hidden="true" data-position="0,0,33" data-gravity="0,-40,0"><div class="lanyard-rig"><svg class="lanyard-rope" viewBox="0 0 320 620"><path class="lanyard-path" d="M160 -10 C 98 118, 106 302, 160 418 C 214 302, 222 118, 160 -10"/><path class="lanyard-path-shadow" d="M160 -10 C 98 118, 106 302, 160 418 C 214 302, 222 118, 160 -10"/></svg><span class="lanyard-clip"></span><div class="lanyard-card"><span class="lanyard-logo">${logoMark}</span><span class="lanyard-name">空空Studio</span><span class="lanyard-role">Product Visual<br>Designer</span><span class="lanyard-meta"><b>KK</b><b>2026</b></span></div></div></div>`;
