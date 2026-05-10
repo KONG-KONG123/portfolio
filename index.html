@@ -1027,6 +1027,45 @@
       .work h3{font-size:18px!important}
       .featured h3{font-size:24px!important}
     }
+
+    /* Orb hero background */
+    .home-hero.brand-final:before{
+      background:#000!important;
+      opacity:1!important;
+      filter:none!important;
+    }
+    .hero-orb-bg{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:auto;
+      overflow:hidden;
+      background:#000;
+    }
+    .hero-orb-bg canvas{
+      display:block;
+      width:100%!important;
+      height:100%!important;
+    }
+    .hero-orb-bg:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 50% 46%,rgba(255,255,255,.04),transparent 32%),
+        linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.1) 48%,rgba(0,0,0,.64)),
+        linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.2) 62%,#000);
+    }
+    .brand-final .brand-stage,
+    .brand-final .brand-rail{
+      position:relative;
+      z-index:3!important;
+    }
+    @media(max-width:640px){
+      .hero-orb-bg{height:100%;min-height:620px}
+      .home-hero.brand-final:before{background:#000!important}
+    }
   </style>
 </head>
 <body>
@@ -2085,10 +2124,10 @@
     const heroShowcaseHTML=()=>`<div class="hero-showcase no-mag"><div class="hero-orbit"></div>${heroPicks.map((w,i)=>`<button class="hero-shot ${['primary','secondary','tertiary'][i]||''}" type="button" data-id="${w.id}" aria-label="Open ${escapeHTML(w.title)}"><img src="${w.cover}" alt="${escapeHTML(w.title)}" loading="${i===0?'eager':'lazy'}"><span class="hero-shot-info"><small>${escapeHTML(w.category)} · ${escapeHTML(w.year||'2026')}</small><strong>${escapeHTML(w.title)}</strong></span></button>`).join('')}</div>`;
     const coreCardHTML=s=>{const preview=imageWork(w=>w.category===s.key,works[0]);return `<a class="core-card" href="#${s.key.toLowerCase()}"><div class="core-preview">${preview?media(preview.cover,preview.title):''}</div><h3>${textfx(s.title)}</h3><p>${s.subtitle}</p><p>${s.text}</p></a>`};
     app.innerHTML=`<div class="wrap"><section class="hero"><div class="hero-copy"><h1>${textfx('Designed for')}<span class="gradient">Product Impact.</span></h1><p class="intro">${profile.name}｜以产品级渲染、AI 视觉生成和动态叙事，为 3C 产品打造像官网首图一样克制、清晰、有记忆点的视觉表达。</p><div class="actions no-mag"><a class="btn" href="#rendering"><span>View Portfolio</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact Me</span>${icon('arrow')}</button></div></div></section><section id="about" class="about reveal"><div><p class="label">About</p><h2 class="title">${textfx('Product obsession, visual experimentation, premium presentation.')}</h2></div><p class="muted">${profile.intro} 以下是我的商业项目案例及个人作品，点击作品卡片可查看完整项目内容。</p></section><section class="core reveal"><p class="label">Core Sections</p><h2 class="title" style="margin-bottom:40px">三大能力板块</h2><div class="core-grid">${sections.map(coreCardHTML).join('')}</div>${portfolioCarouselHTML()}</section>${sections.map(s=>sectionHTML(s)).join('')}</div><footer id="contact" class="contact"><div class="contact-box reveal"><div style="width:42px;height:42px;margin:0 auto 24px;color:rgba(255,255,255,.6)">${icon('mail')}</div><h2 class="title no-mag">Let’s Create Something Impressive.</h2><p class="muted" style="max-width:680px;margin:24px auto 0">如果你对我的作品感兴趣，欢迎通过微信、邮箱、小红书、站酷或 Behance 联系我。</p><div class="contact-actions no-mag"><button class="btn" type="button" id="copyWechat"><span class="brand-logo"><img src="logo/weixin.svg" alt=""></span><span>WeChat QR</span>${icon('arrow')}</button><button class="btn" type="button" id="openEmail"><span class="brand-logo"><img src="logo/qqyouxiang.svg" alt=""></span><span>Send Email</span>${icon('arrow')}</button><a class="btn" target="_blank" href="${profile.xiaohongshu}"><span class="brand-logo"><img src="logo/xiaohongshu.svg" alt=""></span><span>Xiaohongshu</span></a><a class="btn" target="_blank" href="${profile.zcool}"><span class="brand-logo"><img src="logo/zhanku123.svg" alt=""></span><span>Zcool</span></a><a class="btn" target="_blank" href="${profile.behance}"><span class="brand-logo"><img src="logo/Behance.svg" alt=""></span><span>Behance</span></a></div></div></footer>`;
-    const hero=$('.hero');hero.classList.add('home-hero','brand-hero','brand-final');hero.innerHTML=`<aside class="brand-rail no-mag"><span>01</span><span>REEL</span></aside><div class="brand-stage no-mag"><div class="brand-meta brand-meta-left"><b>Visual<br>Systems</b><span>3C Product Films</span><span>Rendering / AIGC / Motion</span></div><div class="brand-mark"><span>Directed by</span><strong>空空Studio</strong><em>Product Visual Designer</em></div><svg class="brand-signature" viewBox="0 0 620 220" aria-hidden="true"><path d="M20 142C66 44 132 34 116 116c-12 60-1 86 40 48 70-66 106-158 151-134 31 17-31 107-10 130 24 26 85-86 137-118 38-23 58-3 30 36-25 35-50 73-33 84 30 19 92-80 151-116"/></svg><div class="brand-meta brand-meta-right"><b>2025<br>2026</b><span>Product Rendering</span><span>AIGC Campaign Visual</span><span>Motion Storytelling</span></div><h1 class="brand-title">Visual Reel</h1><p class="brand-intro">Cinematic product imagery shaped through rendering, AI image systems and motion direction for 3C brands.</p><div class="brand-actions"><a class="btn" href="#rendering"><span>View Works</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact</span>${icon('arrow')}</button></div><div class="brand-index"><span>01 Rendering</span><span>02 AIGC Visual</span><span>03 Motion Story</span></div></div>`;
+    const hero=$('.hero');hero.classList.add('home-hero','brand-hero','brand-final');hero.innerHTML=`<div id="heroOrb" class="hero-orb-bg no-mag" data-hover-intensity="2" data-hue="0" data-background-color="#000000" aria-hidden="true"></div><aside class="brand-rail no-mag"><span>01</span><span>REEL</span></aside><div class="brand-stage no-mag"><div class="brand-meta brand-meta-left"><b>Visual<br>Systems</b><span>3C Product Films</span><span>Rendering / AIGC / Motion</span></div><div class="brand-mark"><span>Directed by</span><strong>空空Studio</strong><em>Product Visual Designer</em></div><svg class="brand-signature" viewBox="0 0 620 220" aria-hidden="true"><path d="M20 142C66 44 132 34 116 116c-12 60-1 86 40 48 70-66 106-158 151-134 31 17-31 107-10 130 24 26 85-86 137-118 38-23 58-3 30 36-25 35-50 73-33 84 30 19 92-80 151-116"/></svg><div class="brand-meta brand-meta-right"><b>2025<br>2026</b><span>Product Rendering</span><span>AIGC Campaign Visual</span><span>Motion Storytelling</span></div><h1 class="brand-title">Visual Reel</h1><p class="brand-intro">Cinematic product imagery shaped through rendering, AI image systems and motion direction for 3C brands.</p><div class="brand-actions"><a class="btn" href="#rendering"><span>View Works</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact</span>${icon('arrow')}</button></div><div class="brand-index"><span>01 Rendering</span><span>02 AIGC Visual</span><span>03 Motion Story</span></div></div>`;
     hero.querySelector('.intro')?.classList.add('no-mag');
     const homeHero=$('.home-hero');
-    if(homeHero&&!isMobileViewport)homeHero.insertAdjacentHTML('afterbegin','<canvas id="forceField" class="force-field"></canvas><div class="field-vignette"></div>');
+    if(false&&homeHero&&!isMobileViewport)homeHero.insertAdjacentHTML('afterbegin','<canvas id="forceField" class="force-field"></canvas><div class="field-vignette"></div>');
     function keepMobileScrollUnlocked(){if(!isMobileViewport)return;document.documentElement.style.overflowY='auto';document.body.style.overflowY='auto';document.body.style.position='static';document.body.style.touchAction='auto'}
     keepMobileScrollUnlocked();
     window.addEventListener('pageshow',keepMobileScrollUnlocked);
@@ -2125,6 +2164,316 @@
     const updateScrollUI=()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=`${max?scrollY/max*100:0}%`;backToTop.classList.toggle('show',scrollY>innerHeight*.55);let current='';sectionsForNav.forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.42)current='#'+s.id});navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===current));document.querySelectorAll('.section-hero img,.section-hero video').forEach(img=>{const r=img.getBoundingClientRect();const p=(r.top-innerHeight)/(innerHeight+r.height);img.style.transform=`scale(${1.08-Math.max(-.08,Math.min(.08,p*.08))}) translateY(${p*-40}px)`})};
     backToTop.onclick=()=>scrollTo({top:0,behavior:'smooth'});
     window.addEventListener('scroll',updateScrollUI,{passive:true}); updateScrollUI();
+  </script>
+  <script type="module">
+    import { Mesh, Program, Renderer, Triangle, Vec3 } from 'https://cdn.jsdelivr.net/npm/ogl@1.0.11/+esm';
+
+    const vert = /* glsl */ `
+      precision highp float;
+      attribute vec2 position;
+      attribute vec2 uv;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 0.0, 1.0);
+      }
+    `;
+
+    const frag = /* glsl */ `
+      precision highp float;
+
+      uniform float iTime;
+      uniform vec3 iResolution;
+      uniform float hue;
+      uniform float hover;
+      uniform float rot;
+      uniform float hoverIntensity;
+      uniform vec3 backgroundColor;
+      varying vec2 vUv;
+
+      vec3 rgb2yiq(vec3 c) {
+        float y = dot(c, vec3(0.299, 0.587, 0.114));
+        float i = dot(c, vec3(0.596, -0.274, -0.322));
+        float q = dot(c, vec3(0.211, -0.523, 0.312));
+        return vec3(y, i, q);
+      }
+
+      vec3 yiq2rgb(vec3 c) {
+        float r = c.x + 0.956 * c.y + 0.621 * c.z;
+        float g = c.x - 0.272 * c.y - 0.647 * c.z;
+        float b = c.x - 1.106 * c.y + 1.703 * c.z;
+        return vec3(r, g, b);
+      }
+
+      vec3 adjustHue(vec3 color, float hueDeg) {
+        float hueRad = hueDeg * 3.14159265 / 180.0;
+        vec3 yiq = rgb2yiq(color);
+        float cosA = cos(hueRad);
+        float sinA = sin(hueRad);
+        float i = yiq.y * cosA - yiq.z * sinA;
+        float q = yiq.y * sinA + yiq.z * cosA;
+        yiq.y = i;
+        yiq.z = q;
+        return yiq2rgb(yiq);
+      }
+
+      vec3 hash33(vec3 p3) {
+        p3 = fract(p3 * vec3(0.1031, 0.11369, 0.13787));
+        p3 += dot(p3, p3.yxz + 19.19);
+        return -1.0 + 2.0 * fract(vec3(p3.x + p3.y, p3.x + p3.z, p3.y + p3.z) * p3.zyx);
+      }
+
+      float snoise3(vec3 p) {
+        const float K1 = 0.333333333;
+        const float K2 = 0.166666667;
+        vec3 i = floor(p + (p.x + p.y + p.z) * K1);
+        vec3 d0 = p - (i - (i.x + i.y + i.z) * K2);
+        vec3 e = step(vec3(0.0), d0 - d0.yzx);
+        vec3 i1 = e * (1.0 - e.zxy);
+        vec3 i2 = 1.0 - e.zxy * (1.0 - e);
+        vec3 d1 = d0 - (i1 - K2);
+        vec3 d2 = d0 - (i2 - K1);
+        vec3 d3 = d0 - 0.5;
+        vec4 h = max(0.6 - vec4(dot(d0, d0), dot(d1, d1), dot(d2, d2), dot(d3, d3)), 0.0);
+        vec4 n = h * h * h * h * vec4(dot(d0, hash33(i)), dot(d1, hash33(i + i1)), dot(d2, hash33(i + i2)), dot(d3, hash33(i + 1.0)));
+        return dot(vec4(31.316), n);
+      }
+
+      vec4 extractAlpha(vec3 colorIn) {
+        float a = max(max(colorIn.r, colorIn.g), colorIn.b);
+        return vec4(colorIn.rgb / (a + 1e-5), a);
+      }
+
+      const vec3 baseColor1 = vec3(0.611765, 0.262745, 0.996078);
+      const vec3 baseColor2 = vec3(0.298039, 0.760784, 0.913725);
+      const vec3 baseColor3 = vec3(0.062745, 0.078431, 0.600000);
+      const float innerRadius = 0.6;
+      const float noiseScale = 0.65;
+
+      float light1(float intensity, float attenuation, float dist) {
+        return intensity / (1.0 + dist * attenuation);
+      }
+      float light2(float intensity, float attenuation, float dist) {
+        return intensity / (1.0 + dist * dist * attenuation);
+      }
+
+      vec4 draw(vec2 uv) {
+        vec3 color1 = adjustHue(baseColor1, hue);
+        vec3 color2 = adjustHue(baseColor2, hue);
+        vec3 color3 = adjustHue(baseColor3, hue);
+
+        float ang = atan(uv.y, uv.x);
+        float len = length(uv);
+        float invLen = len > 0.0 ? 1.0 / len : 0.0;
+        float bgLuminance = dot(backgroundColor, vec3(0.299, 0.587, 0.114));
+
+        float n0 = snoise3(vec3(uv * noiseScale, iTime * 0.5)) * 0.5 + 0.5;
+        float r0 = mix(mix(innerRadius, 1.0, 0.4), mix(innerRadius, 1.0, 0.6), n0);
+        float d0 = distance(uv, (r0 * invLen) * uv);
+        float v0 = light1(1.0, 10.0, d0);
+
+        v0 *= smoothstep(r0 * 1.05, r0, len);
+        float innerFade = smoothstep(r0 * 0.8, r0 * 0.95, len);
+        v0 *= mix(innerFade, 1.0, bgLuminance * 0.7);
+        float cl = cos(ang + iTime * 2.0) * 0.5 + 0.5;
+
+        float a = iTime * -1.0;
+        vec2 pos = vec2(cos(a), sin(a)) * r0;
+        float d = distance(uv, pos);
+        float v1 = light2(1.5, 5.0, d);
+        v1 *= light1(1.0, 50.0, d0);
+
+        float v2 = smoothstep(1.0, mix(innerRadius, 1.0, n0 * 0.5), len);
+        float v3 = smoothstep(innerRadius, mix(innerRadius, 1.0, 0.5), len);
+
+        vec3 colBase = mix(color1, color2, cl);
+        float fadeAmount = mix(1.0, 0.1, bgLuminance);
+
+        vec3 darkCol = mix(color3, colBase, v0);
+        darkCol = (darkCol + v1) * v2 * v3;
+        darkCol = clamp(darkCol, 0.0, 1.0);
+
+        vec3 lightCol = (colBase + v1) * mix(1.0, v2 * v3, fadeAmount);
+        lightCol = mix(backgroundColor, lightCol, v0);
+        lightCol = clamp(lightCol, 0.0, 1.0);
+
+        vec3 finalCol = mix(darkCol, lightCol, bgLuminance);
+        return extractAlpha(finalCol);
+      }
+
+      vec4 mainImage(vec2 fragCoord) {
+        vec2 center = iResolution.xy * 0.5;
+        float size = min(iResolution.x, iResolution.y);
+        vec2 uv = (fragCoord - center) / size * 2.0;
+
+        float angle = rot;
+        float s = sin(angle);
+        float c = cos(angle);
+        uv = vec2(c * uv.x - s * uv.y, s * uv.x + c * uv.y);
+
+        uv.x += hover * hoverIntensity * 0.1 * sin(uv.y * 10.0 + iTime);
+        uv.y += hover * hoverIntensity * 0.1 * sin(uv.x * 10.0 + iTime);
+
+        return draw(uv);
+      }
+
+      void main() {
+        vec2 fragCoord = vUv * iResolution.xy;
+        vec4 col = mainImage(fragCoord);
+        gl_FragColor = vec4(col.rgb * col.a, col.a);
+      }
+    `;
+
+    function hslToRgb(h, s, l) {
+      let r, g, b;
+      if (s === 0) {
+        r = g = b = l;
+      } else {
+        const hue2rgb = (p, q, t) => {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1 / 6) return p + (q - p) * 6 * t;
+          if (t < 1 / 2) return q;
+          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+          return p;
+        };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1 / 3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1 / 3);
+      }
+      return new Vec3(r, g, b);
+    }
+
+    function hexToVec3(color) {
+      if (color.startsWith('#')) {
+        const r = parseInt(color.slice(1, 3), 16) / 255;
+        const g = parseInt(color.slice(3, 5), 16) / 255;
+        const b = parseInt(color.slice(5, 7), 16) / 255;
+        return new Vec3(r, g, b);
+      }
+      const rgbMatch = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      if (rgbMatch) {
+        return new Vec3(parseInt(rgbMatch[1]) / 255, parseInt(rgbMatch[2]) / 255, parseInt(rgbMatch[3]) / 255);
+      }
+      const hslMatch = color.match(/hsla?\((\d+),\s*(\d+)%,\s*(\d+)%/);
+      if (hslMatch) {
+        const h = parseInt(hslMatch[1]) / 360;
+        const s = parseInt(hslMatch[2]) / 100;
+        const l = parseInt(hslMatch[3]) / 100;
+        return hslToRgb(h, s, l);
+      }
+      return new Vec3(0, 0, 0);
+    }
+
+    function initOrb(container, options = {}) {
+      if (!container || container.dataset.orbReady === 'true') return;
+      container.dataset.orbReady = 'true';
+
+      const hue = Number(options.hue ?? container.dataset.hue ?? 0);
+      const hoverIntensity = Number(options.hoverIntensity ?? container.dataset.hoverIntensity ?? 2);
+      const rotateOnHover = options.rotateOnHover ?? true;
+      const forceHoverState = options.forceHoverState ?? false;
+      const backgroundColor = options.backgroundColor ?? container.dataset.backgroundColor ?? '#000000';
+
+      const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
+      const gl = renderer.gl;
+      gl.clearColor(0, 0, 0, 0);
+      container.appendChild(gl.canvas);
+
+      const geometry = new Triangle(gl);
+      const program = new Program(gl, {
+        vertex: vert,
+        fragment: frag,
+        uniforms: {
+          iTime: { value: 0 },
+          iResolution: { value: new Vec3(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height) },
+          hue: { value: hue },
+          hover: { value: 0 },
+          rot: { value: 0 },
+          hoverIntensity: { value: hoverIntensity },
+          backgroundColor: { value: hexToVec3(backgroundColor) }
+        }
+      });
+
+      const mesh = new Mesh(gl, { geometry, program });
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+        const width = Math.max(1, container.clientWidth);
+        const height = Math.max(1, container.clientHeight);
+        renderer.setSize(width * dpr, height * dpr);
+        gl.canvas.style.width = width + 'px';
+        gl.canvas.style.height = height + 'px';
+        program.uniforms.iResolution.value.set(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height);
+      }
+
+      let targetHover = 0;
+      let lastTime = 0;
+      let currentRot = 0;
+      const rotationSpeed = 0.3;
+
+      const handleMouseMove = e => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const width = rect.width;
+        const height = rect.height;
+        const size = Math.min(width, height);
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const uvX = ((x - centerX) / size) * 2.0;
+        const uvY = ((y - centerY) / size) * 2.0;
+        targetHover = Math.sqrt(uvX * uvX + uvY * uvY) < 0.8 ? 1 : 0;
+      };
+
+      const handleMouseLeave = () => {
+        targetHover = 0;
+      };
+
+      container.addEventListener('mousemove', handleMouseMove);
+      container.addEventListener('mouseleave', handleMouseLeave);
+
+      const resizeObserver = new ResizeObserver(resize);
+      resizeObserver.observe(container);
+      resize();
+
+      let rafId;
+      const update = t => {
+        rafId = requestAnimationFrame(update);
+        const dt = (t - lastTime) * 0.001;
+        lastTime = t;
+        program.uniforms.iTime.value = t * 0.001;
+        program.uniforms.hue.value = hue;
+        program.uniforms.hoverIntensity.value = hoverIntensity;
+        program.uniforms.backgroundColor.value = hexToVec3(backgroundColor);
+
+        const effectiveHover = forceHoverState ? 1 : targetHover;
+        program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * 0.1;
+        if (rotateOnHover && effectiveHover > 0.5) currentRot += dt * rotationSpeed;
+        program.uniforms.rot.value = currentRot;
+
+        renderer.render({ scene: mesh });
+      };
+      rafId = requestAnimationFrame(update);
+
+      window.addEventListener('pagehide', () => {
+        cancelAnimationFrame(rafId);
+        resizeObserver.disconnect();
+        container.removeEventListener('mousemove', handleMouseMove);
+        container.removeEventListener('mouseleave', handleMouseLeave);
+        gl.getExtension('WEBGL_lose_context')?.loseContext();
+      }, { once: true });
+    }
+
+    initOrb(document.getElementById('heroOrb'), {
+      hoverIntensity: 2,
+      rotateOnHover: true,
+      hue: 0,
+      forceHoverState: false,
+      backgroundColor: '#000000'
+    });
   </script>
 </body>
 </html>
