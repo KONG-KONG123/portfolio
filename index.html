@@ -1088,6 +1088,143 @@
     .highlight-card .highlight-info{
       line-height:normal!important;
     }
+
+    /* Dome gallery replacement for the featured portfolio rail. */
+    .dome-gallery{
+      --radius:720px;
+      position:relative;
+      width:100vw;
+      height:100vh;
+      min-height:680px;
+      margin:52px 0 0 calc(50% - 50vw);
+      overflow:hidden;
+      background:#000;
+      isolation:isolate;
+      cursor:grab;
+      touch-action:none;
+    }
+    .dome-gallery.is-dragging{cursor:grabbing}
+    .dome-gallery-main{
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      perspective:calc(var(--radius) * 2.2);
+      perspective-origin:50% 50%;
+    }
+    .dome-stage{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      transform-style:preserve-3d;
+    }
+    .dome-sphere{
+      position:relative;
+      width:0;
+      height:0;
+      transform-style:preserve-3d;
+      will-change:transform;
+    }
+    .dome-item{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:clamp(230px,24vw,430px);
+      aspect-ratio:16/10;
+      margin-left:calc(clamp(230px,24vw,430px) / -2);
+      margin-top:calc(clamp(230px,24vw,430px) / -3.2);
+      transform-style:preserve-3d;
+      will-change:transform;
+    }
+    .dome-item-image{
+      position:absolute;
+      inset:0;
+      padding:0;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:8px;
+      overflow:hidden;
+      background:#080808;
+      color:#fff;
+      cursor:pointer;
+      box-shadow:0 26px 80px rgba(0,0,0,.58);
+      transform:translateZ(0);
+      transition:border-color .25s,transform .25s,filter .25s;
+    }
+    .dome-item-image img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      max-width:none;
+      object-fit:cover;
+      object-position:center;
+      filter:var(--dome-filter,grayscale(1));
+      transition:filter .25s,transform .45s,opacity .25s;
+      opacity:.92;
+    }
+    .dome-item-image:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,.86),rgba(0,0,0,.18) 44%,rgba(0,0,0,.04));
+      pointer-events:none;
+    }
+    .dome-item-image:hover{
+      border-color:rgba(255,255,255,.38);
+      transform:translateZ(8px);
+    }
+    .dome-item-image:hover img{
+      filter:none;
+      opacity:1;
+      transform:scale(1.035);
+    }
+    .dome-caption{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:16px;
+      z-index:2;
+      color:#fff;
+      text-align:left;
+      line-height:1.1;
+      pointer-events:none;
+    }
+    .dome-caption small{
+      display:block;
+      margin-bottom:8px;
+      color:rgba(255,255,255,.55);
+      font-size:10px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    .dome-caption strong{
+      display:block;
+      font-size:clamp(20px,2.4vw,38px);
+      font-weight:520;
+      letter-spacing:-.04em;
+      text-shadow:0 8px 24px rgba(0,0,0,.85);
+    }
+    .dome-overlay,
+    .dome-edge{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      pointer-events:none;
+    }
+    .dome-overlay{
+      background:
+        radial-gradient(circle at 50% 50%,transparent 0 42%,rgba(0,0,0,.28) 72%,#000 100%),
+        linear-gradient(90deg,#000 0%,rgba(0,0,0,.12) 18%,rgba(0,0,0,.08) 82%,#000 100%);
+      mix-blend-mode:multiply;
+    }
+    .dome-edge{
+      background:linear-gradient(180deg,#000 0%,transparent 17%,transparent 78%,#000 100%);
+    }
+    @media(max-width:900px){
+      .dome-gallery{height:72vh;min-height:520px;margin-top:30px}
+      .dome-item{width:clamp(190px,54vw,320px);margin-left:calc(clamp(190px,54vw,320px) / -2);margin-top:calc(clamp(190px,54vw,320px) / -3.2)}
+      .dome-caption strong{font-size:22px}
+    }
   </style>
 </head>
 <body>
@@ -2137,7 +2274,7 @@
     const media=(src,alt,controls=false)=>isVideo(src)?`<video src="${src}" ${controls?'controls':''} muted playsinline loop ${isMobileViewport&&!controls?'preload="metadata" data-defer-play="true"':'autoplay preload="auto"'}></video>`:`<img src="${src}" alt="${alt}" loading="lazy">`;
     const galleryItem=(src,alt,i)=>isVideo(src)?`<div class="gallery-item"><video src="${src}" controls playsinline preload="metadata"></video></div>`:`<button onclick='openLightboxBySrc(${JSON.stringify(src)})'><img src="${src}" alt="${alt} ${i+1}" loading="lazy"></button>`;
     const card=(w,i,featured=false)=>`<button class="work ${featured?'featured':''} reveal" data-id="${w.id}"><div class="work-img">${media(w.cover,w.title)}<span class="external">${icon('arrow')}</span><div class="work-body"><div class="mb">${(w.tags||[]).map(t=>`<span class="tag">${textfx(t)}</span>`).join('')}</div><h3>${textfx(w.title)}</h3><div class="work-type">${textfx(w.type)}</div></div></div></button>`;
-    const portfolioCarouselHTML=()=>sectionCarouselHTML({key:'Portfolio'},works).replace('section-carousel no-mag','section-carousel core-carousel no-mag');
+    const portfolioCarouselHTML=()=>`<div class="dome-gallery no-mag" data-fit="0.8" data-min-radius="600" data-max-vertical-rotation="0" data-segments="34" data-drag-dampening="2" data-grayscale="true"><main class="dome-gallery-main"><div class="dome-stage"><div class="dome-sphere"></div></div><div class="dome-overlay"></div><div class="dome-edge"></div></main></div>`;
     const highlightCard=w=>`<button class="highlight-card" type="button" data-id="${w.id}" aria-label="Open ${escapeHTML(w.title)}">${media(w.cover,w.title)}<div class="highlight-info"><small>${escapeHTML(w.category)} · ${escapeHTML(w.year||'2026')}</small><h3>${textfx(w.title)}</h3></div></button>`;
     const sectionCarouselHTML=(s,sw)=>sw.length?`<div class="section-carousel no-mag" data-carousel="${s.key}"><div class="carousel-wrap"><div class="carousel-track">${sw.map(highlightCard).join('')}</div></div><div class="carousel-controls"><div class="carousel-dots">${sw.map((w,i)=>`<button class="carousel-dot ${i===0?'active':''}" type="button" data-index="${i}" aria-label="Show ${escapeHTML(w.title)}"></button>`).join('')}</div><button class="carousel-btn is-paused" type="button" aria-label="Pause carousel"><span class="carousel-play-icon"></span></button></div></div>`:'';
     const aigcHero=works.find(w=>w.title==='AIGC 鼠标概念')||works.find(w=>w.category==='AIGC')||works[8];
@@ -2161,6 +2298,9 @@
     document.querySelectorAll('.work,.hero-shot').forEach(el=>el.onclick=()=>openModal(works.find(w=>w.id==el.dataset.id)));
     function initCarousels(){document.querySelectorAll('.section-carousel').forEach(carousel=>{const track=carousel.querySelector('.carousel-track'),cards=[...carousel.querySelectorAll('.highlight-card')],dots=[...carousel.querySelectorAll('.carousel-dot')],play=carousel.querySelector('.carousel-btn');let index=0,timer=null;const setActive=i=>{index=(i+cards.length)%cards.length;cards.forEach((card,idx)=>card.classList.toggle('active',idx===index));dots.forEach((dot,idx)=>dot.classList.toggle('active',idx===index))};const go=i=>{setActive(i);const card=cards[index],left=card.offsetLeft-(track.clientWidth-card.clientWidth)/2;track.scrollTo({left,behavior:'smooth'})};const stop=()=>{clearInterval(timer);timer=null;play.classList.remove('is-paused');play.setAttribute('aria-label','Play carousel')};const start=()=>{stop();timer=setInterval(()=>go(index+1),4200);play.classList.add('is-paused');play.setAttribute('aria-label','Pause carousel')};cards.forEach((card,i)=>card.onclick=()=>openModal(works.find(w=>w.id==card.dataset.id)));dots.forEach((dot,i)=>dot.onclick=()=>{stop();go(i)});play.onclick=()=>timer?stop():start();track.addEventListener('scroll',()=>{clearTimeout(track._snapTimer);track._snapTimer=setTimeout(()=>{const center=track.getBoundingClientRect().left+track.clientWidth/2;let nearest=0,dist=Infinity;cards.forEach((card,i)=>{const r=card.getBoundingClientRect();const d=Math.abs(r.left+r.width/2-center);if(d<dist){dist=d;nearest=i}});setActive(nearest)},80)},{passive:true});setActive(0);isMobileViewport?stop():start()})}
     initCarousels();
+    function buildDomeItems(pool,segments){const xCols=Array.from({length:segments},(_,i)=>-37+i*2),evenYs=[-4,-2,0,2,4],oddYs=[-3,-1,1,3,5],coords=xCols.flatMap((x,c)=>(c%2===0?evenYs:oddYs).map(y=>({x,y,sizeX:2,sizeY:2}))),images=pool.length?pool:[works.find(w=>!isVideo(w.cover))].filter(Boolean);return coords.map((c,i)=>({...c,work:images[i%images.length]}))}
+    function initDomeGallery(root){if(!root||root.dataset.ready==='true')return;root.dataset.ready='true';const sphere=root.querySelector('.dome-sphere'),segments=Number(root.dataset.segments)||34,fit=Number(root.dataset.fit)||.8,minRadius=Number(root.dataset.minRadius)||600,maxVertical=Number(root.dataset.maxVerticalRotation)||0,dragDampening=Number(root.dataset.dragDampening)||2,pool=works.filter(w=>w.cover&&!isVideo(w.cover)),items=buildDomeItems(pool,segments);root.style.setProperty('--dome-filter',root.dataset.grayscale==='true'?'grayscale(1)':'none');sphere.innerHTML=items.map((it,i)=>`<div class="dome-item" data-x="${it.x}" data-y="${it.y}" data-size-x="${it.sizeX}" data-size-y="${it.sizeY}" data-id="${it.work.id}"><button class="dome-item-image" type="button" aria-label="Open ${escapeHTML(it.work.title)}"><img src="${it.work.cover}" alt="${escapeHTML(it.work.title)}" loading="${i<10?'eager':'lazy'}" draggable="false"><span class="dome-caption"><small>${escapeHTML(it.work.category)} · ${escapeHTML(it.work.year||'2026')}</small><strong>${escapeHTML(it.work.title)}</strong></span></button></div>`).join('');const els=[...sphere.querySelectorAll('.dome-item')];let radius=minRadius,rot={x:0,y:0},start={x:0,y:0,rx:0,ry:0},dragging=false,moved=false,raf=null,lastTime=0,velocity={x:0,y:0};const clamp=(v,min,max)=>Math.min(Math.max(v,min),max),wrap=d=>{const a=(((d+180)%360)+360)%360;return a-180},apply=()=>{sphere.style.transform=`translateZ(${-radius}px) rotateX(${rot.x}deg) rotateY(${rot.y}deg)`};const layout=()=>{const r=root.getBoundingClientRect(),basis=r.width/r.height>=1.3?r.width:Math.min(r.width,r.height);radius=Math.max(minRadius,Math.min(basis*fit,r.height*1.35));root.style.setProperty('--radius',`${Math.round(radius)}px`);const unit=360/segments/2;els.forEach(el=>{const x=Number(el.dataset.x),y=Number(el.dataset.y),sx=Number(el.dataset.sizeX)||2,sy=Number(el.dataset.sizeY)||2,rotateY=unit*(x+(sx-1)/2),rotateX=unit*(y-(sy-1)/2);el.style.transform=`rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(${radius}px)`});apply()};new ResizeObserver(layout).observe(root);layout();const stopInertia=()=>{if(raf)cancelAnimationFrame(raf);raf=null};const inertia=t=>{if(!lastTime)lastTime=t;const dt=Math.min(.04,(t-lastTime)/1000);lastTime=t;const friction=.94+.055*clamp(dragDampening,0,1);velocity.x*=Math.pow(friction,dt*60);velocity.y*=Math.pow(friction,dt*60);if(Math.abs(velocity.x)<.02&&Math.abs(velocity.y)<.02){raf=null;lastTime=0;return}rot.y=wrap(rot.y+velocity.x*dt);rot.x=clamp(rot.x-velocity.y*dt,-maxVertical,maxVertical);apply();raf=requestAnimationFrame(inertia)};root.addEventListener('pointerdown',e=>{if(e.button&&e.button!==0)return;stopInertia();root.setPointerCapture?.(e.pointerId);root.classList.add('is-dragging');dragging=true;moved=false;start={x:e.clientX,y:e.clientY,rx:rot.x,ry:rot.y};velocity={x:0,y:0}});root.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-start.x,dy=e.clientY-start.y;if(Math.hypot(dx,dy)>4)moved=true;rot.y=wrap(start.ry+dx/20);rot.x=clamp(start.rx-dy/20,-maxVertical,maxVertical);velocity={x:e.movementX*7,y:e.movementY*7};apply()});const end=()=>{if(!dragging)return;dragging=false;root.classList.remove('is-dragging');lastTime=0;if(Math.abs(velocity.x)>.1||Math.abs(velocity.y)>.1)raf=requestAnimationFrame(inertia);setTimeout(()=>{moved=false},80)};root.addEventListener('pointerup',end);root.addEventListener('pointercancel',end);root.addEventListener('pointerleave',end);root.addEventListener('click',e=>{const btn=e.target.closest('.dome-item-image');if(!btn||moved)return;const item=btn.closest('.dome-item'),w=works.find(work=>work.id==item.dataset.id);if(w)openModal(w)})}
+    document.querySelectorAll('.dome-gallery').forEach(initDomeGallery);
     let mobileVideoObserver=null;
     function initVideoPreviews(root=document){root.querySelectorAll('.work-img video,.highlight-card video,.modal-hero video').forEach(v=>{if(v.dataset.previewReady)return;v.dataset.previewReady='1';const reveal=()=>{if(Number.isFinite(v.duration)&&v.duration>1){try{v.currentTime=Math.min(2,v.duration*.15)}catch(e){}}v.play?.().catch(()=>{})};if(isMobileViewport&&v.dataset.deferPlay==='true'){v.autoplay=false;v.preload='metadata';mobileVideoObserver=mobileVideoObserver||new IntersectionObserver(entries=>entries.forEach(entry=>{const video=entry.target;if(entry.isIntersecting){video.load?.();const run=()=>{reveal();mobileVideoObserver?.unobserve(video)};video.readyState>=1?run():video.addEventListener('loadedmetadata',run,{once:true})}}),{rootMargin:'180px 0px',threshold:.08});mobileVideoObserver.observe(v);return}v.addEventListener('loadedmetadata',reveal,{once:true});v.addEventListener('canplay',()=>v.play?.().catch(()=>{}),{once:true});if(v.readyState>=1)reveal()})}
     initVideoPreviews();
