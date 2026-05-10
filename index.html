@@ -3663,7 +3663,8 @@
       addEventListener('resize',()=>{target=clamp(target,0,maxScroll());current=scrollY},{passive:true});
       addEventListener('keydown',()=>{target=scrollY;current=scrollY},{passive:true});
     }
-    initDampedWheelScroll();
+    // Temporarily disabled: custom wheel damping caused repeated bounce on scroll.
+    // initDampedWheelScroll();
   </script>
   <script type="module">
     import { Color, Mesh, Program, Renderer, Triangle, Vec3 } from 'https://cdn.jsdelivr.net/npm/ogl@1.0.11/+esm';
