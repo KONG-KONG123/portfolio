@@ -2198,6 +2198,15 @@
       .tag-row{
         overscroll-behavior:auto!important;
       }
+      body.mobile-static-bg .pixel-blast-bg,
+      body.mobile-static-bg .hero-dither-bg,
+      body.mobile-static-bg .lanyard-wrapper{
+        display:none!important;
+      }
+      body.mobile-static-bg.terminal-zone .pixel-blast-bg,
+      body.mobile-static-bg.hero-zone .pixel-blast-bg{
+        opacity:0!important;
+      }
     }
   </style>
 </head>
@@ -3243,6 +3252,7 @@
     const sections=[{key:'Rendering',title:'Rendering',subtitle:'Product-level 3D Visualization',icon:'box',text:'聚焦 3C 产品高精度渲染、材质表现、光影塑造与商业级视觉输出。',sectionHeroCover:'作品集文件/ec6456226552503.webp',sectionHeroPosition:'center 72%'},{key:'AIGC',title:'AIGC Visual',subtitle:'AI-powered Creative Imaging',icon:'sparkles',text:'结合 AIGC 工具进行产品海报、风格探索、商业视觉实验与创意图像生成。'},{key:'Motion',title:'Motion',subtitle:'Dynamic Product Storytelling',icon:'play',text:'通过产品动画、镜头语言与动态设计，让静态产品拥有更强的叙事感。'}];
     const $=s=>document.querySelector(s); const app=$('#app');
     const isMobileViewport=matchMedia('(max-width:640px)').matches;
+    if(isMobileViewport){document.body.classList.add('mobile-static-bg');document.getElementById('pixelBlastBg')?.remove();}
     const icon=n=> n==='arrow'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg>': n==='mail'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>':'✦';
     const escapeHTML=t=>String(t).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
     const textfx=t=>`<span class="magtext">${[...String(t)].map(ch=>ch===' '?' ':`<span class="char">${escapeHTML(ch)}</span>`).join('')}</span>`;
@@ -3264,6 +3274,7 @@
     const logoMark='<svg viewBox="0 0 322 244" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20,21.888888888061047 L21,222.88888888806105 L74,223.88888888806105 L71.77777099609375,138 Q116,173.88888888806105 134.77777099609375,224 L190,222.88888888806105 Q176,171.88888888806105 114.77777099609375,122 Q152,97.88888888806105 174.77777099609375,58 L224.77777099609375,58 L164.77777099609375,122 Q216,171.88888888806105 245,222.88888888806105 L301,222.88888888806105 Q277,172.88888888806105 220.77777099609375,122 Q276,82.88888888806105 301.77777099609375,20 L135.77777099609375,20 Q113,74.88888888806105 72.77777099609375,107 L73.77777099609375,21 L20,21.888888888061047 Z" fill="currentColor"/></svg>';
     const lanyardHTML=`<div class="lanyard-wrapper no-mag" aria-label="可拖拽的 3D 挂绳徽章"><canvas class="lanyard-canvas" aria-label="可拖拽的 3D 挂绳徽章"></canvas><div class="lanyard-hint">拖动徽章 · Silk rope</div></div>`;
     const hero=$('.hero');hero.classList.add('home-hero','brand-hero','brand-final');hero.innerHTML=`<div id="heroDither" class="hero-dither-bg no-mag" aria-hidden="true"></div><aside class="brand-rail no-mag"><span>01</span><span>REEL</span></aside><div class="brand-stage no-mag"><div class="brand-meta brand-meta-left"><b>Visual<br>Systems</b><span>3C Product Films</span><span>Rendering / AIGC / Motion</span></div><div class="brand-mark"><span>Directed by</span><strong>空空Studio</strong><em>Product Visual Designer</em></div><svg class="brand-signature" viewBox="0 0 620 220" aria-hidden="true"><path d="M20 142C66 44 132 34 116 116c-12 60-1 86 40 48 70-66 106-158 151-134 31 17-31 107-10 130 24 26 85-86 137-118 38-23 58-3 30 36-25 35-50 73-33 84 30 19 92-80 151-116"/></svg>${lanyardHTML}<div class="brand-meta brand-meta-right"><b>2025<br>2026</b><span>Product Rendering</span><span>AIGC Campaign Visual</span><span>Motion Storytelling</span></div><div class="brand-title text-pressure-wrap" data-text-pressure="VISUALREEL" aria-label="VISUALREEL"><h1 class="text-pressure-title flex"></h1></div><p class="brand-intro">Cinematic product imagery shaped through rendering, AI image systems and motion direction for 3C brands.</p><div class="brand-actions"><a class="btn" href="#rendering"><span>View Works</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact</span>${icon('arrow')}</button></div><div class="brand-index"><span>01 Rendering</span><span>02 AIGC Visual</span><span>03 Motion Story</span></div></div>`;
+    if(isMobileViewport){document.getElementById('heroDither')?.remove();document.querySelector('.lanyard-wrapper')?.remove();}
     function initTextPressure(root=document){
       root.querySelectorAll('[data-text-pressure]').forEach(container=>{
         if(container.dataset.textPressureReady)return;
@@ -3529,7 +3540,7 @@
       function resize(){const rect=wrap.getBoundingClientRect(),w=Math.max(1,rect.width),h=Math.max(1,rect.height);camera.aspect=w/h;camera.updateProjectionMatrix();positionLanyardScene();renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));renderer.setSize(w,h,false)}
       window.addEventListener('resize',resize);new ResizeObserver(resize).observe(wrap);resize();
     }
-    initLanyard();
+    if(!isMobileViewport)initLanyard();else document.querySelector('.lanyard-wrapper')?.remove();
     function initBorderGlow(root=document){const selector='.core-card,.highlight-card,.wechat-card,.stat';root.querySelectorAll(selector).forEach(card=>{if(card.dataset.borderGlowReady)return;card.dataset.borderGlowReady='1';card.classList.add('border-glow-card');const move=e=>{const rect=card.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,cx=rect.width/2,cy=rect.height/2,dx=x-cx,dy=y-cy,kx=dx!==0?cx/Math.abs(dx):Infinity,ky=dy!==0?cy/Math.abs(dy):Infinity,edge=Math.min(Math.max(1/Math.min(kx,ky),0),1),angle=(Math.atan2(dy,dx)*180/Math.PI+450)%360;card.style.setProperty('--edge-proximity',(edge*100).toFixed(3));card.style.setProperty('--cursor-angle',`${angle.toFixed(3)}deg`)};const leave=()=>card.style.setProperty('--edge-proximity','0');card.addEventListener('pointermove',move);card.addEventListener('pointerleave',leave)})}
     initBorderGlow();
     function initFlowingMenu(root=document){root.querySelectorAll('[data-flowing-item]').forEach(item=>{if(item.dataset.flowingReady)return;item.dataset.flowingReady='1';const inner=item.querySelector('.flowing-marquee-inner'),part=item.querySelector('.flowing-part');const setDistance=()=>{if(part)inner?.style.setProperty('--flow-distance',`${part.offsetWidth}px`)};setDistance();addEventListener('resize',setDistance);const closestEdge=e=>{const r=item.getBoundingClientRect(),y=e.clientY-r.top;return y<r.height/2?'top':'bottom'};item.addEventListener('pointerenter',e=>{item.classList.toggle('from-top',closestEdge(e)==='top');item.classList.add('is-active')});item.addEventListener('pointerleave',e=>{item.classList.toggle('from-top',closestEdge(e)==='top');item.classList.remove('is-active')})})}
@@ -4498,31 +4509,38 @@
       }, { once: true });
     }
 
-    initPixelBlast(document.getElementById('pixelBlastBg'), {
-      variant: 'diamond',
-      pixelSize: 4,
-      color: '#393939',
-      patternScale: 2,
-      patternDensity: 1.25,
-      enableRipples: true,
-      rippleSpeed: 0.3,
-      rippleThickness: 0.1,
-      rippleIntensityScale: 1,
-      speed: 0.5,
-      transparent: true,
-      edgeFade: 0.16
-    });
+    const mobileStaticBackground = window.matchMedia('(max-width: 640px)').matches;
+    if(mobileStaticBackground){
+      document.body.classList.add('mobile-static-bg');
+      document.getElementById('pixelBlastBg')?.remove();
+      document.getElementById('heroDither')?.remove();
+    }else{
+      initPixelBlast(document.getElementById('pixelBlastBg'), {
+        variant: 'diamond',
+        pixelSize: 4,
+        color: '#393939',
+        patternScale: 2,
+        patternDensity: 1.25,
+        enableRipples: true,
+        rippleSpeed: 0.3,
+        rippleThickness: 0.1,
+        rippleIntensityScale: 1,
+        speed: 0.5,
+        transparent: true,
+        edgeFade: 0.16
+      });
 
-    initDither(document.getElementById('heroDither'), {
-      waveColor: [0.27058823529411763, 0.27058823529411763, 0.27058823529411763],
-      disableAnimation: false,
-      enableMouseInteraction: true,
-      mouseRadius: 0.3,
-      colorNum: 4.4,
-      waveAmplitude: 0.51,
-      waveFrequency: 3.1,
-      waveSpeed: 0.01
-    });
+      initDither(document.getElementById('heroDither'), {
+        waveColor: [0.27058823529411763, 0.27058823529411763, 0.27058823529411763],
+        disableAnimation: false,
+        enableMouseInteraction: true,
+        mouseRadius: 0.3,
+        colorNum: 4.4,
+        waveAmplitude: 0.51,
+        waveFrequency: 3.1,
+        waveSpeed: 0.01
+      });
+    }
   </script>
 </body>
 </html>
