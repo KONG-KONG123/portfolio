@@ -1369,6 +1369,66 @@
     @media(max-width:640px){
       .lanyard-wrapper{display:none}
     }
+
+    /* BorderGlow: edge-sensitive card light tuned to the portfolio's cool cinematic palette. */
+    .border-glow-card{
+      --edge-proximity:0;
+      --cursor-angle:180deg;
+      --edge-sensitivity:30;
+      --border-radius:8px;
+      --glow-padding:38px;
+      --cone-spread:26;
+      --fill-opacity:.34;
+      --glow-color:hsl(205deg 92% 72% / 88%);
+      --glow-color-60:hsl(205deg 92% 72% / 52%);
+      --glow-color-50:hsl(264deg 86% 72% / 44%);
+      --glow-color-40:hsl(188deg 86% 62% / 34%);
+      --glow-color-30:hsl(220deg 92% 70% / 24%);
+      --glow-color-20:hsl(205deg 92% 72% / 16%);
+      --glow-color-10:hsl(205deg 92% 72% / 8%);
+      position:relative;
+      isolation:isolate;
+      overflow:hidden;
+    }
+    .border-glow-card:before,
+    .border-glow-card:after{
+      content:"";
+      position:absolute;
+      inset:calc(var(--glow-padding) * -1);
+      z-index:1;
+      border-radius:calc(var(--border-radius) + var(--glow-padding));
+      opacity:calc(var(--edge-proximity) / 100);
+      pointer-events:none;
+      transition:opacity .16s ease-out;
+    }
+    .border-glow-card:before{
+      background:
+        conic-gradient(from calc(var(--cursor-angle) - var(--cone-spread) * 1deg),transparent 0deg,var(--glow-color-10) 14deg,var(--glow-color-40) 28deg,var(--glow-color) 44deg,var(--glow-color-50) 58deg,transparent 78deg),
+        radial-gradient(circle at 50% 50%,rgba(56,189,248,.13),transparent 48%);
+      filter:blur(calc(var(--glow-padding) * .42));
+      mix-blend-mode:screen;
+    }
+    .border-glow-card:after{
+      inset:0;
+      border:1px solid transparent;
+      border-radius:var(--border-radius);
+      background:
+        linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)) padding-box,
+        conic-gradient(from calc(var(--cursor-angle) - var(--cone-spread) * 1deg),rgba(255,255,255,.08),var(--glow-color),var(--glow-color-60),rgba(255,255,255,.08),rgba(255,255,255,.02)) border-box;
+      filter:drop-shadow(0 0 calc(var(--edge-proximity) * .28px) var(--glow-color-20));
+    }
+    .border-glow-card > *{
+      position:relative;
+      z-index:2;
+    }
+    .core-card.border-glow-card{--border-radius:8px;--glow-padding:40px}
+    .work.border-glow-card,.highlight-card.border-glow-card,.dome-item-image.border-glow-card{--border-radius:8px;--glow-padding:36px}
+    .modal-box.border-glow-card,.wechat-card.border-glow-card{--border-radius:18px;--glow-padding:46px}
+    .panel.border-glow-card,.stat.border-glow-card,.gallery button.border-glow-card,.gallery .gallery-item.border-glow-card{--border-radius:8px;--glow-padding:32px}
+    @media(max-width:640px){
+      .border-glow-card:before{filter:blur(18px)}
+      .border-glow-card{--glow-padding:26px}
+    }
   </style>
 </head>
 <body>
@@ -2442,6 +2502,8 @@
     if(!isMobileViewport)initHeroForceField();else{document.querySelector('#forceField')?.remove();document.querySelector('.field-vignette')?.remove();}
     function initLanyard(){const wrap=document.querySelector('.lanyard-wrapper'),card=wrap?.querySelector('.lanyard-card'),rope=wrap?.querySelectorAll('.lanyard-path');if(!wrap||!card)return;let x=0,y=0,vx=0,vy=0,targetX=0,targetY=0,dragging=false,last={x:0,y:0};const clamp=(v,min,max)=>Math.min(Math.max(v,min),max);function render(){if(!dragging){vx+=(targetX-x)*.035;vy+=(targetY-y)*.035;vx*=.88;vy*=.88;x+=vx;y+=vy}else{x=targetX;y=targetY}const rx=clamp(-y*.06,-10,10),ry=clamp(x*.045,-12,12),rz=clamp(x*.045,-9,9)-4;card.style.setProperty('--lanyard-x',`${x}px`);card.style.setProperty('--lanyard-y',`${y}px`);card.style.setProperty('--lanyard-rx',`${rx}deg`);card.style.setProperty('--lanyard-ry',`${ry}deg`);card.style.setProperty('--lanyard-rz',`${rz}deg`);card.style.setProperty('--lanyard-shine',`${-35+x*.18}%`);const bend=clamp(x*.35,-44,44),drop=clamp(y*.18,-18,34);rope.forEach(path=>path.setAttribute('d',`M160 0 C ${112+bend} ${118+drop}, ${118+bend*.45} ${206+drop}, 160 254 C ${202+bend*.45} ${206+drop}, ${208+bend} ${118+drop}, 160 0`));requestAnimationFrame(render)}card.addEventListener('pointerdown',e=>{dragging=true;card.classList.add('is-dragging');card.setPointerCapture?.(e.pointerId);last={x:e.clientX,y:e.clientY};vx=0;vy=0});card.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-last.x,dy=e.clientY-last.y;targetX=clamp(targetX+dx,-92,92);targetY=clamp(targetY+dy,-42,92);vx=dx*1.4;vy=dy*1.4;last={x:e.clientX,y:e.clientY}});const release=()=>{if(!dragging)return;dragging=false;card.classList.remove('is-dragging');targetX=0;targetY=0};card.addEventListener('pointerup',release);card.addEventListener('pointercancel',release);card.addEventListener('lostpointercapture',release);requestAnimationFrame(render)}
     initLanyard();
+    function initBorderGlow(root=document){const selector='.core-card,.work,.highlight-card,.dome-item-image,.modal-box,.wechat-card,.panel,.stat,.gallery button,.gallery .gallery-item';root.querySelectorAll(selector).forEach(card=>{if(card.dataset.borderGlowReady)return;card.dataset.borderGlowReady='1';card.classList.add('border-glow-card');const move=e=>{const rect=card.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,cx=rect.width/2,cy=rect.height/2,dx=x-cx,dy=y-cy,kx=dx!==0?cx/Math.abs(dx):Infinity,ky=dy!==0?cy/Math.abs(dy):Infinity,edge=Math.min(Math.max(1/Math.min(kx,ky),0),1),angle=(Math.atan2(dy,dx)*180/Math.PI+450)%360;card.style.setProperty('--edge-proximity',(edge*100).toFixed(3));card.style.setProperty('--cursor-angle',`${angle.toFixed(3)}deg`)};const leave=()=>card.style.setProperty('--edge-proximity','0');card.addEventListener('pointermove',move);card.addEventListener('pointerleave',leave)})}
+    initBorderGlow();
     function sectionHTML(s){const sw=works.filter(w=>w.category===s.key);const ut=[...new Set(sw.flatMap(w=>w.tags||[]))];const glow=s.key==='Rendering'?'rgba(86,124,255,.2)':s.key==='AIGC'?'rgba(182,104,255,.22)':'rgba(255,146,77,.2)';const heroWork=s.key==='AIGC'?aigcHero:sw[0];return `<section id="${s.key.toLowerCase()}" class="portfolio-section reveal" style="--glow:${glow}"><div class="section-shell"><div class="section-hero">${heroWork?media(heroWork.cover,s.title):''}<div class="section-head"><p class="label">${s.subtitle}</p><div class="section-head-grid"><div><h2 class="title">${textfx(s.title)}</h2><p class="muted">${s.text}</p></div><div class="stats"><div class="stat"><small>Projects</small><b>${String(sw.length).padStart(2,'0')}</b></div><div class="stat"><small>Tags</small><b>${String(ut.length).padStart(2,'0')}</b></div><div class="stat"><small>Focus</small><b style="font-size:20px">${s.title}</b></div></div></div></div></div><div class="tag-row">${tags(ut.slice(0,10))}</div>${sw[0]?card(sw[0],0,true):''}<div class="work-grid">${sw.slice(1).map((w,i)=>card(w,i+1)).join('')}</div></div></section>`}
     document.querySelectorAll('.work,.hero-shot').forEach(el=>el.onclick=()=>openModal(works.find(w=>w.id==el.dataset.id)));
     function initCarousels(){document.querySelectorAll('.section-carousel').forEach(carousel=>{const track=carousel.querySelector('.carousel-track'),cards=[...carousel.querySelectorAll('.highlight-card')],dots=[...carousel.querySelectorAll('.carousel-dot')],play=carousel.querySelector('.carousel-btn');let index=0,timer=null;const setActive=i=>{index=(i+cards.length)%cards.length;cards.forEach((card,idx)=>card.classList.toggle('active',idx===index));dots.forEach((dot,idx)=>dot.classList.toggle('active',idx===index))};const go=i=>{setActive(i);const card=cards[index],left=card.offsetLeft-(track.clientWidth-card.clientWidth)/2;track.scrollTo({left,behavior:'smooth'})};const stop=()=>{clearInterval(timer);timer=null;play.classList.remove('is-paused');play.setAttribute('aria-label','Play carousel')};const start=()=>{stop();timer=setInterval(()=>go(index+1),4200);play.classList.add('is-paused');play.setAttribute('aria-label','Pause carousel')};cards.forEach((card,i)=>card.onclick=()=>openModal(works.find(w=>w.id==card.dataset.id)));dots.forEach((dot,i)=>dot.onclick=()=>{stop();go(i)});play.onclick=()=>timer?stop():start();track.addEventListener('scroll',()=>{clearTimeout(track._snapTimer);track._snapTimer=setTimeout(()=>{const center=track.getBoundingClientRect().left+track.clientWidth/2;let nearest=0,dist=Infinity;cards.forEach((card,i)=>{const r=card.getBoundingClientRect();const d=Math.abs(r.left+r.width/2-center);if(d<dist){dist=d;nearest=i}});setActive(nearest)},80)},{passive:true});setActive(0);isMobileViewport?stop():start()})}
@@ -2454,12 +2516,12 @@
     initVideoPreviews();
     document.addEventListener('click',e=>{const el=e.target.closest('.highlight-card');if(!el)return;const w=works.find(work=>work.id==el.dataset.id);if(w)openModal(w)});
     let currentGallery=[],currentLightboxIndex=0;
-    function openModal(w){const videoHero=isVideo(w.cover);currentGallery=(w.images||[w.cover]).filter(src=>!isVideo(src));const galleryItems=videoHero?(w.images||[]).filter(src=>src!==w.cover&&!isVideo(src)):(w.images||[w.cover]);const m=$('#modal');m.innerHTML=`<div class="modal-box"><button class="close" onclick="closeModal()">✕</button><div class="modal-content"><div class="modal-hero ${videoHero?'is-video':''}">${media(w.cover,w.title,videoHero)}<div class="modal-title"><p class="eyebrow">${w.category} · ${w.year}</p><h2>${w.title}</h2></div></div><div class="info-grid"><div class="panel"><p class="label">Project Info</p><p>项目类型：${w.type}</p><p>能力板块：${w.category}</p><div class="tag-row">${tags(w.tags)}</div></div><div><p class="muted">${w.desc}</p><div class="process">${(w.process||[]).map((p,i)=>`<div><small>0${i+1}</small><br>${p}</div>`).join('')}</div></div></div>${galleryItems.length?`<div class="gallery">${galleryItems.map((img,i)=>galleryItem(img,w.title,i)).join('')}</div>`:''}</div></div>`;magnetizeText(m);initVideoPreviews(m);m.classList.add('open')} window.closeModal=()=>$('#modal').classList.remove('open'); $('#modal').onclick=e=>{if(e.target.id==='modal')closeModal()};
+    function openModal(w){const videoHero=isVideo(w.cover);currentGallery=(w.images||[w.cover]).filter(src=>!isVideo(src));const galleryItems=videoHero?(w.images||[]).filter(src=>src!==w.cover&&!isVideo(src)):(w.images||[w.cover]);const m=$('#modal');m.innerHTML=`<div class="modal-box"><button class="close" onclick="closeModal()">✕</button><div class="modal-content"><div class="modal-hero ${videoHero?'is-video':''}">${media(w.cover,w.title,videoHero)}<div class="modal-title"><p class="eyebrow">${w.category} · ${w.year}</p><h2>${w.title}</h2></div></div><div class="info-grid"><div class="panel"><p class="label">Project Info</p><p>项目类型：${w.type}</p><p>能力板块：${w.category}</p><div class="tag-row">${tags(w.tags)}</div></div><div><p class="muted">${w.desc}</p><div class="process">${(w.process||[]).map((p,i)=>`<div><small>0${i+1}</small><br>${p}</div>`).join('')}</div></div></div>${galleryItems.length?`<div class="gallery">${galleryItems.map((img,i)=>galleryItem(img,w.title,i)).join('')}</div>`:''}</div></div>`;magnetizeText(m);initVideoPreviews(m);initBorderGlow(m);m.classList.add('open')} window.closeModal=()=>$('#modal').classList.remove('open'); $('#modal').onclick=e=>{if(e.target.id==='modal')closeModal()};
     window.openLightboxBySrc=src=>{const i=currentGallery.indexOf(src);currentLightboxIndex=i>=0?i:0;renderLightbox()}; function renderLightbox(){const l=$('#lightbox');const src=currentGallery[currentLightboxIndex];l.innerHTML=`<button class="close" style="position:absolute;right:28px;top:28px" onclick="closeLightbox()">✕</button>${currentGallery.length>1?`<button class="lightbox-arrow lightbox-prev" onclick="moveLightbox(-1)">‹</button><button class="lightbox-arrow lightbox-next" onclick="moveLightbox(1)">›</button><div class="lightbox-count">${currentLightboxIndex+1} / ${currentGallery.length}</div>`:''}<img src="${src}" alt="Preview">`;l.classList.add('open')} window.moveLightbox=dir=>{if(!currentGallery.length)return;currentLightboxIndex=(currentLightboxIndex+dir+currentGallery.length)%currentGallery.length;renderLightbox()}; window.closeLightbox=()=>$('#lightbox').classList.remove('open'); $('#lightbox').onclick=e=>{if(e.target.id==='lightbox')closeLightbox()};
     const wechatQR='作品集文件/wechat-qr.webp';
-    window.openWechat=()=>{const m=$('#wechatModal');m.innerHTML=`<div class="wechat-card"><button class="wechat-close" onclick="closeWechat()">✕</button><p class="label">WeChat</p><h2 class="wechat-title">扫码联系我</h2><p class="wechat-text">打开微信扫一扫，添加后可以直接沟通项目合作、产品渲染与 AIGC 视觉需求。</p><div class="qr-frame"><img src="${wechatQR}" alt="微信二维码"></div><div class="wechat-id">WeChat <b>${profile.wechat}</b></div></div>`;magnetizeText(m);m.classList.add('open')};
+    window.openWechat=()=>{const m=$('#wechatModal');m.innerHTML=`<div class="wechat-card"><button class="wechat-close" onclick="closeWechat()">✕</button><p class="label">WeChat</p><h2 class="wechat-title">扫码联系我</h2><p class="wechat-text">打开微信扫一扫，添加后可以直接沟通项目合作、产品渲染与 AIGC 视觉需求。</p><div class="qr-frame"><img src="${wechatQR}" alt="微信二维码"></div><div class="wechat-id">WeChat <b>${profile.wechat}</b></div></div>`;magnetizeText(m);initBorderGlow(m);m.classList.add('open')};
     window.closeWechat=()=>$('#wechatModal').classList.remove('open'); $('#wechatModal').onclick=e=>{if(e.target.id==='wechatModal')closeWechat()};
-    window.openEmail=()=>{const m=$('#wechatModal');m.innerHTML=`<div class="wechat-card email-card"><button class="wechat-close" onclick="closeWechat()">✕</button><p class="label">Email</p><h2 class="wechat-title">邮箱联系</h2><p class="wechat-text">可以复制邮箱，或直接打开邮件客户端发送合作需求。</p><div class="qr-frame"><span class="email-address">${profile.email}</span></div><div class="email-actions"><button class="btn" type="button" onclick="navigator.clipboard.writeText(profile.email)">Copy Email</button><a class="btn" href="mailto:${profile.email}">Open Mail</a></div></div>`;magnetizeText(m);m.classList.add('open')};
+    window.openEmail=()=>{const m=$('#wechatModal');m.innerHTML=`<div class="wechat-card email-card"><button class="wechat-close" onclick="closeWechat()">✕</button><p class="label">Email</p><h2 class="wechat-title">邮箱联系</h2><p class="wechat-text">可以复制邮箱，或直接打开邮件客户端发送合作需求。</p><div class="qr-frame"><span class="email-address">${profile.email}</span></div><div class="email-actions"><button class="btn" type="button" onclick="navigator.clipboard.writeText(profile.email)">Copy Email</button><a class="btn" href="mailto:${profile.email}">Open Mail</a></div></div>`;magnetizeText(m);initBorderGlow(m);m.classList.add('open')};
     $('#heroWechat').onclick=openWechat; $('#copyWechat').onclick=openWechat; $('#openEmail').onclick=openEmail;
     window.addEventListener('keydown',e=>{if(!$('#lightbox').classList.contains('open'))return;if(e.key==='ArrowLeft')moveLightbox(-1);if(e.key==='ArrowRight')moveLightbox(1);if(e.key==='Escape')closeLightbox()});
     const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
