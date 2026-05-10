@@ -727,12 +727,12 @@
     body{background:#000!important;color:#fff!important}
     .bg{overflow:hidden}
     .bg:before,#glow,.field-vignette{display:none!important}
-    .bg:after{z-index:1;background:radial-gradient(circle at 50% 32%,rgba(0,0,0,.08),rgba(0,0,0,.74) 72%),linear-gradient(180deg,rgba(0,0,0,.36),rgba(0,0,0,.68))!important}
+    .bg:after{z-index:1;background:radial-gradient(circle at 50% 32%,rgba(0,0,0,.02),rgba(0,0,0,.56) 72%),linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.52))!important}
     .faulty-terminal-bg,.pixel-blast-bg{position:absolute;inset:0;z-index:0;overflow:hidden;opacity:0;transition:opacity .65s ease;transform:translateZ(0)}
     .faulty-terminal-bg{filter:contrast(1.08)}
     .faulty-terminal-bg canvas,.pixel-blast-bg canvas{width:100%!important;height:100%!important;display:block}
-    .pixel-blast-bg{filter:contrast(1.08);mix-blend-mode:screen}
-    body.terminal-zone .pixel-blast-bg{opacity:.72}
+    .pixel-blast-bg{z-index:2;filter:contrast(1.18) brightness(1.16)}
+    body.terminal-zone .pixel-blast-bg{opacity:.95}
     body.hero-zone .pixel-blast-bg{opacity:0}
     .site-header{
       height:56px!important;
@@ -3553,7 +3553,7 @@
             let intensity = grain * settings.patternDensity + drift;
             if (mouse.active) {
               const md = Math.hypot(x - mouse.x, y - mouse.y) / 360;
-              intensity += Math.max(0, 1 - md) * 0.18;
+              intensity += Math.max(0, 1 - md) * 0.28;
             }
             for (const ripple of ripples) {
               const age = (t - ripple.t) * 0.001;
@@ -3564,7 +3564,7 @@
             }
             const edge = Math.min(x / width, y / height, (width - x) / width, (height - y) / height);
             const fade = clamp01(edge / settings.edgeFade);
-            const alpha = clamp01((intensity - 0.48) * 0.32) * fade;
+            const alpha = clamp01((intensity - 0.26) * 0.58) * fade;
             if (alpha <= 0.015) continue;
             ctx.globalAlpha = alpha;
             drawDiamond(x, y, radius * (0.68 + alpha * 0.8));
