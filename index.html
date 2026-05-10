@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>空空Studio作品集</title>
   <meta name="description" content="空空Studio 3C Product Rendering / AIGC Visual / Motion Portfolio" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="500x500" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
   <style>
     :root{--bg:#050505;--white:#fff;--muted:rgba(255,255,255,.58);--line:rgba(255,255,255,.1);--panel:rgba(255,255,255,.035);--panel-strong:rgba(255,255,255,.075);--text:#fff;--text-soft:rgba(255,255,255,.68)}
     body.light{--bg:#f4f1ea;--white:#111;--muted:rgba(18,18,18,.62);--line:rgba(18,18,18,.12);--panel:rgba(255,255,255,.56);--panel-strong:rgba(255,255,255,.72);--text:#111;--text-soft:rgba(18,18,18,.68)}
@@ -3271,8 +3272,8 @@
     const magnetizeText=(root=document.body)=>{const skip=new Set(['SCRIPT','STYLE','IMG','VIDEO','SVG','PATH','BR']);const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{if(!n.nodeValue.trim())return NodeFilter.FILTER_REJECT;const p=n.parentElement;if(!p||p.closest('.magtext,.char,.no-mag,.intro'))return NodeFilter.FILTER_REJECT;for(let el=p;el&&el!==root.parentElement;el=el.parentElement){if(skip.has(el.tagName)||el.classList?.contains('no-mag'))return NodeFilter.FILTER_REJECT}return NodeFilter.FILTER_ACCEPT}});const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);nodes.forEach(n=>{const frag=document.createDocumentFragment();[...n.nodeValue].forEach(ch=>{if(ch===' '){frag.appendChild(document.createTextNode(' '));return}const s=document.createElement('span');s.className='char';s.textContent=ch;frag.appendChild(s)});const wrap=document.createElement('span');wrap.className='magtext';wrap.appendChild(frag);n.parentNode.replaceChild(wrap,n)})};
     const tags=a=>(a||[]).map(t=>`<span class="tag">${textfx(t)}</span>`).join('');
     const isVideo=src=>/\.(mp4|webm|mov)(\?|#|$)/i.test(src||'');
-    const media=(src,alt,controls=false,position='')=>{const pos=position?` style="object-position:${escapeHTML(position)}"`:'';return isVideo(src)?`<video src="${src}" ${controls?'controls':''} muted playsinline loop ${isMobileViewport&&!controls?'preload="metadata" data-defer-play="true"':'autoplay preload="auto"'}${pos}></video>`:`<img src="${src}" alt="${alt}" loading="lazy"${pos}>`};
-    const galleryItem=(src,alt,i)=>isVideo(src)?`<div class="gallery-item"><video src="${src}" controls playsinline preload="metadata"></video></div>`:`<button onclick='openLightboxBySrc(${JSON.stringify(src)})'><img src="${src}" alt="${alt} ${i+1}" loading="lazy"></button>`;
+    const media=(src,alt,controls=false,position='')=>{const pos=position?` style="object-position:${escapeHTML(position)}"`:'';return isVideo(src)?`<video src="${src}" ${controls?'controls':''} muted playsinline loop preload="metadata" ${controls?'':'data-defer-play="true"'}${pos}></video>`:`<img src="${src}" alt="${alt}" loading="lazy" decoding="async"${pos}>`};
+    const galleryItem=(src,alt,i)=>isVideo(src)?`<div class="gallery-item"><video src="${src}" controls playsinline preload="metadata"></video></div>`:`<button onclick='openLightboxBySrc(${JSON.stringify(src)})'><img src="${src}" alt="${alt} ${i+1}" loading="lazy" decoding="async"></button>`;
     const card=(w,i,featured=false)=>`<button class="work ${featured?'featured':''} reveal" data-id="${w.id}"><div class="work-img">${media(w.cover,w.title,false,w.coverPosition)}<span class="external">${icon('arrow')}</span><div class="work-body"><div class="mb">${(w.tags||[]).map(t=>`<span class="tag">${textfx(t)}</span>`).join('')}</div><h3>${textfx(w.title)}</h3><div class="work-type">${textfx(w.type)}</div></div></div></button>`;
     const portfolioCarouselHTML=()=>isMobileViewport?'':`<div class="dome-gallery no-mag" data-fit="0.65" data-fit-basis="auto" data-min-radius="700" data-max-vertical-rotation="0" data-segments="32" data-drag-sensitivity="20" data-drag-dampening="2.2" data-grayscale="true"><main class="dome-gallery-main"><div class="dome-stage"><div class="dome-sphere"></div></div><div class="dome-overlay"></div><div class="dome-edge"></div></main></div>`;
     const highlightCard=w=>`<button class="highlight-card" type="button" data-id="${w.id}" aria-label="Open ${escapeHTML(w.title)}">${media(w.cover,w.title,false,w.coverPosition)}<div class="highlight-info"><small>${escapeHTML(w.category)} · ${escapeHTML(w.year||'2026')}</small><h3>${textfx(w.title)}</h3></div></button>`;
@@ -3612,7 +3613,7 @@
     }
     if(!isMobileViewport)document.querySelectorAll('.dome-gallery').forEach(initDomeGallery);
     let mobileVideoObserver=null;
-    function initVideoPreviews(root=document){root.querySelectorAll('.work-img video,.highlight-card video,.modal-hero video').forEach(v=>{if(v.dataset.previewReady)return;v.dataset.previewReady='1';const reveal=()=>{if(Number.isFinite(v.duration)&&v.duration>1){try{v.currentTime=Math.min(2,v.duration*.15)}catch(e){}}v.play?.().catch(()=>{})};if(isMobileViewport&&v.dataset.deferPlay==='true'){v.autoplay=false;v.preload='metadata';mobileVideoObserver=mobileVideoObserver||new IntersectionObserver(entries=>entries.forEach(entry=>{const video=entry.target;if(entry.isIntersecting){video.load?.();const run=()=>{reveal();mobileVideoObserver?.unobserve(video)};video.readyState>=1?run():video.addEventListener('loadedmetadata',run,{once:true})}}),{rootMargin:'180px 0px',threshold:.08});mobileVideoObserver.observe(v);return}v.addEventListener('loadedmetadata',reveal,{once:true});v.addEventListener('canplay',()=>v.play?.().catch(()=>{}),{once:true});if(v.readyState>=1)reveal()})}
+    function initVideoPreviews(root=document){root.querySelectorAll('.work-img video,.highlight-card video,.modal-hero video').forEach(v=>{if(v.dataset.previewReady)return;v.dataset.previewReady='1';const reveal=()=>{if(Number.isFinite(v.duration)&&v.duration>1){try{v.currentTime=Math.min(2,v.duration*.15)}catch(e){}}v.play?.().catch(()=>{})};if(v.dataset.deferPlay==='true'){v.autoplay=false;v.preload='metadata';mobileVideoObserver=mobileVideoObserver||new IntersectionObserver(entries=>entries.forEach(entry=>{const video=entry.target;if(entry.isIntersecting){video.load?.();const run=()=>{reveal();mobileVideoObserver?.unobserve(video)};video.readyState>=1?run():video.addEventListener('loadedmetadata',run,{once:true})}else{video.pause?.()}}),{rootMargin:'220px 0px',threshold:.08});mobileVideoObserver.observe(v);return}v.addEventListener('loadedmetadata',reveal,{once:true});v.addEventListener('canplay',()=>v.play?.().catch(()=>{}),{once:true});if(v.readyState>=1)reveal()})}
     initVideoPreviews();
     document.addEventListener('click',e=>{const el=e.target.closest('.highlight-card');if(!el)return;const w=works.find(work=>work.id==el.dataset.id);if(w)openModal(w)});
     let currentGallery=[],currentLightboxIndex=0;
@@ -3636,6 +3637,33 @@
     const updateScrollUI=()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=`${max?scrollY/max*100:0}%`;backToTop.classList.toggle('show',scrollY>innerHeight*.55);const hero=$('.home-hero'),inHero=hero&&hero.getBoundingClientRect().bottom>innerHeight*.18;document.body.classList.toggle('hero-zone',!!inHero);document.body.classList.toggle('terminal-zone',!inHero);let current='';sectionsForNav.forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.42)current='#'+s.id});navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===current));document.querySelectorAll('.section-hero img,.section-hero video').forEach(img=>{const r=img.getBoundingClientRect();const p=(r.top-innerHeight)/(innerHeight+r.height);img.style.transform=`scale(${1.08-Math.max(-.08,Math.min(.08,p*.08))}) translateY(${p*-40}px)`})};
     backToTop.onclick=()=>scrollTo({top:0,behavior:'smooth'});
     window.addEventListener('scroll',updateScrollUI,{passive:true}); updateScrollUI();
+    function initDampedWheelScroll(){
+      if(isMobileViewport||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+      const root=document.scrollingElement||document.documentElement;
+      let current=scrollY,target=scrollY,raf=0;
+      const clamp=(v,min,max)=>Math.min(Math.max(v,min),max);
+      const maxScroll=()=>Math.max(0,root.scrollHeight-innerHeight);
+      const ignore=e=>e.defaultPrevented||e.ctrlKey||e.metaKey||e.shiftKey||e.target.closest('.modal.open,.modal-box,.lightbox.open,.wechat-modal.open,.carousel-track,.section-carousel,.core-carousel,.tag-row,.dome-gallery,input,textarea,select,[contenteditable="true"]');
+      const animate=()=>{
+        current+=(target-current)*.16;
+        if(Math.abs(target-current)<.45){current=target;scrollTo(0,current);raf=0;return}
+        scrollTo(0,current);
+        raf=requestAnimationFrame(animate);
+      };
+      addEventListener('wheel',e=>{
+        if(ignore(e))return;
+        const max=maxScroll();
+        if(max<=0)return;
+        e.preventDefault();
+        current=scrollY;
+        const unit=e.deltaMode===1?18:e.deltaMode===2?innerHeight:1;
+        target=clamp(target+e.deltaY*unit*.86,0,max);
+        if(!raf)raf=requestAnimationFrame(animate);
+      },{passive:false});
+      addEventListener('resize',()=>{target=clamp(target,0,maxScroll());current=scrollY},{passive:true});
+      addEventListener('keydown',()=>{target=scrollY;current=scrollY},{passive:true});
+    }
+    initDampedWheelScroll();
   </script>
   <script type="module">
     import { Color, Mesh, Program, Renderer, Triangle, Vec3 } from 'https://cdn.jsdelivr.net/npm/ogl@1.0.11/+esm';
