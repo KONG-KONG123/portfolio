@@ -2181,6 +2181,24 @@
     .modal .info-grid{
       background:#080808!important;
     }
+    @media(max-width:640px){
+      html,
+      body,
+      #app,
+      main{
+        overscroll-behavior:none!important;
+        overscroll-behavior-y:none!important;
+      }
+      body{
+        touch-action:pan-y pinch-zoom!important;
+      }
+      .section-carousel,
+      .core-carousel,
+      .carousel-track,
+      .tag-row{
+        overscroll-behavior:auto!important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -3287,7 +3305,7 @@
     hero.querySelector('.intro')?.classList.add('no-mag');
     const homeHero=$('.home-hero');
     if(false&&homeHero&&!isMobileViewport)homeHero.insertAdjacentHTML('afterbegin','<canvas id="forceField" class="force-field"></canvas><div class="field-vignette"></div>');
-    function keepMobileScrollUnlocked(){if(!isMobileViewport)return;document.documentElement.style.overflowY='auto';document.body.style.overflowY='auto';document.body.style.position='static';document.body.style.touchAction='auto'}
+    function keepMobileScrollUnlocked(){if(!isMobileViewport)return;document.documentElement.style.overflowY='auto';document.documentElement.style.overscrollBehavior='none';document.documentElement.style.overscrollBehaviorY='none';document.body.style.overflowY='auto';document.body.style.overscrollBehavior='none';document.body.style.overscrollBehaviorY='none';document.body.style.position='static';document.body.style.touchAction='pan-y pinch-zoom'}
     keepMobileScrollUnlocked();
     window.addEventListener('pageshow',keepMobileScrollUnlocked);
     requestAnimationFrame(keepMobileScrollUnlocked);
