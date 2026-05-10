@@ -1033,13 +1033,14 @@
       .featured h3{font-size:24px!important}
     }
 
-    /* Orb hero background */
+    /* Dither hero background */
     .home-hero.brand-final:before{
       background:#000!important;
       opacity:1!important;
       filter:none!important;
     }
-    .hero-orb-bg{
+    .hero-orb-bg,
+    .hero-dither-bg{
       position:absolute;
       inset:0;
       z-index:1;
@@ -1047,20 +1048,22 @@
       overflow:hidden;
       background:#000;
     }
-    .hero-orb-bg canvas{
+    .hero-orb-bg canvas,
+    .hero-dither-bg canvas{
       display:block;
       width:100%!important;
       height:100%!important;
     }
-    .hero-orb-bg:after{
+    .hero-orb-bg:after,
+    .hero-dither-bg:after{
       content:"";
       position:absolute;
       inset:0;
       pointer-events:none;
       background:
-        radial-gradient(circle at 50% 46%,rgba(255,255,255,.04),transparent 32%),
-        linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.1) 48%,rgba(0,0,0,.64)),
-        linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.2) 62%,#000);
+        radial-gradient(circle at 50% 42%,rgba(255,255,255,.05),transparent 31%),
+        linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.16) 48%,rgba(0,0,0,.68)),
+        linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.24) 62%,#000);
     }
     .brand-final .brand-stage,
     .brand-final .brand-rail{
@@ -1068,7 +1071,7 @@
       z-index:3!important;
     }
     @media(max-width:640px){
-      .hero-orb-bg{height:100%;min-height:620px}
+      .hero-orb-bg,.hero-dither-bg{height:100%;min-height:620px}
       .home-hero.brand-final:before{background:#000!important}
     }
 
@@ -2648,7 +2651,7 @@
     app.innerHTML=`<div class="wrap"><section class="hero"><div class="hero-copy"><h1>${textfx('Designed for')}<span class="gradient">Product Impact.</span></h1><p class="intro">${profile.name}｜以产品级渲染、AI 视觉生成和动态叙事，为 3C 产品打造像官网首图一样克制、清晰、有记忆点的视觉表达。</p><div class="actions no-mag"><a class="btn" href="#rendering"><span>View Portfolio</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact Me</span>${icon('arrow')}</button></div></div></section><section id="about" class="about reveal"><div><p class="label">About</p><h2 class="title">${textfx('Product obsession, visual experimentation, premium presentation.')}</h2></div><p class="muted">${profile.intro} 以下是我的商业项目案例及个人作品，点击作品卡片可查看完整项目内容。</p></section><section class="core reveal"><p class="label">Core Sections</p><h2 class="title" style="margin-bottom:40px">三大能力板块</h2>${flowingMenuHTML()}${portfolioCarouselHTML()}</section>${sections.map(s=>sectionHTML(s)).join('')}</div><footer id="contact" class="contact"><div class="contact-box reveal"><div style="width:42px;height:42px;margin:0 auto 24px;color:rgba(255,255,255,.6)">${icon('mail')}</div><h2 class="title no-mag">Let’s Create Something Impressive.</h2><p class="muted" style="max-width:680px;margin:24px auto 0">如果你对我的作品感兴趣，欢迎通过微信、邮箱、小红书、站酷或 Behance 联系我。</p><div class="contact-actions no-mag"><button class="btn" type="button" id="copyWechat"><span class="brand-logo"><img src="logo/weixin.svg" alt=""></span><span>WeChat QR</span>${icon('arrow')}</button><button class="btn" type="button" id="openEmail"><span class="brand-logo"><img src="logo/qqyouxiang.svg" alt=""></span><span>Send Email</span>${icon('arrow')}</button><a class="btn" target="_blank" href="${profile.xiaohongshu}"><span class="brand-logo"><img src="logo/xiaohongshu.svg" alt=""></span><span>Xiaohongshu</span></a><a class="btn" target="_blank" href="${profile.zcool}"><span class="brand-logo"><img src="logo/zhanku123.svg" alt=""></span><span>Zcool</span></a><a class="btn" target="_blank" href="${profile.behance}"><span class="brand-logo"><img src="logo/Behance.svg" alt=""></span><span>Behance</span></a></div></div></footer>`;
     const logoMark='<svg viewBox="0 0 322 244" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20,21.888888888061047 L21,222.88888888806105 L74,223.88888888806105 L71.77777099609375,138 Q116,173.88888888806105 134.77777099609375,224 L190,222.88888888806105 Q176,171.88888888806105 114.77777099609375,122 Q152,97.88888888806105 174.77777099609375,58 L224.77777099609375,58 L164.77777099609375,122 Q216,171.88888888806105 245,222.88888888806105 L301,222.88888888806105 Q277,172.88888888806105 220.77777099609375,122 Q276,82.88888888806105 301.77777099609375,20 L135.77777099609375,20 Q113,74.88888888806105 72.77777099609375,107 L73.77777099609375,21 L20,21.888888888061047 Z" fill="currentColor"/></svg>';
     const lanyardHTML=`<div class="lanyard-wrapper no-mag" aria-hidden="true" data-position="0,0,33" data-gravity="0,-40,0"><div class="lanyard-rig"><svg class="lanyard-rope" viewBox="0 0 320 620"><path class="lanyard-path" d="M160 -10 C 98 118, 106 302, 160 418 C 214 302, 222 118, 160 -10"/><path class="lanyard-path-shadow" d="M160 -10 C 98 118, 106 302, 160 418 C 214 302, 222 118, 160 -10"/></svg><span class="lanyard-clip"></span><div class="lanyard-card"><span class="lanyard-logo">${logoMark}</span><span class="lanyard-name">空空Studio</span><span class="lanyard-role">Product Visual<br>Designer</span><span class="lanyard-meta"><b>KK</b><b>2026</b></span></div></div></div>`;
-    const hero=$('.hero');hero.classList.add('home-hero','brand-hero','brand-final');hero.innerHTML=`<div id="heroOrb" class="hero-orb-bg no-mag" data-hover-intensity="2" data-hue="0" data-background-color="#000000" aria-hidden="true"></div><aside class="brand-rail no-mag"><span>01</span><span>REEL</span></aside><div class="brand-stage no-mag"><div class="brand-meta brand-meta-left"><b>Visual<br>Systems</b><span>3C Product Films</span><span>Rendering / AIGC / Motion</span></div><div class="brand-mark"><span>Directed by</span><strong>空空Studio</strong><em>Product Visual Designer</em></div><svg class="brand-signature" viewBox="0 0 620 220" aria-hidden="true"><path d="M20 142C66 44 132 34 116 116c-12 60-1 86 40 48 70-66 106-158 151-134 31 17-31 107-10 130 24 26 85-86 137-118 38-23 58-3 30 36-25 35-50 73-33 84 30 19 92-80 151-116"/></svg>${lanyardHTML}<div class="brand-meta brand-meta-right"><b>2025<br>2026</b><span>Product Rendering</span><span>AIGC Campaign Visual</span><span>Motion Storytelling</span></div><h1 class="brand-title">Visual Reel</h1><p class="brand-intro">Cinematic product imagery shaped through rendering, AI image systems and motion direction for 3C brands.</p><div class="brand-actions"><a class="btn" href="#rendering"><span>View Works</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact</span>${icon('arrow')}</button></div><div class="brand-index"><span>01 Rendering</span><span>02 AIGC Visual</span><span>03 Motion Story</span></div></div>`;
+    const hero=$('.hero');hero.classList.add('home-hero','brand-hero','brand-final');hero.innerHTML=`<div id="heroDither" class="hero-dither-bg no-mag" aria-hidden="true"></div><aside class="brand-rail no-mag"><span>01</span><span>REEL</span></aside><div class="brand-stage no-mag"><div class="brand-meta brand-meta-left"><b>Visual<br>Systems</b><span>3C Product Films</span><span>Rendering / AIGC / Motion</span></div><div class="brand-mark"><span>Directed by</span><strong>空空Studio</strong><em>Product Visual Designer</em></div><svg class="brand-signature" viewBox="0 0 620 220" aria-hidden="true"><path d="M20 142C66 44 132 34 116 116c-12 60-1 86 40 48 70-66 106-158 151-134 31 17-31 107-10 130 24 26 85-86 137-118 38-23 58-3 30 36-25 35-50 73-33 84 30 19 92-80 151-116"/></svg>${lanyardHTML}<div class="brand-meta brand-meta-right"><b>2025<br>2026</b><span>Product Rendering</span><span>AIGC Campaign Visual</span><span>Motion Storytelling</span></div><h1 class="brand-title">Visual Reel</h1><p class="brand-intro">Cinematic product imagery shaped through rendering, AI image systems and motion direction for 3C brands.</p><div class="brand-actions"><a class="btn" href="#rendering"><span>View Works</span>${icon('arrow')}</a><button class="btn" type="button" id="heroWechat"><span>Contact</span>${icon('arrow')}</button></div><div class="brand-index"><span>01 Rendering</span><span>02 AIGC Visual</span><span>03 Motion Story</span></div></div>`;
     hero.querySelector('.intro')?.classList.add('no-mag');
     const homeHero=$('.home-hero');
     if(false&&homeHero&&!isMobileViewport)homeHero.insertAdjacentHTML('afterbegin','<canvas id="forceField" class="force-field"></canvas><div class="field-vignette"></div>');
@@ -2947,6 +2950,217 @@
         resizeObserver.disconnect();
         window.removeEventListener('resize', resize);
         window.removeEventListener('mousemove', handleMouseMove);
+        gl.getExtension('WEBGL_lose_context')?.loseContext();
+      }, { once: true });
+    }
+
+    const ditherVertex = /* glsl */ `
+      precision highp float;
+      attribute vec2 position;
+      attribute vec2 uv;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 0.0, 1.0);
+      }
+    `;
+
+    const ditherFragment = /* glsl */ `
+      precision highp float;
+      varying vec2 vUv;
+      uniform vec2 resolution;
+      uniform float time;
+      uniform float waveSpeed;
+      uniform float waveFrequency;
+      uniform float waveAmplitude;
+      uniform vec3 waveColor;
+      uniform vec2 mousePos;
+      uniform int enableMouseInteraction;
+      uniform float mouseRadius;
+      uniform float colorNum;
+      uniform float pixelSize;
+
+      vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+      vec4 permute(vec4 x) { return mod289(((x * 34.0) + 1.0) * x); }
+      vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+      vec2 fade(vec2 t) { return t * t * t * (t * (t * 6.0 - 15.0) + 10.0); }
+
+      float cnoise(vec2 P) {
+        vec4 Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
+        vec4 Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
+        Pi = mod289(Pi);
+        vec4 ix = Pi.xzxz;
+        vec4 iy = Pi.yyww;
+        vec4 fx = Pf.xzxz;
+        vec4 fy = Pf.yyww;
+        vec4 i = permute(permute(ix) + iy);
+        vec4 gx = fract(i * (1.0 / 41.0)) * 2.0 - 1.0;
+        vec4 gy = abs(gx) - 0.5;
+        vec4 tx = floor(gx + 0.5);
+        gx = gx - tx;
+        vec2 g00 = vec2(gx.x, gy.x);
+        vec2 g10 = vec2(gx.y, gy.y);
+        vec2 g01 = vec2(gx.z, gy.z);
+        vec2 g11 = vec2(gx.w, gy.w);
+        vec4 norm = taylorInvSqrt(vec4(dot(g00, g00), dot(g01, g01), dot(g10, g10), dot(g11, g11)));
+        g00 *= norm.x;
+        g01 *= norm.y;
+        g10 *= norm.z;
+        g11 *= norm.w;
+        float n00 = dot(g00, vec2(fx.x, fy.x));
+        float n10 = dot(g10, vec2(fx.y, fy.y));
+        float n01 = dot(g01, vec2(fx.z, fy.z));
+        float n11 = dot(g11, vec2(fx.w, fy.w));
+        vec2 fade_xy = fade(Pf.xy);
+        vec2 n_x = mix(vec2(n00, n01), vec2(n10, n11), fade_xy.x);
+        return 2.3 * mix(n_x.x, n_x.y, fade_xy.y);
+      }
+
+      float fbm(vec2 p) {
+        float value = 0.0;
+        float amp = 1.0;
+        float freq = waveFrequency;
+        for (int i = 0; i < 4; i++) {
+          value += amp * abs(cnoise(p));
+          p *= freq;
+          amp *= waveAmplitude;
+        }
+        return value;
+      }
+
+      float pattern(vec2 p) {
+        vec2 p2 = p - time * waveSpeed;
+        return fbm(p + fbm(p2));
+      }
+
+      float bayer8(vec2 coord) {
+        vec2 p = mod(coord, 4.0);
+        float x = p.x;
+        float y = p.y;
+        float v = 0.0;
+        if (y < 1.0) {
+          if (x < 1.0) v = 0.0;
+          else if (x < 2.0) v = 8.0;
+          else if (x < 3.0) v = 2.0;
+          else v = 10.0;
+        } else if (y < 2.0) {
+          if (x < 1.0) v = 12.0;
+          else if (x < 2.0) v = 4.0;
+          else if (x < 3.0) v = 14.0;
+          else v = 6.0;
+        } else if (y < 3.0) {
+          if (x < 1.0) v = 3.0;
+          else if (x < 2.0) v = 11.0;
+          else if (x < 3.0) v = 1.0;
+          else v = 9.0;
+        } else {
+          if (x < 1.0) v = 15.0;
+          else if (x < 2.0) v = 7.0;
+          else if (x < 3.0) v = 13.0;
+          else v = 5.0;
+        }
+        return v / 16.0;
+      }
+
+      vec3 ditherColor(vec2 uv, vec3 color) {
+        vec2 scaledCoord = floor(uv * resolution / pixelSize);
+        float threshold = bayer8(scaledCoord) - 0.25;
+        float stepSize = 1.0 / (colorNum - 1.0);
+        color += threshold * stepSize;
+        color = clamp(color - 0.2, 0.0, 1.0);
+        return floor(color * (colorNum - 1.0) + 0.5) / (colorNum - 1.0);
+      }
+
+      void main() {
+        vec2 uv = gl_FragCoord.xy / resolution.xy;
+        vec2 p = uv - 0.5;
+        p.x *= resolution.x / resolution.y;
+        float f = pattern(p);
+        if (enableMouseInteraction == 1) {
+          vec2 mouseNDC = (mousePos / resolution - 0.5) * vec2(1.0, -1.0);
+          mouseNDC.x *= resolution.x / resolution.y;
+          float dist = length(p - mouseNDC);
+          float effect = 1.0 - smoothstep(0.0, mouseRadius, dist);
+          f -= 0.5 * effect;
+        }
+        vec3 col = mix(vec3(0.0), waveColor, f);
+        col = ditherColor(uv, col);
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `;
+
+    function initDither(container, options = {}) {
+      if (!container || container.dataset.ditherReady === 'true') return;
+      container.dataset.ditherReady = 'true';
+      const settings = {
+        waveColor: [0.27058823529411763, 0.27058823529411763, 0.27058823529411763],
+        disableAnimation: false,
+        enableMouseInteraction: true,
+        mouseRadius: 0.3,
+        colorNum: 4.4,
+        pixelSize: 2,
+        waveAmplitude: 0.51,
+        waveFrequency: 3.1,
+        waveSpeed: 0.01,
+        ...options
+      };
+      const renderer = new Renderer({ dpr: 1, antialias: true });
+      const gl = renderer.gl;
+      gl.clearColor(0, 0, 0, 1);
+      container.appendChild(gl.canvas);
+      const geometry = new Triangle(gl);
+      const program = new Program(gl, {
+        vertex: ditherVertex,
+        fragment: ditherFragment,
+        uniforms: {
+          resolution: { value: new Float32Array([gl.canvas.width, gl.canvas.height]) },
+          time: { value: 0 },
+          waveSpeed: { value: settings.waveSpeed },
+          waveFrequency: { value: settings.waveFrequency },
+          waveAmplitude: { value: settings.waveAmplitude },
+          waveColor: { value: new Color(...settings.waveColor) },
+          mousePos: { value: new Float32Array([0, 0]) },
+          enableMouseInteraction: { value: settings.enableMouseInteraction ? 1 : 0 },
+          mouseRadius: { value: settings.mouseRadius },
+          colorNum: { value: settings.colorNum },
+          pixelSize: { value: settings.pixelSize }
+        }
+      });
+      const mesh = new Mesh(gl, { geometry, program });
+      const mouse = { x: 0, y: 0 };
+      const smoothMouse = { x: 0, y: 0 };
+      const hoverSurface = container.closest('.home-hero') || container;
+      const resize = () => {
+        const width = Math.max(1, container.clientWidth);
+        const height = Math.max(1, container.clientHeight);
+        renderer.setSize(width, height);
+        program.uniforms.resolution.value[0] = gl.canvas.width;
+        program.uniforms.resolution.value[1] = gl.canvas.height;
+      };
+      const move = e => {
+        const rect = container.getBoundingClientRect();
+        mouse.x = (e.clientX - rect.left);
+        mouse.y = (e.clientY - rect.top);
+      };
+      hoverSurface.addEventListener('mousemove', move, { passive: true });
+      const resizeObserver = new ResizeObserver(resize);
+      resizeObserver.observe(container);
+      resize();
+      let rafId;
+      const update = t => {
+        rafId = requestAnimationFrame(update);
+        if (!settings.disableAnimation) program.uniforms.time.value = t * 0.001;
+        smoothMouse.x += (mouse.x - smoothMouse.x) * 0.08;
+        smoothMouse.y += (mouse.y - smoothMouse.y) * 0.08;
+        program.uniforms.mousePos.value[0] = smoothMouse.x;
+        program.uniforms.mousePos.value[1] = smoothMouse.y;
+        renderer.render({ scene: mesh });
+      };
+      rafId = requestAnimationFrame(update);
+      window.addEventListener('pagehide', () => {
+        cancelAnimationFrame(rafId);
+        resizeObserver.disconnect();
+        hoverSurface.removeEventListener('mousemove', move);
         gl.getExtension('WEBGL_lose_context')?.loseContext();
       }, { once: true });
     }
@@ -3270,12 +3484,15 @@
       brightness: 0.2
     });
 
-    initOrb(document.getElementById('heroOrb'), {
-      hoverIntensity: 2,
-      rotateOnHover: true,
-      hue: 0,
-      forceHoverState: false,
-      backgroundColor: '#000000'
+    initDither(document.getElementById('heroDither'), {
+      waveColor: [0.27058823529411763, 0.27058823529411763, 0.27058823529411763],
+      disableAnimation: false,
+      enableMouseInteraction: true,
+      mouseRadius: 0.3,
+      colorNum: 4.4,
+      waveAmplitude: 0.51,
+      waveFrequency: 3.1,
+      waveSpeed: 0.01
     });
   </script>
 </body>
