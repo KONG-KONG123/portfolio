@@ -71,10 +71,10 @@ function boot({mobile = false, reduced = false} = {}) {
 test('all work cards render, with posters and no initial video elements', () => {
   const app = boot();
   assert.equal(app.document.querySelectorAll('.work').length, app.evaluate('works.length'));
-  assert.equal(app.evaluate('works.length'), 34);
+  assert.equal(app.evaluate('works.length'), 36);
   assert.equal(app.document.querySelectorAll('video').length, 0);
   const videos = app.evaluate('works.filter(w=>isVideo(w.cover))');
-  assert.equal(videos.length, 13);
+  assert.equal(videos.length, 15);
   for (const work of videos) {
     const image = app.document.querySelector(`.work[data-id="${work.id}"] img`);
     assert.match(image.getAttribute('src'), /^_posters\//);
@@ -124,11 +124,12 @@ test('closing a project pauses and releases its video; reopening recreates it', 
   app.dom.window.close();
 });
 
-test('seven new Motion works open local compressed videos without preloading', () => {
+test('web-optimized Motion works open local compressed videos without preloading', () => {
   const app = boot();
-  const added = app.evaluate('works.filter(work=>work.id>=28)');
-  assert.equal(added.length, 7);
-  assert.equal(new Set(added.map(work => work.cover)).size, 7);
+  const added = app.evaluate('works.filter(work=>work.cover.startsWith("media/motion/"))');
+  assert.equal(added.length, 9);
+  assert.equal(new Set(added.map(work => work.cover)).size, 9);
+  assert.deepEqual(Array.from(added, work => work.id), [28, 29, 30, 31, 32, 33, 34, 35, 36]);
   for (const work of added) {
     assert.equal(work.category, 'Motion');
     assert.match(work.cover, /^media\/motion\/[a-z-]+\.mp4$/);
