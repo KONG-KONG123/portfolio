@@ -68,12 +68,13 @@ function boot({mobile = false, reduced = false} = {}) {
   return {dom, window, document, frames, observers, mediaQueries, idle, evaluate, tick, visible, key};
 }
 
-test('all 27 work cards render, with posters and no initial video elements', () => {
+test('all work cards render, with posters and no initial video elements', () => {
   const app = boot();
-  assert.equal(app.document.querySelectorAll('.work').length, 27);
+  assert.equal(app.document.querySelectorAll('.work').length, app.evaluate('works.length'));
+  assert.equal(app.evaluate('works.length'), 34);
   assert.equal(app.document.querySelectorAll('video').length, 0);
   const videos = app.evaluate('works.filter(w=>isVideo(w.cover))');
-  assert.equal(videos.length, 6);
+  assert.equal(videos.length, 13);
   for (const work of videos) {
     const image = app.document.querySelector(`.work[data-id="${work.id}"] img`);
     assert.match(image.getAttribute('src'), /^_posters\//);
@@ -120,6 +121,35 @@ test('closing a project pauses and releases its video; reopening recreates it', 
   assert.equal(app.document.activeElement, button);
   button.click();
   assert.ok(app.document.querySelector('#modal video').getAttribute('src'));
+  app.dom.window.close();
+});
+
+test('seven new Motion works open local compressed videos without preloading', () => {
+  const app = boot();
+  const added = app.evaluate('works.filter(work=>work.id>=28)');
+  assert.equal(added.length, 7);
+  assert.equal(new Set(added.map(work => work.cover)).size, 7);
+  for (const work of added) {
+    assert.equal(work.category, 'Motion');
+    assert.match(work.cover, /^media\/motion\/[a-z-]+\.mp4$/);
+    assert.ok(fs.statSync(path.join(root, work.cover)).size < 24_000_000);
+    const button = app.document.querySelector(`#motion .work[data-id="${work.id}"]`);
+    assert.ok(button);
+    const preview = button.querySelector('img');
+    assert.match(preview.getAttribute('src'), /^_posters\//);
+    assert.equal(preview.getAttribute('loading'), 'lazy');
+    assert.ok(fs.statSync(path.join(root, preview.getAttribute('src'))).size < 150_000);
+    button.focus(); button.click();
+    const video = app.document.querySelector('#modal video');
+    assert.equal(video.getAttribute('src'), work.cover);
+    assert.equal(video.preload, 'none');
+    assert.ok(video.controls);
+    assert.equal(video.autoplay, false);
+    assert.equal(video.getAttribute('poster'), preview.getAttribute('src'));
+    app.key('Escape');
+    assert.ok(video._paused && video._released);
+    assert.equal(app.document.activeElement, button);
+  }
   app.dom.window.close();
 });
 
