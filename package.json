@@ -1,0 +1,11 @@
+{
+  "name": "kongkong-portfolio",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "build:media": "python scripts/build-media.py"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}
